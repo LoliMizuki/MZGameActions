@@ -7,14 +7,16 @@
 
 @implementation MZAction {
     MZFloat _passedTime;
+    MZFloat _duration;
 }
 
-@synthesize name, isActive, actionTime;
+@synthesize name, isActive, isActiveFunc, duration, actionTime;
 
 - (instancetype)init {
     self = [super init];
 
-    self.actionTime = [MZActionTime new];
+    _duration = -1;
+    actionTime = [MZActionTime new];
 
     return self;
 }
@@ -24,11 +26,26 @@
 }
 
 - (bool)isActive {
-    return (_isActiveFunc != nil) ? _isActiveFunc() : true;
+    return (isActiveFunc != nil) ? isActiveFunc() : true;
 }
 
 - (void)setTimeScale:(double)aTimeScale {
     self.actionTime.timeScale = aTimeScale;
+}
+
+- (MZFloat)duration {
+    return _duration;
+}
+
+- (void)setDuration:(MZFloat)aDuration {
+    _duration = aDuration;
+
+    if (_duration > 0) {
+        __mz_gen_weak_block(weakSelf, self);
+        isActiveFunc = ^{ return (bool)(weakSelf.passedTime < weakSelf.duration); };
+    } else {
+        isActiveFunc = nil;
+    }
 }
 
 - (MZFloat)timeScale {

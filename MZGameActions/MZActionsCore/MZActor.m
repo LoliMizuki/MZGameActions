@@ -95,6 +95,7 @@
 - (void)update {
     [super update];
     [_group update];
+    [_group removeInactives];
 }
 
 @end

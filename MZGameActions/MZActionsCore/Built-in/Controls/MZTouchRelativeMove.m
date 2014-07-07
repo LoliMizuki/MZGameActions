@@ -12,6 +12,18 @@
 
 @synthesize mover, touchNotifier;
 
++ (instancetype)newWithMover:(id<MZTransform>)mover touchNotifier:(id<MZTouchNotifier>)touchNotifier {
+    MZAssertIfNilWithMessage(mover, @"mover is nil");
+    MZAssertIfNilWithMessage(touchNotifier, @"touchNotifier is nil");
+
+    MZTouchRelativeMove *t = [MZTouchRelativeMove new];
+    t.mover = mover;
+    t.touchNotifier = touchNotifier;
+    [t.touchNotifier addTouchResponder:t];
+
+    return t;
+}
+
 - (void)dealloc {
     [self removeFromNotifier];
     mover = nil;

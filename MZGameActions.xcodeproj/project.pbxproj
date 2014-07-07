@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93C196A731000EB49A3 /* MZMove.m */; };
+		8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */; };
 		8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E24D88C1966A504000388AC /* MZSpritesLayer.m */; };
 		8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */; };
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
 		8E7CA2811964122100917EEB /* MZPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA2801964122100917EEB /* MZPool.m */; };
+		8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AF9196A867800A3BCF2 /* MZCollections.m */; };
+		8E9C9B0C196A867800A3BCF2 /* MZConverts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AFB196A867800A3BCF2 /* MZConverts.m */; };
+		8E9C9B0D196A867800A3BCF2 /* MZFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AFD196A867800A3BCF2 /* MZFormula.m */; };
+		8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AFF196A867800A3BCF2 /* MZGLHelper.m */; };
+		8E9C9B0F196A867800A3BCF2 /* MZiOSFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9B01196A867800A3BCF2 /* MZiOSFiles.m */; };
+		8E9C9B10196A867800A3BCF2 /* MZMapReduces.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9B04196A867800A3BCF2 /* MZMapReduces.m */; };
+		8E9C9B11196A867800A3BCF2 /* MZMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9B06196A867800A3BCF2 /* MZMath.m */; };
+		8E9C9B12196A867800A3BCF2 /* MZMemoryUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9B08196A867800A3BCF2 /* MZMemoryUsage.m */; };
 		8EB70A37196154CD008BC335 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A36196154CD008BC335 /* Foundation.framework */; };
 		8EB70A39196154CD008BC335 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A38196154CD008BC335 /* CoreGraphics.framework */; };
 		8EB70A3B196154CD008BC335 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A3A196154CD008BC335 /* UIKit.framework */; };
@@ -29,13 +39,6 @@
 		8EB70A5F196154CD008BC335 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A3A196154CD008BC335 /* UIKit.framework */; };
 		8EB70A67196154CD008BC335 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A65196154CD008BC335 /* InfoPlist.strings */; };
 		8EB70A69196154CD008BC335 /* MZGameActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A68196154CD008BC335 /* MZGameActionsTests.m */; };
-		8EFB2AF71961555000A23555 /* MZConverts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AE71961555000A23555 /* MZConverts.m */; };
-		8EFB2AF81961555000A23555 /* MZFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AE91961555000A23555 /* MZFormula.m */; };
-		8EFB2AF91961555000A23555 /* MZGLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AEB1961555000A23555 /* MZGLHelper.m */; };
-		8EFB2AFA1961555000A23555 /* MZiOSFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AED1961555000A23555 /* MZiOSFiles.m */; };
-		8EFB2AFB1961555000A23555 /* MZMapReduces.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AF01961555000A23555 /* MZMapReduces.m */; };
-		8EFB2AFC1961555000A23555 /* MZMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AF21961555000A23555 /* MZMath.m */; };
-		8EFB2AFD1961555000A23555 /* MZMemoryUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2AF41961555000A23555 /* MZMemoryUsage.m */; };
 		8EFB2B061961565800A23555 /* enemies.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2AFF1961565800A23555 /* enemies.atlas */; };
 		8EFB2B071961565800A23555 /* enemy_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B001961565800A23555 /* enemy_bullets.atlas */; };
 		8EFB2B081961565800A23555 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B011961565800A23555 /* player.atlas */; };
@@ -60,6 +63,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0DC93A196A728F00EB49A3 /* MZMovesHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZMovesHeader.h; sourceTree = "<group>"; };
+		8E0DC93B196A731000EB49A3 /* MZMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMove.h; sourceTree = "<group>"; };
+		8E0DC93C196A731000EB49A3 /* MZMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMove.m; sourceTree = "<group>"; };
+		8E0DC93E196A76DE00EB49A3 /* MZMoveWithVelocityDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveWithVelocityDirection.h; sourceTree = "<group>"; };
+		8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveWithVelocityDirection.m; sourceTree = "<group>"; };
 		8E24D88B1966A504000388AC /* MZSpritesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSpritesLayer.h; sourceTree = "<group>"; };
 		8E24D88C1966A504000388AC /* MZSpritesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSpritesLayer.m; sourceTree = "<group>"; };
 		8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActor.h; sourceTree = "<group>"; };
@@ -70,6 +78,27 @@
 		8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTouchRelativeMove.m; sourceTree = "<group>"; };
 		8E7CA27F1964122100917EEB /* MZPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPool.h; sourceTree = "<group>"; };
 		8E7CA2801964122100917EEB /* MZPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPool.m; sourceTree = "<group>"; };
+		8E9C9AF6196A867800A3BCF2 /* MZBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBlockMacros.h; sourceTree = "<group>"; };
+		8E9C9AF7196A867800A3BCF2 /* MZCGs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCGs.h; sourceTree = "<group>"; };
+		8E9C9AF8196A867800A3BCF2 /* MZCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCollections.h; sourceTree = "<group>"; };
+		8E9C9AF9196A867800A3BCF2 /* MZCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCollections.m; sourceTree = "<group>"; };
+		8E9C9AFA196A867800A3BCF2 /* MZConverts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZConverts.h; sourceTree = "<group>"; };
+		8E9C9AFB196A867800A3BCF2 /* MZConverts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZConverts.m; sourceTree = "<group>"; };
+		8E9C9AFC196A867800A3BCF2 /* MZFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZFormula.h; sourceTree = "<group>"; };
+		8E9C9AFD196A867800A3BCF2 /* MZFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZFormula.m; sourceTree = "<group>"; };
+		8E9C9AFE196A867800A3BCF2 /* MZGLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGLHelper.h; sourceTree = "<group>"; };
+		8E9C9AFF196A867800A3BCF2 /* MZGLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGLHelper.m; sourceTree = "<group>"; };
+		8E9C9B00196A867800A3BCF2 /* MZiOSFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZiOSFiles.h; sourceTree = "<group>"; };
+		8E9C9B01196A867800A3BCF2 /* MZiOSFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZiOSFiles.m; sourceTree = "<group>"; };
+		8E9C9B02196A867800A3BCF2 /* MZLogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLogs.h; sourceTree = "<group>"; };
+		8E9C9B03196A867800A3BCF2 /* MZMapReduces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMapReduces.h; sourceTree = "<group>"; };
+		8E9C9B04196A867800A3BCF2 /* MZMapReduces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMapReduces.m; sourceTree = "<group>"; };
+		8E9C9B05196A867800A3BCF2 /* MZMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMath.h; sourceTree = "<group>"; };
+		8E9C9B06196A867800A3BCF2 /* MZMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMath.m; sourceTree = "<group>"; };
+		8E9C9B07196A867800A3BCF2 /* MZMemoryUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMemoryUsage.h; sourceTree = "<group>"; };
+		8E9C9B08196A867800A3BCF2 /* MZMemoryUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMemoryUsage.m; sourceTree = "<group>"; };
+		8E9C9B09196A867800A3BCF2 /* MZUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUtilities.h; sourceTree = "<group>"; };
+		8E9C9B0A196A867800A3BCF2 /* NSRange-Conventional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRange-Conventional.h"; sourceTree = "<group>"; };
 		8EB70A33196154CD008BC335 /* MZGameActions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZGameActions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB70A36196154CD008BC335 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8EB70A38196154CD008BC335 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -93,25 +122,6 @@
 		8EB70A64196154CD008BC335 /* MZGameActionsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZGameActionsTests-Info.plist"; sourceTree = "<group>"; };
 		8EB70A66196154CD008BC335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EB70A68196154CD008BC335 /* MZGameActionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZGameActionsTests.m; sourceTree = "<group>"; };
-		8EFB2AE41961555000A23555 /* MZBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBlockMacros.h; sourceTree = "<group>"; };
-		8EFB2AE51961555000A23555 /* MZCGs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCGs.h; sourceTree = "<group>"; };
-		8EFB2AE61961555000A23555 /* MZConverts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZConverts.h; sourceTree = "<group>"; };
-		8EFB2AE71961555000A23555 /* MZConverts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZConverts.m; sourceTree = "<group>"; };
-		8EFB2AE81961555000A23555 /* MZFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZFormula.h; sourceTree = "<group>"; };
-		8EFB2AE91961555000A23555 /* MZFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZFormula.m; sourceTree = "<group>"; };
-		8EFB2AEA1961555000A23555 /* MZGLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGLHelper.h; sourceTree = "<group>"; };
-		8EFB2AEB1961555000A23555 /* MZGLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGLHelper.m; sourceTree = "<group>"; };
-		8EFB2AEC1961555000A23555 /* MZiOSFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZiOSFiles.h; sourceTree = "<group>"; };
-		8EFB2AED1961555000A23555 /* MZiOSFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZiOSFiles.m; sourceTree = "<group>"; };
-		8EFB2AEE1961555000A23555 /* MZLogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZLogs.h; sourceTree = "<group>"; };
-		8EFB2AEF1961555000A23555 /* MZMapReduces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMapReduces.h; sourceTree = "<group>"; };
-		8EFB2AF01961555000A23555 /* MZMapReduces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMapReduces.m; sourceTree = "<group>"; };
-		8EFB2AF11961555000A23555 /* MZMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMath.h; sourceTree = "<group>"; };
-		8EFB2AF21961555000A23555 /* MZMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMath.m; sourceTree = "<group>"; };
-		8EFB2AF31961555000A23555 /* MZMemoryUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMemoryUsage.h; sourceTree = "<group>"; };
-		8EFB2AF41961555000A23555 /* MZMemoryUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMemoryUsage.m; sourceTree = "<group>"; };
-		8EFB2AF51961555000A23555 /* MZUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZUtilities.h; sourceTree = "<group>"; };
-		8EFB2AF61961555000A23555 /* NSRange-Conventional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRange-Conventional.h"; sourceTree = "<group>"; };
 		8EFB2AFF1961565800A23555 /* enemies.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemies.atlas; sourceTree = "<group>"; };
 		8EFB2B001961565800A23555 /* enemy_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy_bullets.atlas; sourceTree = "<group>"; };
 		8EFB2B011961565800A23555 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
@@ -175,8 +185,42 @@
 		8E700DE1196A6FF600885D02 /* Moves */ = {
 			isa = PBXGroup;
 			children = (
+				8E0DC93A196A728F00EB49A3 /* MZMovesHeader.h */,
+				8E0DC93B196A731000EB49A3 /* MZMove.h */,
+				8E0DC93C196A731000EB49A3 /* MZMove.m */,
+				8E0DC93E196A76DE00EB49A3 /* MZMoveWithVelocityDirection.h */,
+				8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */,
 			);
 			path = Moves;
+			sourceTree = "<group>";
+		};
+		8E9C9AF5196A867800A3BCF2 /* MZUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				8E9C9AF6196A867800A3BCF2 /* MZBlockMacros.h */,
+				8E9C9AF7196A867800A3BCF2 /* MZCGs.h */,
+				8E9C9AF8196A867800A3BCF2 /* MZCollections.h */,
+				8E9C9AF9196A867800A3BCF2 /* MZCollections.m */,
+				8E9C9AFA196A867800A3BCF2 /* MZConverts.h */,
+				8E9C9AFB196A867800A3BCF2 /* MZConverts.m */,
+				8E9C9AFC196A867800A3BCF2 /* MZFormula.h */,
+				8E9C9AFD196A867800A3BCF2 /* MZFormula.m */,
+				8E9C9AFE196A867800A3BCF2 /* MZGLHelper.h */,
+				8E9C9AFF196A867800A3BCF2 /* MZGLHelper.m */,
+				8E9C9B00196A867800A3BCF2 /* MZiOSFiles.h */,
+				8E9C9B01196A867800A3BCF2 /* MZiOSFiles.m */,
+				8E9C9B02196A867800A3BCF2 /* MZLogs.h */,
+				8E9C9B03196A867800A3BCF2 /* MZMapReduces.h */,
+				8E9C9B04196A867800A3BCF2 /* MZMapReduces.m */,
+				8E9C9B05196A867800A3BCF2 /* MZMath.h */,
+				8E9C9B06196A867800A3BCF2 /* MZMath.m */,
+				8E9C9B07196A867800A3BCF2 /* MZMemoryUsage.h */,
+				8E9C9B08196A867800A3BCF2 /* MZMemoryUsage.m */,
+				8E9C9B09196A867800A3BCF2 /* MZUtilities.h */,
+				8E9C9B0A196A867800A3BCF2 /* NSRange-Conventional.h */,
+			);
+			name = MZUtilities;
+			path = ../../../../release/MZUtilities;
 			sourceTree = "<group>";
 		};
 		8EB70A2A196154CC008BC335 = {
@@ -223,7 +267,7 @@
 				8EB70A53196154CD008BC335 /* Spaceship.png */,
 				8EFB2B181961596300A23555 /* MZActionsCore */,
 				8EB70A55196154CD008BC335 /* Images.xcassets */,
-				8EFB2AE31961555000A23555 /* MZUtilities */,
+				8E9C9AF5196A867800A3BCF2 /* MZUtilities */,
 				8EFB2AFE1961565800A23555 /* resources */,
 				8EB70A3F196154CD008BC335 /* Supporting Files */,
 			);
@@ -257,33 +301,6 @@
 				8EB70A65196154CD008BC335 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8EFB2AE31961555000A23555 /* MZUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				8EFB2AE41961555000A23555 /* MZBlockMacros.h */,
-				8EFB2AE51961555000A23555 /* MZCGs.h */,
-				8EFB2AE61961555000A23555 /* MZConverts.h */,
-				8EFB2AE71961555000A23555 /* MZConverts.m */,
-				8EFB2AE81961555000A23555 /* MZFormula.h */,
-				8EFB2AE91961555000A23555 /* MZFormula.m */,
-				8EFB2AEA1961555000A23555 /* MZGLHelper.h */,
-				8EFB2AEB1961555000A23555 /* MZGLHelper.m */,
-				8EFB2AEC1961555000A23555 /* MZiOSFiles.h */,
-				8EFB2AED1961555000A23555 /* MZiOSFiles.m */,
-				8EFB2AEE1961555000A23555 /* MZLogs.h */,
-				8EFB2AEF1961555000A23555 /* MZMapReduces.h */,
-				8EFB2AF01961555000A23555 /* MZMapReduces.m */,
-				8EFB2AF11961555000A23555 /* MZMath.h */,
-				8EFB2AF21961555000A23555 /* MZMath.m */,
-				8EFB2AF31961555000A23555 /* MZMemoryUsage.h */,
-				8EFB2AF41961555000A23555 /* MZMemoryUsage.m */,
-				8EFB2AF51961555000A23555 /* MZUtilities.h */,
-				8EFB2AF61961555000A23555 /* NSRange-Conventional.h */,
-			);
-			name = MZUtilities;
-			path = ../../../../release/MZUtilities;
 			sourceTree = "<group>";
 		};
 		8EFB2AFE1961565800A23555 /* resources */ = {
@@ -330,8 +347,8 @@
 			isa = PBXGroup;
 			children = (
 				8E700DDE196A6FF600885D02 /* Controls */,
-				8E700DDD196A6FF600885D02 /* Attacks */,
 				8E700DE1196A6FF600885D02 /* Moves */,
+				8E700DDD196A6FF600885D02 /* Attacks */,
 			);
 			path = "Built-in";
 			sourceTree = "<group>";
@@ -442,25 +459,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EFB2B241961638600A23555 /* MZAction.m in Sources */,
+				8E9C9B11196A867800A3BCF2 /* MZMath.m in Sources */,
+				8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */,
+				8E9C9B12196A867800A3BCF2 /* MZMemoryUsage.m in Sources */,
+				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
+				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,
 				8EB70A52196154CD008BC335 /* GameScene.m in Sources */,
 				8EB70A4F196154CD008BC335 /* ViewController.m in Sources */,
-				8EFB2AF71961555000A23555 /* MZConverts.m in Sources */,
 				8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */,
 				8EB70A49196154CD008BC335 /* AppDelegate.m in Sources */,
-				8EFB2AFC1961555000A23555 /* MZMath.m in Sources */,
 				8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */,
+				8E9C9B0F196A867800A3BCF2 /* MZiOSFiles.m in Sources */,
+				8E9C9B0C196A867800A3BCF2 /* MZConverts.m in Sources */,
 				8E7CA2811964122100917EEB /* MZPool.m in Sources */,
+				8E9C9B0D196A867800A3BCF2 /* MZFormula.m in Sources */,
 				8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */,
 				8EFB2B1E1961596300A23555 /* MZActionTime.m in Sources */,
+				8E9C9B10196A867800A3BCF2 /* MZMapReduces.m in Sources */,
 				8EFB2B281961777F00A23555 /* MZActionsGroup.m in Sources */,
-				8EFB2AFA1961555000A23555 /* MZiOSFiles.m in Sources */,
-				8EFB2AF91961555000A23555 /* MZGLHelper.m in Sources */,
 				8EB70A45196154CD008BC335 /* main.m in Sources */,
-				8EFB2AF81961555000A23555 /* MZFormula.m in Sources */,
 				8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */,
-				8EFB2AFD1961555000A23555 /* MZMemoryUsage.m in Sources */,
 				8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */,
-				8EFB2AFB1961555000A23555 /* MZMapReduces.m in Sources */,
+				8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

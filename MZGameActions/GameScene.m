@@ -31,15 +31,13 @@
     [self _setEnemiesLayer];
     [self _setPlayer];
 
-    NSArray *eAniNames = _enemiesLayer.animationNames;
-
     CGPoint (^randPos)() = ^{
         return mzp([MZMath randomIntInRangeMin:0 max:self.size.width],
                    [MZMath randomIntInRangeMin:0 max:self.size.height]);
     };
 
     void (^randPut)() = ^{
-        NSString *n = eAniNames[[MZMath randomIntInRangeMin:0 max:(int)eAniNames.count]];
+        NSString *n = [MZCollections randomPickInArray:_enemiesLayer.animationNames];
         SKSpriteNode *s = [_enemiesLayer spriteWithForeverAnimationName:n];
         s.position = randPos();
     };
@@ -135,8 +133,8 @@
                          oneLoopTime:0.5];
 
     [_playersLayer addAnimationWithTextureNames:@[ @"fairy-walk-up-001", @"fairy-walk-up-002", @"fairy-walk-up-003" ]
-                                          name:@"fairy-walk-up"
-                                   oneLoopTime:0.5];
+                                           name:@"fairy-walk-up"
+                                    oneLoopTime:0.5];
 
     [self addChild:_playersLayer];
 }
@@ -199,15 +197,21 @@
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
     [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"];
 
-    MZTouchRelativeMove *trm = [player addActionWithClass:[MZTouchRelativeMove class] name:@"touch-relative-move"];
-    trm.mover = player;
-    trm.touchNotifier = self;
-    [self addTouchResponder:trm];
+    [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
 
     player.position = [self center];
     player.rotation = 90;
 
     [_playersUpdater addImmediate:player];
+
+    // move test
+    MZMoveWithVelocityDirection *m = [player addAction:[MZMoveWithVelocityDirection newWithMover:player] name:@"move"];
+    m.velocity = 100;
+    m.direction = 90;
+    m.updateAction = ^(MZMoveWithVelocityDirection *action) {
+        action.direction += 100 * action.deltaTime;
+        action.mover.rotation = action.direction;
+    };
 }
 
 @end

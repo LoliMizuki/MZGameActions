@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, MZTouchType) { kMZTouchType_Began, kMZTouchType_Moved
 
 @protocol MZBehaviour <NSObject>
 
+@property (nonatomic, readwrite) MZFloat duration;
 @property (nonatomic, readwrite) MZFloat timeScale;
 @property (nonatomic, readwrite, strong) MZActionTime *actionTime;
 

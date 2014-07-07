@@ -21,3 +21,8 @@
 
 // Built-in
 #import "MZTouchRelativeMove.h"
+
+// Moves
+#import "MZMovesHeader.h"
+#import "MZMove.h"
+#import "MZMoveWithVelocityDirection.h"
