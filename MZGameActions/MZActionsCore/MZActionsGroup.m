@@ -1,4 +1,5 @@
 #import "MZActionsGroup.h"
+#import "MZGameHeader.h"
 
 @interface MZActionsGroup (_)
 - (void)_addUpdatingActionsFromBuffer;
@@ -6,6 +7,7 @@
 @end
 
 @implementation MZActionsGroup {
+    MZActionTime *_actionTime;
     NSMutableArray *_newActionsBuffer;
     NSMutableArray *_updatingAciotns;
 }
@@ -25,12 +27,31 @@
     _updatingAciotns = nil;
 }
 
+- (void)setActionTime:(MZActionTime *)anActionTime {
+    _actionTime = anActionTime;
+
+    for (MZAction *a in _newActionsBuffer) {
+        a.actionTime = _actionTime;
+    }
+
+    for (MZAction *a in _updatingAciotns) {
+        a.actionTime = _actionTime;
+    }
+}
+
+- (MZActionTime *)actionTime {
+    return _actionTime;
+}
+
 - (NSMutableArray *)updatingAciotns {
     return _updatingAciotns;
 }
 
 - (id)addImmediate:(MZAction *)newAction {
+    MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
+
     [_updatingAciotns addObject:newAction];
+    newAction.actionTime = self.actionTime;
     [newAction start];
     return newAction;
 }
@@ -63,6 +84,8 @@
 @implementation MZActionsGroup (_)
 
 - (void)_addUpdatingActionsFromBuffer {
+    MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
+
     if (_newActionsBuffer.count == 0) return;
 
     for (MZAction *a in _newActionsBuffer) {

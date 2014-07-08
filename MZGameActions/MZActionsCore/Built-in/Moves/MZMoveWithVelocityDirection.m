@@ -15,6 +15,10 @@
     return self;
 }
 
+- (MZFloat)currentDirection {
+    return direction;
+}
+
 - (void)update {
     [super update];
 

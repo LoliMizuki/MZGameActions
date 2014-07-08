@@ -3,7 +3,7 @@
 
 @implementation MZMove
 
-@synthesize mover;
+@synthesize mover, currentDirection;
 
 + (instancetype)newWithMover:(id)mover {
     MZAssertIfNilWithMessage(mover, @"mover is nil");

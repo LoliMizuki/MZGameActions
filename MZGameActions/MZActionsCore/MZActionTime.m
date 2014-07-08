@@ -5,7 +5,7 @@
     CFTimeInterval _preTime;
 }
 
-@synthesize timeScale, deltaTime;
+@synthesize name, timeScale, deltaTime;
 
 - (instancetype)init {
     self = [super init];

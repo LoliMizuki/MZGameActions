@@ -11,7 +11,8 @@
 
 
 @implementation GameScene {
-    MZActionTime *_time;
+    MZActionTime *_playerActionTime;
+    MZActionTime *_playerActionTime2;
 
     MZSpritesLayer *_playersLayer;
     MZSpritesLayer *_enemiesLayer;
@@ -104,7 +105,8 @@
 }
 
 - (void)update:(CFTimeInterval)currentTime {
-    [_time updateWithCurrentTime:currentTime];
+    [_playerActionTime updateWithCurrentTime:currentTime];
+    [_playerActionTime2 updateWithCurrentTime:currentTime];
 
     [_playersUpdater update];
 
@@ -192,26 +194,38 @@
 }
 
 - (void)_setPlayer {
+    _playerActionTime = [MZActionTime new];
+    _playerActionTime.name = @"1";
+    _playerActionTime2 = [MZActionTime new];
+    _playerActionTime2.name = @"2";
+
     MZActor *player = [MZActor new];
+    player.actionTime = _playerActionTime;
 
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
     [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"];
 
     [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
 
-    player.position = [self center];
+    player.position = mzpAdd([self center], mzp(0, -200));
     player.rotation = 90;
 
+    _playersUpdater.actionTime = _playerActionTime;
     [_playersUpdater addImmediate:player];
 
     // move test
-    MZMoveWithVelocityDirection *m = [player addAction:[MZMoveWithVelocityDirection newWithMover:player] name:@"move"];
-    m.velocity = 100;
-    m.direction = 90;
-    m.updateAction = ^(MZMoveWithVelocityDirection *action) {
-        action.direction += 100 * action.deltaTime;
-        action.mover.rotation = action.direction;
-    };
+    MZMoveTurnToDirection *m = [player addAction:[MZMoveTurnToDirection newWithMover:player] name:@"move"];
+    m.velocity = 0;
+    m.acceleration = 100;
+    m.direction = 45;
+    m.turnToDirection = 135;
+    m.turnDegreesPerSecond = 40;
+
+    MZLog(@"%@", m.actionTime.name);
+
+    player.actionTime = _playerActionTime2;
+    MZLog(@"%@", m.actionTime.name);
+    MZLog(@"%@", m.actionTime.name);
 }
 
 @end

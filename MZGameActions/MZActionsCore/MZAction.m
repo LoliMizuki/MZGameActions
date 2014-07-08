@@ -16,7 +16,6 @@
     self = [super init];
 
     _duration = -1;
-    actionTime = [MZActionTime new];
 
     return self;
 }
@@ -29,7 +28,7 @@
     return (isActiveFunc != nil) ? isActiveFunc() : true;
 }
 
-- (void)setTimeScale:(double)aTimeScale {
+- (void)setTimeScale:(MZFloat)aTimeScale {
     self.actionTime.timeScale = aTimeScale;
 }
 

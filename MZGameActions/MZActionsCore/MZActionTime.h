@@ -3,6 +3,7 @@
 
 @interface MZActionTime : NSObject
 
+@property (nonatomic, readwrite, strong) NSString *name;
 @property (nonatomic, readwrite) MZFloat timeScale;
 
 @property (nonatomic, readonly) MZFloat deltaTime;

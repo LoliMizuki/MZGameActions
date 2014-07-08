@@ -14,6 +14,8 @@
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
 		8E7CA2811964122100917EEB /* MZPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA2801964122100917EEB /* MZPool.m */; };
+		8E85D9F7196AA83000C40013 /* MZMoveReachAtTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E85D9F6196AA83000C40013 /* MZMoveReachAtTime.m */; };
+		8E85D9FA196AAB7200C40013 /* MZAttack.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E85D9F9196AAB7200C40013 /* MZAttack.m */; };
 		8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AF9196A867800A3BCF2 /* MZCollections.m */; };
 		8E9C9B0C196A867800A3BCF2 /* MZConverts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AFB196A867800A3BCF2 /* MZConverts.m */; };
 		8E9C9B0D196A867800A3BCF2 /* MZFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C9AFD196A867800A3BCF2 /* MZFormula.m */; };
@@ -39,6 +41,7 @@
 		8EB70A5F196154CD008BC335 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A3A196154CD008BC335 /* UIKit.framework */; };
 		8EB70A67196154CD008BC335 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A65196154CD008BC335 /* InfoPlist.strings */; };
 		8EB70A69196154CD008BC335 /* MZGameActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A68196154CD008BC335 /* MZGameActionsTests.m */; };
+		8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */; };
 		8EFB2B061961565800A23555 /* enemies.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2AFF1961565800A23555 /* enemies.atlas */; };
 		8EFB2B071961565800A23555 /* enemy_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B001961565800A23555 /* enemy_bullets.atlas */; };
 		8EFB2B081961565800A23555 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B011961565800A23555 /* player.atlas */; };
@@ -78,6 +81,11 @@
 		8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTouchRelativeMove.m; sourceTree = "<group>"; };
 		8E7CA27F1964122100917EEB /* MZPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPool.h; sourceTree = "<group>"; };
 		8E7CA2801964122100917EEB /* MZPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPool.m; sourceTree = "<group>"; };
+		8E85D9F5196AA83000C40013 /* MZMoveReachAtTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveReachAtTime.h; sourceTree = "<group>"; };
+		8E85D9F6196AA83000C40013 /* MZMoveReachAtTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveReachAtTime.m; sourceTree = "<group>"; };
+		8E85D9F8196AAB7200C40013 /* MZAttack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAttack.h; sourceTree = "<group>"; };
+		8E85D9F9196AAB7200C40013 /* MZAttack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAttack.m; sourceTree = "<group>"; };
+		8E85D9FB196AAB8400C40013 /* MZAttacksHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZAttacksHeader.h; sourceTree = "<group>"; };
 		8E9C9AF6196A867800A3BCF2 /* MZBlockMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZBlockMacros.h; sourceTree = "<group>"; };
 		8E9C9AF7196A867800A3BCF2 /* MZCGs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCGs.h; sourceTree = "<group>"; };
 		8E9C9AF8196A867800A3BCF2 /* MZCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCollections.h; sourceTree = "<group>"; };
@@ -122,6 +130,8 @@
 		8EB70A64196154CD008BC335 /* MZGameActionsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZGameActionsTests-Info.plist"; sourceTree = "<group>"; };
 		8EB70A66196154CD008BC335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EB70A68196154CD008BC335 /* MZGameActionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZGameActionsTests.m; sourceTree = "<group>"; };
+		8EF5EA6F196A8979009B8CD6 /* MZMoveTurnToDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveTurnToDirection.h; sourceTree = "<group>"; };
+		8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveTurnToDirection.m; sourceTree = "<group>"; };
 		8EFB2AFF1961565800A23555 /* enemies.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemies.atlas; sourceTree = "<group>"; };
 		8EFB2B001961565800A23555 /* enemy_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy_bullets.atlas; sourceTree = "<group>"; };
 		8EFB2B011961565800A23555 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
@@ -169,6 +179,9 @@
 		8E700DDD196A6FF600885D02 /* Attacks */ = {
 			isa = PBXGroup;
 			children = (
+				8E85D9FB196AAB8400C40013 /* MZAttacksHeader.h */,
+				8E85D9F8196AAB7200C40013 /* MZAttack.h */,
+				8E85D9F9196AAB7200C40013 /* MZAttack.m */,
 			);
 			path = Attacks;
 			sourceTree = "<group>";
@@ -190,6 +203,10 @@
 				8E0DC93C196A731000EB49A3 /* MZMove.m */,
 				8E0DC93E196A76DE00EB49A3 /* MZMoveWithVelocityDirection.h */,
 				8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */,
+				8EF5EA6F196A8979009B8CD6 /* MZMoveTurnToDirection.h */,
+				8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */,
+				8E85D9F5196AA83000C40013 /* MZMoveReachAtTime.h */,
+				8E85D9F6196AA83000C40013 /* MZMoveReachAtTime.m */,
 			);
 			path = Moves;
 			sourceTree = "<group>";
@@ -462,6 +479,7 @@
 				8E9C9B11196A867800A3BCF2 /* MZMath.m in Sources */,
 				8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */,
 				8E9C9B12196A867800A3BCF2 /* MZMemoryUsage.m in Sources */,
+				8E85D9FA196AAB7200C40013 /* MZAttack.m in Sources */,
 				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
 				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,
 				8EB70A52196154CD008BC335 /* GameScene.m in Sources */,
@@ -474,11 +492,13 @@
 				8E7CA2811964122100917EEB /* MZPool.m in Sources */,
 				8E9C9B0D196A867800A3BCF2 /* MZFormula.m in Sources */,
 				8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */,
+				8E85D9F7196AA83000C40013 /* MZMoveReachAtTime.m in Sources */,
 				8EFB2B1E1961596300A23555 /* MZActionTime.m in Sources */,
 				8E9C9B10196A867800A3BCF2 /* MZMapReduces.m in Sources */,
 				8EFB2B281961777F00A23555 /* MZActionsGroup.m in Sources */,
 				8EB70A45196154CD008BC335 /* main.m in Sources */,
 				8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */,
+				8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */,
 				8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */,
 				8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */,
 			);

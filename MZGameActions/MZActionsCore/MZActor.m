@@ -79,7 +79,10 @@
 }
 
 - (id)addAction:(MZAction *)action name:(NSString *)name {
+    MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
+
     action.name = name;
+    action.actionTime = self.actionTime;
     [_group addImmediate:action];
 
     return action;

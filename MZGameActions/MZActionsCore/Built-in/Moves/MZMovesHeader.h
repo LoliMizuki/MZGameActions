@@ -3,4 +3,9 @@
 
 #import "MZGameDefines.h"
 
+#import "MZMove.h"
+#import "MZMoveWithVelocityDirection.h"
+#import "MZMoveTurnToDirection.h"
+#import "MZMoveReachAtTime.h"
+
 #endif
