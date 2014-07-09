@@ -19,9 +19,6 @@
 }
 
 - (void)dealloc {
-    if ([name isEqualToString:@"player"]) {
-        MZLog(@"player action release");
-    }
 }
 
 - (MZFloat)deltaTime {

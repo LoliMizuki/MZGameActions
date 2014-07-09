@@ -3,15 +3,19 @@
 #import "AnotherScene.h"
 
 @interface GameScene (_)
+- (void)_init;
+
 - (void)_setPlayerLayer;
 - (void)_setEnemiesLayer;
+- (void)_setEnemyBulletsLayer;
 
 - (void)_setPlayer;
+- (void)_setEnemies;
 
 - (void)_setGUIs;
 
+- (MZActor * (^)(void))__test_enemy_bullet_func;
 - (void)__test_random_put_sprites;
-- (void)__test_change_player_actionTime;
 @end
 
 
@@ -21,8 +25,11 @@
 
     MZSpritesLayer *_playersLayer;
     MZSpritesLayer *_enemiesLayer;
+    MZSpritesLayer *_enemyBulletsLayer;
 
     MZActionsGroup *_playersUpdater;
+    MZActionsGroup *_enemiesUpdater;
+    MZActionsGroup *_enemyBulletsUpdater;
 
     NSMutableArray *_touchResponders;
 }
@@ -30,17 +37,16 @@
 - (id)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
 
-    _touchResponders = [NSMutableArray new];
-    _playersUpdater = [MZActionsGroup new];
+    [self _init];
 
     [self _setPlayerLayer];
     [self _setEnemiesLayer];
+    [self _setEnemyBulletsLayer];
+
     [self _setPlayer];
+    [self _setEnemies];
 
     [self _setGUIs];
-
-    //    [self __test_random_put_sprites];
-    [self __test_change_player_actionTime];
 
     return self;
 }
@@ -51,8 +57,6 @@
 
     [_playersLayer removeFromParent];
     [_enemiesLayer removeFromParent];
-
-    MZLog(@"game scene");
 }
 
 - (CGPoint)center {
@@ -93,6 +97,8 @@
     [_playerActionTime updateWithCurrentTime:currentTime];
 
     [_playersUpdater update];
+    [_enemiesUpdater update];
+    [_enemyBulletsUpdater update];
 
     [_playersUpdater removeInactives];
 }
@@ -100,6 +106,22 @@
 @end
 
 @implementation GameScene (_)
+
+- (void)_init {
+    _playerActionTime = [MZActionTime new];
+    _playerActionTime.name = @"player";
+
+    _touchResponders = [NSMutableArray new];
+
+    _playersUpdater = [MZActionsGroup new];
+    _playersUpdater.actionTime = _playerActionTime;
+
+    _enemiesUpdater = [MZActionsGroup new];
+    _enemiesUpdater.actionTime = _playerActionTime;
+
+    _enemyBulletsUpdater = [MZActionsGroup new];
+    _enemyBulletsUpdater.actionTime = _playerActionTime;
+}
 
 - (void)_setPlayerLayer {
     _playersLayer = [MZSpritesLayer newWithAtlasName:@"player.atlas" nodesNumber:10];
@@ -177,10 +199,12 @@
     [self addChild:_enemiesLayer];
 }
 
-- (void)_setPlayer {
-    _playerActionTime = [MZActionTime new];
-    _playerActionTime.name = @"player";
+- (void)_setEnemyBulletsLayer {
+    _enemyBulletsLayer = [MZSpritesLayer newWithAtlasName:@"enemy_bullets" nodesNumber:500];
+    [self addChild:_enemyBulletsLayer];
+}
 
+- (void)_setPlayer {
     _playersUpdater.actionTime = _playerActionTime;
     MZActor *player = [_playersUpdater addImmediate:[MZActor new]];
 
@@ -189,19 +213,25 @@
     [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
     player.position = mzpAdd([self center], mzp(0, -200));
     player.rotation = 90;
+}
 
-    // move test
-    MZMoveTurnToDirection *mtd = [player addAction:[MZMoveTurnToDirection newWithMover:player] name:@"move"];
-    mtd.velocity = 100;
-    //    m.acceleration = 100;
-    mtd.direction = 45;
-    mtd.turnToDirection = 135;
-    mtd.turnDegreesPerSecond = 40;
+- (void)_setEnemies {
+    MZActor *enemy = [_enemiesUpdater addImmediate:[MZActor new]];
 
-    //    MZMoveWithVelocityDirection *mm = [player addAction:[MZMoveWithVelocityDirection newWithMover:player]
-    // name:@"move"];
-    //    mm.velocity = 100;
-    //    mm.direction = 90;
+    MZNodes *nodes = [enemy addAction:[MZNodes new] name:@"nodes"];
+    [nodes addNode:[_enemiesLayer spriteWithForeverAnimationName:@"Bow"] name:@"body"];
+
+    MZAttack_NWayToDirection *a = [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
+    a.bulletGenFunc = [self __test_enemy_bullet_func];
+    a.colddown = 1;
+    a.interval = 30;
+    a.numberOfWays = 3;
+    a.targetDirection = 270;
+    a.bulletVelocity = 100;
+    a.bulletScale = 0.5;
+
+    enemy.position = mzpFromSizeAndFactor(self.size, .5);
+    enemy.rotation = 270;
 }
 
 - (void)_setGUIs {
@@ -217,6 +247,18 @@
                      [view presentScene:[AnotherScene sceneWithSize:weakSelf.size]
                              transition:[SKTransition crossFadeWithDuration:.5]];
                  }];
+}
+
+- (MZActor * (^)(void))__test_enemy_bullet_func {
+    __mz_gen_weak_block(ebu, _enemyBulletsUpdater);
+
+    return ^{
+        MZActor *b = [ebu addImmediate:[MZActor new]];
+
+        MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
+        [nodes addNode:[_enemyBulletsLayer spriteWithTextureName:@"fireball.png"] name:@"body"];
+        return b;
+    };
 }
 
 - (void)__test_random_put_sprites {
@@ -247,26 +289,6 @@
                                           [SKAction waitForDuration:2],
                                           [SKAction runBlock:randPut]
                                        ]]];
-}
-
-- (void)__test_change_player_actionTime {
-    [self
-        runAction:
-            [SKAction
-                sequence:@[
-                            [SKAction waitForDuration:1],
-                            [SKAction runBlock:^{
-                                MZLog(@"switch to at 2");
-                                _playersUpdater.actionTime.timeScale = 0;
-                                //                                      MZLog(@"_playersUpdater.name = %@",
-                                // _playersUpdater.actionTime.name);
-                                //                                      MZActor *p = _playersUpdater.updatingAciotns[0];
-                                //                                      MZLog(@"player.name = %@", p.actionTime.name);
-                                //                                      MZAction *move = [p actionWithName:@"move"];
-                                //                                      MZLog(@"move.name = %@", move.actionTime.name);
-                                //                                              _playerActionTime.timeScale = 10;
-                            }]
-                         ]]];
 }
 
 @end

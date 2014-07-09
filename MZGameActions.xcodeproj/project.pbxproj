@@ -18,6 +18,7 @@
 		8E3E4EB2196D22F500D30963 /* ramletherl_valentine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAB196D22F500D30963 /* ramletherl_valentine.png */; };
 		8E3E4EB3196D22F500D30963 /* rect_while.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAC196D22F500D30963 /* rect_while.png */; };
 		8E3E4EB4196D22F500D30963 /* yuyurect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAD196D22F500D30963 /* yuyurect.png */; };
+		8E3E4EB7196D2E0400D30963 /* MZAttack_NWayToDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EB6196D2E0400D30963 /* MZAttack_NWayToDirection.m */; };
 		8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */; };
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
@@ -42,7 +43,6 @@
 		8EB70A4C196154CD008BC335 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A4A196154CD008BC335 /* Main.storyboard */; };
 		8EB70A4F196154CD008BC335 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A4E196154CD008BC335 /* ViewController.m */; };
 		8EB70A52196154CD008BC335 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A51196154CD008BC335 /* GameScene.m */; };
-		8EB70A54196154CD008BC335 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A53196154CD008BC335 /* Spaceship.png */; };
 		8EB70A56196154CD008BC335 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A55196154CD008BC335 /* Images.xcassets */; };
 		8EB70A5D196154CD008BC335 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A5C196154CD008BC335 /* XCTest.framework */; };
 		8EB70A5E196154CD008BC335 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A36196154CD008BC335 /* Foundation.framework */; };
@@ -83,6 +83,8 @@
 		8E3E4EAB196D22F500D30963 /* ramletherl_valentine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ramletherl_valentine.png; sourceTree = "<group>"; };
 		8E3E4EAC196D22F500D30963 /* rect_while.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rect_while.png; sourceTree = "<group>"; };
 		8E3E4EAD196D22F500D30963 /* yuyurect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuyurect.png; sourceTree = "<group>"; };
+		8E3E4EB5196D2E0400D30963 /* MZAttack_NWayToDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAttack_NWayToDirection.h; sourceTree = "<group>"; };
+		8E3E4EB6196D2E0400D30963 /* MZAttack_NWayToDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAttack_NWayToDirection.m; sourceTree = "<group>"; };
 		8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActor.h; sourceTree = "<group>"; };
 		8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActor.m; sourceTree = "<group>"; };
 		8E3E9D001961C2DB0007D7D0 /* MZNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNodes.h; sourceTree = "<group>"; };
@@ -133,7 +135,6 @@
 		8EB70A4E196154CD008BC335 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8EB70A50196154CD008BC335 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		8EB70A51196154CD008BC335 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		8EB70A53196154CD008BC335 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		8EB70A55196154CD008BC335 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB70A5B196154CD008BC335 /* MZGameActionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MZGameActionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB70A5C196154CD008BC335 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -199,6 +200,8 @@
 				8E85D9FB196AAB8400C40013 /* MZAttacksHeader.h */,
 				8E85D9F8196AAB7200C40013 /* MZAttack.h */,
 				8E85D9F9196AAB7200C40013 /* MZAttack.m */,
+				8E3E4EB5196D2E0400D30963 /* MZAttack_NWayToDirection.h */,
+				8E3E4EB6196D2E0400D30963 /* MZAttack_NWayToDirection.m */,
 			);
 			path = Attacks;
 			sourceTree = "<group>";
@@ -300,7 +303,6 @@
 				8EB70A51196154CD008BC335 /* GameScene.m */,
 				8E3E4EA3196D21DB00D30963 /* AnotherScene.h */,
 				8E3E4EA4196D21DB00D30963 /* AnotherScene.m */,
-				8EB70A53196154CD008BC335 /* Spaceship.png */,
 				8EFB2B181961596300A23555 /* MZActionsCore */,
 				8EB70A55196154CD008BC335 /* Images.xcassets */,
 				8E9C9AF5196A867800A3BCF2 /* MZUtilities */,
@@ -459,7 +461,6 @@
 				8E3E4EAE196D22F500D30963 /* enemies.atlas in Resources */,
 				8E3E4EB1196D22F500D30963 /* player_bullets.atlas in Resources */,
 				8E3E4EB4196D22F500D30963 /* yuyurect.png in Resources */,
-				8EB70A54196154CD008BC335 /* Spaceship.png in Resources */,
 				8E3E4EAF196D22F500D30963 /* enemy_bullets.atlas in Resources */,
 				8EB70A4C196154CD008BC335 /* Main.storyboard in Resources */,
 			);
@@ -494,6 +495,7 @@
 				8EB70A49196154CD008BC335 /* AppDelegate.m in Sources */,
 				8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */,
 				8E9C9B0F196A867800A3BCF2 /* MZiOSFiles.m in Sources */,
+				8E3E4EB7196D2E0400D30963 /* MZAttack_NWayToDirection.m in Sources */,
 				8E9C9B0C196A867800A3BCF2 /* MZConverts.m in Sources */,
 				8E7CA2811964122100917EEB /* MZPool.m in Sources */,
 				8E9C9B0D196A867800A3BCF2 /* MZFormula.m in Sources */,

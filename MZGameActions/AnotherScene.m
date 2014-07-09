@@ -16,13 +16,12 @@
                  touchAction:^(NSSet *touches, UIEvent *event) {
                      SKView *view = weakSelf.view;
                      [view presentScene:[GameScene sceneWithSize:weakSelf.size]
-                             transition:[SKTransition crossFadeWithDuration:.5]];
+                             transition:[SKTransition doorsOpenVerticalWithDuration:1]];
                  }];
     return self;
 }
 
 - (void)dealloc {
-    MZLog(@"");
 }
 
 

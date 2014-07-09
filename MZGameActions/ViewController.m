@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "GameScene.h"
+#import "AnotherScene.h"
 
 @implementation ViewController
 
@@ -22,7 +23,7 @@
     skView.frameInterval = 2;
 
     // Create and configure the scene.
-    SKScene *scene = [GameScene sceneWithSize:skView.bounds.size];
+    SKScene *scene = [AnotherScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
 
     // Present the scene.
