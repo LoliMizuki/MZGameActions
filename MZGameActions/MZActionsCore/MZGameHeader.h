@@ -19,8 +19,9 @@
 // Batch layer
 #import "MZSpritesLayer.h"
 
-
 // Built-in
 #import "MZTouchRelativeMove.h"
 #import "MZMovesHeader.h"
 #import "MZAttacksHeader.h"
+
+#import "MZSpriteCircleCollider.h"

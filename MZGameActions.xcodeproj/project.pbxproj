@@ -19,6 +19,7 @@
 		8E3E4EB3196D22F500D30963 /* rect_while.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAC196D22F500D30963 /* rect_while.png */; };
 		8E3E4EB4196D22F500D30963 /* yuyurect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAD196D22F500D30963 /* yuyurect.png */; };
 		8E3E4EB7196D2E0400D30963 /* MZAttack_NWayToDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EB6196D2E0400D30963 /* MZAttack_NWayToDirection.m */; };
+		8E3E4EBB196D444700D30963 /* MZSpriteCircleCollider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EBA196D444700D30963 /* MZSpriteCircleCollider.m */; };
 		8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */; };
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
@@ -85,6 +86,8 @@
 		8E3E4EAD196D22F500D30963 /* yuyurect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuyurect.png; sourceTree = "<group>"; };
 		8E3E4EB5196D2E0400D30963 /* MZAttack_NWayToDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAttack_NWayToDirection.h; sourceTree = "<group>"; };
 		8E3E4EB6196D2E0400D30963 /* MZAttack_NWayToDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAttack_NWayToDirection.m; sourceTree = "<group>"; };
+		8E3E4EB9196D444700D30963 /* MZSpriteCircleCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSpriteCircleCollider.h; sourceTree = "<group>"; };
+		8E3E4EBA196D444700D30963 /* MZSpriteCircleCollider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSpriteCircleCollider.m; sourceTree = "<group>"; };
 		8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActor.h; sourceTree = "<group>"; };
 		8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActor.m; sourceTree = "<group>"; };
 		8E3E9D001961C2DB0007D7D0 /* MZNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNodes.h; sourceTree = "<group>"; };
@@ -192,6 +195,15 @@
 				8E3E4EAD196D22F500D30963 /* yuyurect.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8E3E4EB8196D440F00D30963 /* Collisions */ = {
+			isa = PBXGroup;
+			children = (
+				8E3E4EB9196D444700D30963 /* MZSpriteCircleCollider.h */,
+				8E3E4EBA196D444700D30963 /* MZSpriteCircleCollider.m */,
+			);
+			path = Collisions;
 			sourceTree = "<group>";
 		};
 		8E700DDD196A6FF600885D02 /* Attacks */ = {
@@ -370,6 +382,7 @@
 		8EFB2B191961596300A23555 /* Built-in */ = {
 			isa = PBXGroup;
 			children = (
+				8E3E4EB8196D440F00D30963 /* Collisions */,
 				8E700DDE196A6FF600885D02 /* Controls */,
 				8E700DE1196A6FF600885D02 /* Moves */,
 				8E700DDD196A6FF600885D02 /* Attacks */,
@@ -488,6 +501,7 @@
 				8E85D9FA196AAB7200C40013 /* MZAttack.m in Sources */,
 				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
 				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,
+				8E3E4EBB196D444700D30963 /* MZSpriteCircleCollider.m in Sources */,
 				8EB70A52196154CD008BC335 /* GameScene.m in Sources */,
 				8E3E4EA5196D21DB00D30963 /* AnotherScene.m in Sources */,
 				8EB70A4F196154CD008BC335 /* ViewController.m in Sources */,

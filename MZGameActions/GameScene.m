@@ -32,6 +32,8 @@
     MZActionsGroup *_enemyBulletsUpdater;
 
     NSMutableArray *_touchResponders;
+
+    SKNode *_debugLayer;
 }
 
 - (id)initWithSize:(CGSize)size {
@@ -47,6 +49,14 @@
     [self _setEnemies];
 
     [self _setGUIs];
+
+    [self addChild:_debugLayer];
+
+
+    [self runAction:[SKAction sequence:@[
+                                          [SKAction waitForDuration:5],
+                                          [SKAction runBlock:^{ _playerActionTime.timeScale = 0; }]
+                                       ]]];
 
     return self;
 }
@@ -108,6 +118,8 @@
 @implementation GameScene (_)
 
 - (void)_init {
+    _debugLayer = [SKNode node];
+
     _playerActionTime = [MZActionTime new];
     _playerActionTime.name = @"player";
 
@@ -209,10 +221,17 @@
     MZActor *player = [_playersUpdater addImmediate:[MZActor new]];
 
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
-    [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"];
+    SKSpriteNode *sprite =
+        (SKSpriteNode *)
+        [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"].node;
     [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
     player.position = mzpAdd([self center], mzp(0, -200));
     player.rotation = 90;
+
+    MZSpriteCircleCollider *collider =
+        [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1.0]
+                     name:@"body-collider"];
+    [collider addDebugDrawNodeWithParent:_debugLayer color:[UIColor redColor]];
 }
 
 - (void)_setEnemies {
@@ -251,12 +270,21 @@
 
 - (MZActor * (^)(void))__test_enemy_bullet_func {
     __mz_gen_weak_block(ebu, _enemyBulletsUpdater);
+    __mz_gen_weak_block(dl, _debugLayer);
 
     return ^{
         MZActor *b = [ebu addImmediate:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
         [nodes addNode:[_enemyBulletsLayer spriteWithTextureName:@"fireball.png"] name:@"body"];
+
+        SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
+
+        MZSpriteCircleCollider *collider =
+            [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
+                     name:@"body-collider"];
+        [collider addDebugDrawNodeWithParent:dl color:[UIColor greenColor]];
+
         return b;
     };
 }
