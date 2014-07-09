@@ -1,18 +1,23 @@
 #import "GameScene.h"
 #import "MZGameHeader.h"
+#import "AnotherScene.h"
 
 @interface GameScene (_)
 - (void)_setPlayerLayer;
 - (void)_setEnemiesLayer;
 
 - (void)_setPlayer;
+
+- (void)_setGUIs;
+
+- (void)__test_random_put_sprites;
+- (void)__test_change_player_actionTime;
 @end
 
 
 
 @implementation GameScene {
     MZActionTime *_playerActionTime;
-    MZActionTime *_playerActionTime2;
 
     MZSpritesLayer *_playersLayer;
     MZSpritesLayer *_enemiesLayer;
@@ -32,33 +37,11 @@
     [self _setEnemiesLayer];
     [self _setPlayer];
 
-    CGPoint (^randPos)() = ^{
-        return mzp([MZMath randomIntInRangeMin:0 max:self.size.width],
-                   [MZMath randomIntInRangeMin:0 max:self.size.height]);
-    };
+    [self _setGUIs];
 
-    void (^randPut)() = ^{
-        NSString *n = [MZCollections randomPickInArray:_enemiesLayer.animationNames];
-        SKSpriteNode *s = [_enemiesLayer spriteWithForeverAnimationName:n];
-        s.position = randPos();
-    };
+    //    [self __test_random_put_sprites];
+    [self __test_change_player_actionTime];
 
-    [self runAction:[SKAction sequence:@[
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut],
-                                          [SKAction waitForDuration:2],
-                                          [SKAction runBlock:randPut]
-                                       ]]];
     return self;
 }
 
@@ -68,6 +51,8 @@
 
     [_playersLayer removeFromParent];
     [_enemiesLayer removeFromParent];
+
+    MZLog(@"game scene");
 }
 
 - (CGPoint)center {
@@ -106,7 +91,6 @@
 
 - (void)update:(CFTimeInterval)currentTime {
     [_playerActionTime updateWithCurrentTime:currentTime];
-    [_playerActionTime2 updateWithCurrentTime:currentTime];
 
     [_playersUpdater update];
 
@@ -195,37 +179,94 @@
 
 - (void)_setPlayer {
     _playerActionTime = [MZActionTime new];
-    _playerActionTime.name = @"1";
-    _playerActionTime2 = [MZActionTime new];
-    _playerActionTime2.name = @"2";
+    _playerActionTime.name = @"player";
 
-    MZActor *player = [MZActor new];
-    player.actionTime = _playerActionTime;
+    _playersUpdater.actionTime = _playerActionTime;
+    MZActor *player = [_playersUpdater addImmediate:[MZActor new]];
 
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
     [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"];
-
     [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
-
     player.position = mzpAdd([self center], mzp(0, -200));
     player.rotation = 90;
 
-    _playersUpdater.actionTime = _playerActionTime;
-    [_playersUpdater addImmediate:player];
-
     // move test
-    MZMoveTurnToDirection *m = [player addAction:[MZMoveTurnToDirection newWithMover:player] name:@"move"];
-    m.velocity = 0;
-    m.acceleration = 100;
-    m.direction = 45;
-    m.turnToDirection = 135;
-    m.turnDegreesPerSecond = 40;
+    MZMoveTurnToDirection *mtd = [player addAction:[MZMoveTurnToDirection newWithMover:player] name:@"move"];
+    mtd.velocity = 100;
+    //    m.acceleration = 100;
+    mtd.direction = 45;
+    mtd.turnToDirection = 135;
+    mtd.turnDegreesPerSecond = 40;
 
-    MZLog(@"%@", m.actionTime.name);
+    //    MZMoveWithVelocityDirection *mm = [player addAction:[MZMoveWithVelocityDirection newWithMover:player]
+    // name:@"move"];
+    //    mm.velocity = 100;
+    //    mm.direction = 90;
+}
 
-    player.actionTime = _playerActionTime2;
-    MZLog(@"%@", m.actionTime.name);
-    MZLog(@"%@", m.actionTime.name);
+- (void)_setGUIs {
+    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"ElWoQnH"];
+    backButton.position = mzpAdd(mzp(self.size.width, self.size.height), mzp(-40, -60));
+    [backButton setScale:0.1];
+    [self addChild:backButton];
+
+    __mz_gen_weak_block(weakSelf, self);
+    [backButton addTouchType:kMZTouchType_Began
+                 touchAction:^(NSSet *touches, UIEvent *event) {
+                     SKView *view = weakSelf.view;
+                     [view presentScene:[AnotherScene sceneWithSize:weakSelf.size]
+                             transition:[SKTransition crossFadeWithDuration:.5]];
+                 }];
+}
+
+- (void)__test_random_put_sprites {
+    CGPoint (^randPos)() = ^{
+        return mzp([MZMath randomIntInRangeMin:0 max:self.size.width],
+                   [MZMath randomIntInRangeMin:0 max:self.size.height]);
+    };
+
+    void (^randPut)() = ^{
+        NSString *n = [MZCollections randomPickInArray:_enemiesLayer.animationNames];
+        SKSpriteNode *s = [_enemiesLayer spriteWithForeverAnimationName:n];
+        s.position = randPos();
+    };
+
+    [self runAction:[SKAction sequence:@[
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut],
+                                          [SKAction waitForDuration:2],
+                                          [SKAction runBlock:randPut]
+                                       ]]];
+}
+
+- (void)__test_change_player_actionTime {
+    [self
+        runAction:
+            [SKAction
+                sequence:@[
+                            [SKAction waitForDuration:1],
+                            [SKAction runBlock:^{
+                                MZLog(@"switch to at 2");
+                                _playersUpdater.actionTime.timeScale = 0;
+                                //                                      MZLog(@"_playersUpdater.name = %@",
+                                // _playersUpdater.actionTime.name);
+                                //                                      MZActor *p = _playersUpdater.updatingAciotns[0];
+                                //                                      MZLog(@"player.name = %@", p.actionTime.name);
+                                //                                      MZAction *move = [p actionWithName:@"move"];
+                                //                                      MZLog(@"move.name = %@", move.actionTime.name);
+                                //                                              _playerActionTime.timeScale = 10;
+                            }]
+                         ]]];
 }
 
 @end

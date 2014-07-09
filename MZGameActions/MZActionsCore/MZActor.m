@@ -37,6 +37,10 @@
     _group.actionTime = anActionTime;
 }
 
+- (MZActionTime *)actionTime {
+    return _group.actionTime;
+}
+
 - (void)setPosition:(CGPoint)p {
     _position = p;
     [self _updatePosition];
@@ -74,15 +78,10 @@
     return _rotation;
 }
 
-- (MZActionTime *)actionTime {
-    return _group.actionTime;
-}
-
 - (id)addAction:(MZAction *)action name:(NSString *)name {
     MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
 
     action.name = name;
-    action.actionTime = self.actionTime;
     [_group addImmediate:action];
 
     return action;
@@ -93,6 +92,15 @@
     [self addAction:action name:name];
 
     return action;
+}
+
+- (id)actionWithName:(NSString *)name {
+    for (MZAction *a in _group.updatingAciotns) {
+        if (![a.name isEqualToString:name]) continue;
+        return a;
+    }
+
+    return nil;
 }
 
 - (void)update {

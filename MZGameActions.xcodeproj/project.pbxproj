@@ -10,6 +10,14 @@
 		8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93C196A731000EB49A3 /* MZMove.m */; };
 		8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */; };
 		8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E24D88C1966A504000388AC /* MZSpritesLayer.m */; };
+		8E3E4EA5196D21DB00D30963 /* AnotherScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA4196D21DB00D30963 /* AnotherScene.m */; };
+		8E3E4EAE196D22F500D30963 /* enemies.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA7196D22F500D30963 /* enemies.atlas */; };
+		8E3E4EAF196D22F500D30963 /* enemy_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA8196D22F500D30963 /* enemy_bullets.atlas */; };
+		8E3E4EB0196D22F500D30963 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA9196D22F500D30963 /* player.atlas */; };
+		8E3E4EB1196D22F500D30963 /* player_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAA196D22F500D30963 /* player_bullets.atlas */; };
+		8E3E4EB2196D22F500D30963 /* ramletherl_valentine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAB196D22F500D30963 /* ramletherl_valentine.png */; };
+		8E3E4EB3196D22F500D30963 /* rect_while.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAC196D22F500D30963 /* rect_while.png */; };
+		8E3E4EB4196D22F500D30963 /* yuyurect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EAD196D22F500D30963 /* yuyurect.png */; };
 		8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */; };
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
@@ -42,13 +50,6 @@
 		8EB70A67196154CD008BC335 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A65196154CD008BC335 /* InfoPlist.strings */; };
 		8EB70A69196154CD008BC335 /* MZGameActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A68196154CD008BC335 /* MZGameActionsTests.m */; };
 		8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */; };
-		8EFB2B061961565800A23555 /* enemies.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2AFF1961565800A23555 /* enemies.atlas */; };
-		8EFB2B071961565800A23555 /* enemy_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B001961565800A23555 /* enemy_bullets.atlas */; };
-		8EFB2B081961565800A23555 /* player.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B011961565800A23555 /* player.atlas */; };
-		8EFB2B091961565800A23555 /* player_bullets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B021961565800A23555 /* player_bullets.atlas */; };
-		8EFB2B0A1961565800A23555 /* ramletherl_valentine.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B031961565800A23555 /* ramletherl_valentine.png */; };
-		8EFB2B0B1961565800A23555 /* rect_while.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B041961565800A23555 /* rect_while.png */; };
-		8EFB2B0C1961565800A23555 /* yuyurect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB2B051961565800A23555 /* yuyurect.png */; };
 		8EFB2B1E1961596300A23555 /* MZActionTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B1B1961596300A23555 /* MZActionTime.m */; };
 		8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B2019615EEC00A23555 /* MZSpriteKit.m */; };
 		8EFB2B241961638600A23555 /* MZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B231961638600A23555 /* MZAction.m */; };
@@ -73,6 +74,15 @@
 		8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveWithVelocityDirection.m; sourceTree = "<group>"; };
 		8E24D88B1966A504000388AC /* MZSpritesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSpritesLayer.h; sourceTree = "<group>"; };
 		8E24D88C1966A504000388AC /* MZSpritesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSpritesLayer.m; sourceTree = "<group>"; };
+		8E3E4EA3196D21DB00D30963 /* AnotherScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherScene.h; sourceTree = "<group>"; };
+		8E3E4EA4196D21DB00D30963 /* AnotherScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherScene.m; sourceTree = "<group>"; };
+		8E3E4EA7196D22F500D30963 /* enemies.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemies.atlas; sourceTree = "<group>"; };
+		8E3E4EA8196D22F500D30963 /* enemy_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy_bullets.atlas; sourceTree = "<group>"; };
+		8E3E4EA9196D22F500D30963 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
+		8E3E4EAA196D22F500D30963 /* player_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player_bullets.atlas; sourceTree = "<group>"; };
+		8E3E4EAB196D22F500D30963 /* ramletherl_valentine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ramletherl_valentine.png; sourceTree = "<group>"; };
+		8E3E4EAC196D22F500D30963 /* rect_while.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rect_while.png; sourceTree = "<group>"; };
+		8E3E4EAD196D22F500D30963 /* yuyurect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuyurect.png; sourceTree = "<group>"; };
 		8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActor.h; sourceTree = "<group>"; };
 		8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActor.m; sourceTree = "<group>"; };
 		8E3E9D001961C2DB0007D7D0 /* MZNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNodes.h; sourceTree = "<group>"; };
@@ -132,13 +142,6 @@
 		8EB70A68196154CD008BC335 /* MZGameActionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZGameActionsTests.m; sourceTree = "<group>"; };
 		8EF5EA6F196A8979009B8CD6 /* MZMoveTurnToDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveTurnToDirection.h; sourceTree = "<group>"; };
 		8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveTurnToDirection.m; sourceTree = "<group>"; };
-		8EFB2AFF1961565800A23555 /* enemies.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemies.atlas; sourceTree = "<group>"; };
-		8EFB2B001961565800A23555 /* enemy_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = enemy_bullets.atlas; sourceTree = "<group>"; };
-		8EFB2B011961565800A23555 /* player.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player.atlas; sourceTree = "<group>"; };
-		8EFB2B021961565800A23555 /* player_bullets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = player_bullets.atlas; sourceTree = "<group>"; };
-		8EFB2B031961565800A23555 /* ramletherl_valentine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ramletherl_valentine.png; sourceTree = "<group>"; };
-		8EFB2B041961565800A23555 /* rect_while.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rect_while.png; sourceTree = "<group>"; };
-		8EFB2B051961565800A23555 /* yuyurect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuyurect.png; sourceTree = "<group>"; };
 		8EFB2B1A1961596300A23555 /* MZActionTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActionTime.h; sourceTree = "<group>"; };
 		8EFB2B1B1961596300A23555 /* MZActionTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActionTime.m; sourceTree = "<group>"; };
 		8EFB2B1C1961596300A23555 /* MZGameDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGameDefines.h; sourceTree = "<group>"; };
@@ -176,6 +179,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E3E4EA6196D22F500D30963 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8E3E4EA7196D22F500D30963 /* enemies.atlas */,
+				8E3E4EA8196D22F500D30963 /* enemy_bullets.atlas */,
+				8E3E4EA9196D22F500D30963 /* player.atlas */,
+				8E3E4EAA196D22F500D30963 /* player_bullets.atlas */,
+				8E3E4EAB196D22F500D30963 /* ramletherl_valentine.png */,
+				8E3E4EAC196D22F500D30963 /* rect_while.png */,
+				8E3E4EAD196D22F500D30963 /* yuyurect.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8E700DDD196A6FF600885D02 /* Attacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,11 +298,13 @@
 				8EB70A4E196154CD008BC335 /* ViewController.m */,
 				8EB70A50196154CD008BC335 /* GameScene.h */,
 				8EB70A51196154CD008BC335 /* GameScene.m */,
+				8E3E4EA3196D21DB00D30963 /* AnotherScene.h */,
+				8E3E4EA4196D21DB00D30963 /* AnotherScene.m */,
 				8EB70A53196154CD008BC335 /* Spaceship.png */,
 				8EFB2B181961596300A23555 /* MZActionsCore */,
 				8EB70A55196154CD008BC335 /* Images.xcassets */,
 				8E9C9AF5196A867800A3BCF2 /* MZUtilities */,
-				8EFB2AFE1961565800A23555 /* resources */,
+				8E3E4EA6196D22F500D30963 /* Resources */,
 				8EB70A3F196154CD008BC335 /* Supporting Files */,
 			);
 			path = MZGameActions;
@@ -318,20 +337,6 @@
 				8EB70A65196154CD008BC335 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8EFB2AFE1961565800A23555 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				8EFB2AFF1961565800A23555 /* enemies.atlas */,
-				8EFB2B001961565800A23555 /* enemy_bullets.atlas */,
-				8EFB2B011961565800A23555 /* player.atlas */,
-				8EFB2B021961565800A23555 /* player_bullets.atlas */,
-				8EFB2B031961565800A23555 /* ramletherl_valentine.png */,
-				8EFB2B041961565800A23555 /* rect_while.png */,
-				8EFB2B051961565800A23555 /* yuyurect.png */,
-			);
-			path = resources;
 			sourceTree = "<group>";
 		};
 		8EFB2B181961596300A23555 /* MZActionsCore */ = {
@@ -446,16 +451,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EFB2B0A1961565800A23555 /* ramletherl_valentine.png in Resources */,
-				8EFB2B0B1961565800A23555 /* rect_while.png in Resources */,
+				8E3E4EB2196D22F500D30963 /* ramletherl_valentine.png in Resources */,
 				8EB70A43196154CD008BC335 /* InfoPlist.strings in Resources */,
-				8EFB2B081961565800A23555 /* player.atlas in Resources */,
-				8EFB2B061961565800A23555 /* enemies.atlas in Resources */,
+				8E3E4EB3196D22F500D30963 /* rect_while.png in Resources */,
+				8E3E4EB0196D22F500D30963 /* player.atlas in Resources */,
 				8EB70A56196154CD008BC335 /* Images.xcassets in Resources */,
-				8EFB2B091961565800A23555 /* player_bullets.atlas in Resources */,
-				8EFB2B0C1961565800A23555 /* yuyurect.png in Resources */,
+				8E3E4EAE196D22F500D30963 /* enemies.atlas in Resources */,
+				8E3E4EB1196D22F500D30963 /* player_bullets.atlas in Resources */,
+				8E3E4EB4196D22F500D30963 /* yuyurect.png in Resources */,
 				8EB70A54196154CD008BC335 /* Spaceship.png in Resources */,
-				8EFB2B071961565800A23555 /* enemy_bullets.atlas in Resources */,
+				8E3E4EAF196D22F500D30963 /* enemy_bullets.atlas in Resources */,
 				8EB70A4C196154CD008BC335 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +488,7 @@
 				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
 				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,
 				8EB70A52196154CD008BC335 /* GameScene.m in Sources */,
+				8E3E4EA5196D21DB00D30963 /* AnotherScene.m in Sources */,
 				8EB70A4F196154CD008BC335 /* ViewController.m in Sources */,
 				8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */,
 				8EB70A49196154CD008BC335 /* AppDelegate.m in Sources */,

@@ -11,4 +11,6 @@
 - (id)addAction:(MZAction *)action name:(NSString *)name;
 - (id)addActionWithClass:(Class)actionClass name:(NSString *)name;
 
+- (id)actionWithName:(NSString *)name;
+
 @end

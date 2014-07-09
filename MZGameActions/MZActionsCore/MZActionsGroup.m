@@ -30,13 +30,11 @@
 - (void)setActionTime:(MZActionTime *)anActionTime {
     _actionTime = anActionTime;
 
-    for (MZAction *a in _newActionsBuffer) {
-        a.actionTime = _actionTime;
-    }
+    [MZMapReduces mapWithArray:_newActionsBuffer
+                        action:^(MZAction *a) { a.actionTime = _actionTime; }];
 
-    for (MZAction *a in _updatingAciotns) {
-        a.actionTime = _actionTime;
-    }
+    [MZMapReduces mapWithArray:_updatingAciotns
+                        action:^(MZAction *a) { a.actionTime = _actionTime; }];
 }
 
 - (MZActionTime *)actionTime {

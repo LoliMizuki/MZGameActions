@@ -16,6 +16,7 @@
     self = [super init];
 
     _duration = -1;
+    actionTime = [MZActionTime new];
 
     return self;
 }

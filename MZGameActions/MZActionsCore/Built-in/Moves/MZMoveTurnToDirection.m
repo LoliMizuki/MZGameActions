@@ -23,6 +23,17 @@
     return self;
 }
 
+- (void)dealloc {
+}
+
+- (void)setActionTime:(MZActionTime *)anActionTime {
+    _moveWithVelocityDirection.actionTime = anActionTime;
+}
+
+- (MZActionTime *)actionTime {
+    return _moveWithVelocityDirection.actionTime;
+}
+
 - (void)setMover:(id<MZTransform>)aMover {
     _moveWithVelocityDirection.mover = aMover;
 }

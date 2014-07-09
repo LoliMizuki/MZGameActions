@@ -31,7 +31,6 @@
     return self;
 }
 
-
 - (void)dealloc {
     for (SKNode *s in nodesPool.elements) {
         [s removeFromParent];

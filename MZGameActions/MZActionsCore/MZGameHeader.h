@@ -1,4 +1,5 @@
 #import "MZUtilities.h"
+#import "MZSpriteKit.h"
 
 #import "MZGameDefines.h"
 

@@ -1,4 +1,5 @@
 #import "MZActionTime.h"
+#import "MZGameHeader.h"
 
 @implementation MZActionTime {
     MZFloat _deltaTime;
@@ -18,6 +19,9 @@
 }
 
 - (void)dealloc {
+    if ([name isEqualToString:@"player"]) {
+        MZLog(@"player action release");
+    }
 }
 
 - (MZFloat)deltaTime {
