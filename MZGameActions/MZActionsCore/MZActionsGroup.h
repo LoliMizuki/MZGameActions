@@ -6,6 +6,7 @@
 
 // add action and immediate call start
 - (id)addImmediate:(MZAction *)newAction;
+- (id)addLate:(MZAction *)newAction;
 - (void)removeInactives;
 - (void)clear;
 @end

@@ -13,6 +13,8 @@
 - (void)update;
 - (void)end;
 
+- (void)setActive:(bool)active;
+
 @end
 
 // 感覺上會快就會需要 enableUpdate 這種東西了(如同 pasue 這項 Action 的意思)

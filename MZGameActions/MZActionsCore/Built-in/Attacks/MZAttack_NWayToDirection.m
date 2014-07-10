@@ -13,6 +13,7 @@
 }
 
 @synthesize numberOfWays, targetDirection, interval;
+@synthesize beforeLauchAction;
 
 - (instancetype)init {
     self = [super init];
@@ -42,6 +43,8 @@
 
 - (void)_launchs {
     if (self.bulletGenFunc == nil) return;
+
+    if (beforeLauchAction != nil) beforeLauchAction(self);
 
     for (int i = 0; i < numberOfWays; i++) {
         float offsetDegrees = (i + 1) / 2 * interval * ((i % 2 == 0) ? 1 : -1);

@@ -14,3 +14,7 @@
 - (id)actionWithName:(NSString *)name;
 
 @end
+
+// action 用備份 dict 備份一下
+// remove with name
+// actionsWithClass

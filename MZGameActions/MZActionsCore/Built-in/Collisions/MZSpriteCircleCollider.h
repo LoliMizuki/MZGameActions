@@ -17,13 +17,15 @@
 // setting
 @property (nonatomic, readwrite, weak) SKSpriteNode *sprite;
 @property (nonatomic, readwrite) CGPoint offset;
-@property (nonatomic, readwrite) float collisionScale;
+@property (nonatomic, readwrite) MZFloat collisionScale;
+@property (nonatomic, readwrite, strong) void (^collidedAction)(id collider);
 
 // collider info
-@property (nonatomic, readonly) float colliderRadius;
+@property (nonatomic, readonly) MZFloat colliderRadius;
 @property (nonatomic, readonly) CGPoint colliderPosition;
 
 - (bool)isCollidesAnother:(MZSpriteCircleCollider *)another;
+- (bool)collidesAnother:(MZSpriteCircleCollider *)another;
 
 - (void)addDebugDrawNodeWithParent:(SKNode *)parent color:(SKColor *)color;
 - (void)removeDebugDrawNode;

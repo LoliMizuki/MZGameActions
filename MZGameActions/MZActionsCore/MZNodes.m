@@ -6,6 +6,8 @@
 
 @implementation MZNodeInfo
 
+@synthesize node;
+
 - (instancetype)init {
     self = [super init];
 
@@ -14,6 +16,12 @@
     self.originRotation = 0;
 
     return self;
+}
+
+- (void)dealloc {
+    [node returnPool];
+
+    node = nil;
 }
 
 - (void)setPosition:(CGPoint)position {

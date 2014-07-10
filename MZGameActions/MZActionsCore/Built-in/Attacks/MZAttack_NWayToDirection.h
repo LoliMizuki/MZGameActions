@@ -6,5 +6,6 @@
 @property (nonatomic, readwrite) int numberOfWays;
 @property (nonatomic, readwrite) MZFloat targetDirection;
 @property (nonatomic, readwrite) MZFloat interval;
+@property (nonatomic, readwrite, strong) void (^beforeLauchAction)(id attack);
 
 @end

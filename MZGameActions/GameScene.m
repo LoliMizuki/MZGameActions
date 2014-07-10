@@ -34,6 +34,7 @@
     NSMutableArray *_touchResponders;
 
     SKNode *_debugLayer;
+    SKLabelNode *_message;
 }
 
 - (id)initWithSize:(CGSize)size {
@@ -110,7 +111,24 @@
     [_enemiesUpdater update];
     [_enemyBulletsUpdater update];
 
-    [_playersUpdater removeInactives];
+    // collision test
+    for (MZActor *player in _playersUpdater.updatingAciotns) {
+        MZSpriteCircleCollider *playerCollider = [player actionWithName:@"collider"];
+        for (MZActor *eb in _enemyBulletsUpdater.updatingAciotns) {
+            MZSpriteCircleCollider *ebCollider = [eb actionWithName:@"collider"];
+
+            [playerCollider collidesAnother:ebCollider];
+        }
+    }
+
+    [_playersUpdater update];
+    [_enemiesUpdater removeInactives];
+    [_enemyBulletsUpdater removeInactives];
+
+    NSUInteger a = _enemyBulletsLayer.nodesPool.numberOfAvailable;
+    NSUInteger b = _enemyBulletsLayer.nodesPool.numberOfElements;
+
+    _message.text = [NSString stringWithFormat:@"%lu/%lu", a, b];
 }
 
 @end
@@ -133,6 +151,10 @@
 
     _enemyBulletsUpdater = [MZActionsGroup new];
     _enemyBulletsUpdater.actionTime = _playerActionTime;
+
+    _message = [SKLabelNode labelNodeWithFontNamed:@"Arail"];
+    _message.position = mzp(self.size.width / 2, 20);
+    [self addChild:_message];
 }
 
 - (void)_setPlayerLayer {
@@ -230,7 +252,7 @@
 
     MZSpriteCircleCollider *collider =
         [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1.0]
-                     name:@"body-collider"];
+                     name:@"collider"];
     [collider addDebugDrawNodeWithParent:_debugLayer color:[UIColor redColor]];
 }
 
@@ -242,12 +264,15 @@
 
     MZAttack_NWayToDirection *a = [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
     a.bulletGenFunc = [self __test_enemy_bullet_func];
-    a.colddown = 1;
-    a.interval = 30;
-    a.numberOfWays = 3;
+    a.colddown = 0.2;
+    a.interval = 5;
+    a.numberOfWays = 5;
     a.targetDirection = 270;
     a.bulletVelocity = 100;
     a.bulletScale = 0.5;
+    a.beforeLauchAction = ^(MZAttack_NWayToDirection *_a) {
+        _a.targetDirection += 10;
+    };
 
     enemy.position = mzpFromSizeAndFactor(self.size, .5);
     enemy.rotation = 270;
@@ -282,7 +307,13 @@
 
         MZSpriteCircleCollider *collider =
             [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
-                     name:@"body-collider"];
+                     name:@"collider"];
+
+        __mz_gen_weak_block(weak, b);
+        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
+            [weak setActive:false];
+        };
+
         [collider addDebugDrawNodeWithParent:dl color:[UIColor greenColor]];
 
         return b;

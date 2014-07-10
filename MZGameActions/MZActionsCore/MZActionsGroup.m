@@ -54,6 +54,15 @@
     return newAction;
 }
 
+- (id)addLate:(MZAction *)newAction {
+    MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
+
+    [_newActionsBuffer addObject:newAction];
+    newAction.actionTime = self.actionTime;
+
+    return newAction;
+}
+
 - (void)update {
     [super update];
 
@@ -82,8 +91,6 @@
 @implementation MZActionsGroup (_)
 
 - (void)_addUpdatingActionsFromBuffer {
-    MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
-
     if (_newActionsBuffer.count == 0) return;
 
     for (MZAction *a in _newActionsBuffer) {
@@ -96,7 +103,7 @@
 
 - (void)_updateActions {
     for (MZAction *a in _updatingAciotns) {
-        [a update];
+        if (a.isActive) [a update];
     }
 }
 

@@ -53,8 +53,9 @@
 
 - (NSUInteger)numberOfAvailable {
     int count = 0;
-    for (NSNumber *v in _poolElementsStates)
+    for (NSNumber *v in _poolElementsStates) {
         if (![v boolValue]) count++;
+    }
 
     return count;
 }

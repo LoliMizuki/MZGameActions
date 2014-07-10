@@ -6,13 +6,12 @@
 - (void)_updateDebugNode;
 @end
 
-#pragma mark -
-
 @implementation MZSpriteCircleCollider {
     SKShapeNode *_debugNode;
 }
 
-#pragma mark - init and dealloc
+@synthesize colliderRadius, colliderPosition;
+@synthesize collidedAction;
 
 + (instancetype)newWithSprite:(SKSpriteNode *)sprite offset:(CGPoint)offset collisionScale:(float)collisionScale {
     MZSpriteCircleCollider *collider = [MZSpriteCircleCollider new];
@@ -21,6 +20,13 @@
     collider.collisionScale = collisionScale;
 
     return collider;
+}
+
++ (bool)isColliderA:(MZSpriteCircleCollider *)colliderA collidedB:(MZSpriteCircleCollider *)colliderB {
+    float distancePow2 = [MZMath distancePow2FromP1:colliderA.colliderPosition toPoint2:colliderB.colliderPosition];
+    float collidedDistancePow2 = pow(colliderA.colliderRadius + colliderB.colliderRadius, 2);
+
+    return distancePow2 <= collidedDistancePow2;
 }
 
 - (void)dealloc {
@@ -32,12 +38,7 @@
                                       NSStringFromCGPoint(self.colliderPosition), self.colliderRadius];
 }
 
-#pragma mark - properties
-
-@synthesize colliderRadius;
-@synthesize colliderPosition;
-
-- (float)colliderRadius {
+- (MZFloat)colliderRadius {
     return self.collisionScale * MIN(self.sprite.xScale, self.sprite.yScale) *
            MIN(self.sprite.texture.size.width / 2, self.sprite.texture.size.height / 2);
 }
@@ -50,17 +51,17 @@
     return mzpAdd(self.sprite.position, resultOffset);
 }
 
-#pragma mark - methods
-
-+ (bool)isColliderA:(MZSpriteCircleCollider *)colliderA collidedB:(MZSpriteCircleCollider *)colliderB {
-    float distancePow2 = [MZMath distancePow2FromP1:colliderA.colliderPosition toPoint2:colliderB.colliderPosition];
-    float collidedDistancePow2 = pow(colliderA.colliderRadius + colliderB.colliderRadius, 2);
-
-    return distancePow2 <= collidedDistancePow2;
-}
-
 - (bool)isCollidesAnother:(MZSpriteCircleCollider *)another {
     return [MZSpriteCircleCollider isColliderA:self collidedB:another];
+}
+
+- (bool)collidesAnother:(MZSpriteCircleCollider *)another {
+    if (![self isCollidesAnother:another]) return false;
+
+    if (self.collidedAction != nil) self.collidedAction(self);
+    if (another.collidedAction != nil) another.collidedAction(another);
+
+    return true;
 }
 
 - (void)addDebugDrawNodeWithParent:(SKNode *)parent color:(SKColor *)color {
@@ -89,8 +90,6 @@
 }
 
 @end
-
-#pragma mark -
 
 @implementation MZSpriteCircleCollider (Private)
 
