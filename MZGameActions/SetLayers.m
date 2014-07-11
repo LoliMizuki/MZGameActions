@@ -31,7 +31,7 @@
 }
 
 + (instancetype)newWithScene:(GameScene *)scene {
-    SetLayers *sl = [SetLayers new];
+    SetLayers *sl = [self new];
     sl->_gameScene = scene;
     [sl setLayersFromDatas];
 
