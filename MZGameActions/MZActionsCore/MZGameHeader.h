@@ -1,3 +1,5 @@
+#import <SpriteKit/SpriteKit.h>
+
 #import "MZUtilities.h"
 #import "MZSpriteKit.h"
 
@@ -21,6 +23,8 @@
 
 // Built-in
 #import "MZTouchRelativeMove.h"
+#import "MZBoundTest.h"
+
 #import "MZMovesHeader.h"
 #import "MZAttacksHeader.h"
 

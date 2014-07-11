@@ -135,6 +135,8 @@
 
     MZPoolElementAction getAction = ^(SKSpriteNode *s) {
         s.hidden = false;
+        [s setScale:1];
+        s.color = [UIColor whiteColor];
     };
 
     MZPoolElementAction returnAction = ^(SKSpriteNode *s) {

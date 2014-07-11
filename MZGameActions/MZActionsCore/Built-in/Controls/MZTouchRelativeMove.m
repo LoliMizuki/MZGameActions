@@ -10,7 +10,7 @@
     CGPoint _touchPositionAtBegan;
 }
 
-@synthesize mover, touchNotifier;
+@synthesize mover, bound, touchNotifier;
 
 + (instancetype)newWithMover:(id<MZTransform>)mover touchNotifier:(id<MZTouchNotifier>)touchNotifier {
     MZAssertIfNilWithMessage(mover, @"mover is nil");
@@ -22,6 +22,12 @@
     [t.touchNotifier addTouchResponder:t];
 
     return t;
+}
+
+- (instancetype)init {
+    self = [super init];
+    bound = CGRectNull;
+    return self;
 }
 
 - (void)dealloc {
@@ -41,7 +47,16 @@
 
     CGPoint currTouchPos = [touchNotifier positionWithTouch:[touches anyObject]];
     CGPoint diff = mzpSub(currTouchPos, _touchPositionAtBegan);
-    mover.position = mzpAdd(_moverPositionAtBegan, diff);
+    CGPoint nextPos = mzpAdd(_moverPositionAtBegan, diff);
+
+    if (!CGRectIsNull(bound)) {
+        float nextX = fmaxf(fminf(nextPos.x, CGRectGetMaxX(bound)), CGRectGetMinX(bound));
+        float nextY = fmaxf(fminf(nextPos.y, CGRectGetMaxY(bound)), CGRectGetMinY(bound));
+
+        nextPos = mzp(nextX, nextY);
+    }
+
+    mover.position = nextPos;
 }
 
 - (void)touchesEnded:(NSSet *)touches {

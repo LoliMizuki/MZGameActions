@@ -1,13 +1,10 @@
 #import "GameScene.h"
 #import "MZGameHeader.h"
 #import "AnotherScene.h"
+#import "SetLayers.h"
 
 @interface GameScene (_)
 - (void)_init;
-
-- (void)_setPlayerLayer;
-- (void)_setEnemiesLayer;
-- (void)_setEnemyBulletsLayer;
 
 - (void)_setPlayer;
 - (void)_setEnemies;
@@ -22,10 +19,7 @@
 
 @implementation GameScene {
     MZActionTime *_playerActionTime;
-
-    MZSpritesLayer *_playersLayer;
-    MZSpritesLayer *_enemiesLayer;
-    MZSpritesLayer *_enemyBulletsLayer;
+    NSMutableDictionary *_spritesLayerDict;
 
     MZActionsGroup *_playersUpdater;
     MZActionsGroup *_enemiesUpdater;
@@ -35,6 +29,8 @@
 
     SKNode *_debugLayer;
     SKLabelNode *_message;
+
+    CGRect _gameBound;
 }
 
 - (id)initWithSize:(CGSize)size {
@@ -42,9 +38,7 @@
 
     [self _init];
 
-    [self _setPlayerLayer];
-    [self _setEnemiesLayer];
-    [self _setEnemyBulletsLayer];
+    [[SetLayers newWithScene:self] setLayersFromDatas];
 
     [self _setPlayer];
     [self _setEnemies];
@@ -53,21 +47,18 @@
 
     [self addChild:_debugLayer];
 
-
-    [self runAction:[SKAction sequence:@[
-                                          [SKAction waitForDuration:5],
-                                          [SKAction runBlock:^{ _playerActionTime.timeScale = 0; }]
-                                       ]]];
-
     return self;
 }
 
 - (void)dealloc {
-    [_playersUpdater clear];
     [_touchResponders removeAllObjects];
 
-    [_playersLayer removeFromParent];
-    [_enemiesLayer removeFromParent];
+    [_playersUpdater clear];
+    [_enemiesUpdater clear];
+    [_enemyBulletsUpdater clear];
+
+    for (SKNode *l in _spritesLayerDict.allValues) [l removeFromParent];
+    [_spritesLayerDict removeAllObjects];
 }
 
 - (CGPoint)center {
@@ -76,6 +67,15 @@
 
 - (void)addTouchResponder:(id<MZTouchResponder>)touchResponder {
     [_touchResponders addObject:touchResponder];
+}
+
+- (void)addSpritesLayer:(MZSpritesLayer *)layer name:(NSString *)name {
+    _spritesLayerDict[name] = layer;
+    [self addChild:layer];
+}
+
+- (MZSpritesLayer *)spritesLayerWithName:(NSString *)name {
+    return _spritesLayerDict[name];
 }
 
 - (void)removeTouchResponder:(id<MZTouchResponder>)touchResponder {
@@ -116,18 +116,18 @@
         MZSpriteCircleCollider *playerCollider = [player actionWithName:@"collider"];
         for (MZActor *eb in _enemyBulletsUpdater.updatingAciotns) {
             MZSpriteCircleCollider *ebCollider = [eb actionWithName:@"collider"];
-
+            //
             [playerCollider collidesAnother:ebCollider];
         }
     }
 
-    [_playersUpdater update];
+    [_playersUpdater removeInactives];
     [_enemiesUpdater removeInactives];
     [_enemyBulletsUpdater removeInactives];
 
-    NSUInteger a = _enemyBulletsLayer.nodesPool.numberOfAvailable;
-    NSUInteger b = _enemyBulletsLayer.nodesPool.numberOfElements;
-
+    NSUInteger a = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfAvailable;
+    NSUInteger b = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfElements;
+    //
     _message.text = [NSString stringWithFormat:@"%lu/%lu", a, b];
 }
 
@@ -136,7 +136,22 @@
 @implementation GameScene (_)
 
 - (void)_init {
+    _spritesLayerDict = [NSMutableDictionary new];
     _debugLayer = [SKNode node];
+
+    CGPoint inner = mzp(50, 50);
+    _gameBound = CGRectMake(inner.x, inner.y, self.size.width - 2 * inner.x, self.size.height - 2 * inner.y);
+
+    // add bound lines
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGSize halfSize = _gameBound.size;
+    halfSize = CGSizeMake(halfSize.width / 2, halfSize.height / 2);
+    CGPathAddRect(path, nil, _gameBound);
+    SKShapeNode *gameZone = [SKShapeNode node];
+    [gameZone setStrokeColor:[SKColor purpleColor]];
+    gameZone.path = path;
+    CGPathRelease(path);
+    [self addChild:gameZone];
 
     _playerActionTime = [MZActionTime new];
     _playerActionTime.name = @"player";
@@ -157,87 +172,6 @@
     [self addChild:_message];
 }
 
-- (void)_setPlayerLayer {
-    _playersLayer = [MZSpritesLayer newWithAtlasName:@"player.atlas" nodesNumber:10];
-    [_playersLayer
-        addAnimationWithTextureNames:@[ @"fairy-walk-down-001", @"fairy-walk-down-002", @"fairy-walk-down-003" ]
-                                name:@"fairy-walk-down"
-                         oneLoopTime:0.5];
-
-    [_playersLayer
-        addAnimationWithTextureNames:@[ @"fairy-walk-left-001", @"fairy-walk-left-002", @"fairy-walk-left-003" ]
-                                name:@"fairy-walk-left"
-                         oneLoopTime:0.5];
-
-    [_playersLayer
-        addAnimationWithTextureNames:@[ @"fairy-walk-right-001", @"fairy-walk-right-002", @"fairy-walk-right-003" ]
-                                name:@"fairy-walk-right"
-                         oneLoopTime:0.5];
-
-    [_playersLayer addAnimationWithTextureNames:@[ @"fairy-walk-up-001", @"fairy-walk-up-002", @"fairy-walk-up-003" ]
-                                           name:@"fairy-walk-up"
-                                    oneLoopTime:0.5];
-
-    [self addChild:_playersLayer];
-}
-
-- (void)_setEnemiesLayer {
-    _enemiesLayer = [MZSpritesLayer newWithAtlasName:@"enemies.atlas" nodesNumber:100];
-    [_enemiesLayer addAnimationWithTextureNames:@[
-                                                   @"Bow_normal0001",
-                                                   @"Bow_normal0002",
-                                                   @"Bow_normal0003",
-                                                   @"Bow_normal0004",
-                                                   @"Bow_normal0005",
-                                                   @"Bow_normal0006",
-                                                   @"Bow_normal0007",
-                                                   @"Bow_normal0008",
-                                                   @"Bow_normal0009",
-                                                   @"Bow_normal0010",
-                                                   @"Bow_normal0011",
-                                                   @"Bow_normal0012"
-                                                ]
-                                           name:@"Bow"
-                                    oneLoopTime:0.1];
-
-    [_enemiesLayer addAnimationWithTextureNames:
-                       @[ @"monster_blue_0001", @"monster_blue_0002", @"monster_blue_0003", @"monster_blue_0004" ]
-                                           name:@"monster_blue"
-                                    oneLoopTime:0.1];
-
-    [_enemiesLayer addAnimationWithTextureNames:
-                       @[ @"monster_green_0001", @"monster_green_0002", @"monster_green_0003", @"monster_green_0004" ]
-                                           name:@"monster_green"
-                                    oneLoopTime:0.1];
-
-    [_enemiesLayer addAnimationWithTextureNames:
-                       @[ @"monster_red_0001", @"monster_red_0002", @"monster_red_0003", @"monster_red_0004" ]
-                                           name:@"monster_red"
-                                    oneLoopTime:0.1];
-
-    [_enemiesLayer addAnimationWithTextureNames:@[
-                                                   @"ship_0001",
-                                                   @"ship_0002",
-                                                   @"ship_0003",
-                                                   @"ship_0004",
-                                                   @"ship_0005",
-                                                   @"ship_0006",
-                                                   @"ship_0007",
-                                                   @"ship_0008",
-                                                   @"ship_0009",
-                                                   @"ship_0010"
-                                                ]
-                                           name:@"ship"
-                                    oneLoopTime:0.1];
-
-    [self addChild:_enemiesLayer];
-}
-
-- (void)_setEnemyBulletsLayer {
-    _enemyBulletsLayer = [MZSpritesLayer newWithAtlasName:@"enemy_bullets" nodesNumber:500];
-    [self addChild:_enemyBulletsLayer];
-}
-
 - (void)_setPlayer {
     _playersUpdater.actionTime = _playerActionTime;
     MZActor *player = [_playersUpdater addImmediate:[MZActor new]];
@@ -245,22 +179,27 @@
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
     SKSpriteNode *sprite =
         (SKSpriteNode *)
-        [nodes addNode:[_playersLayer spriteWithForeverAnimationName:@"fairy-walk-up"] name:@"body"].node;
-    [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
-    player.position = mzpAdd([self center], mzp(0, -200));
-    player.rotation = 90;
+        [nodes addNode:[[self spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-up"]
+                  name:@"body"].node;
+
+    MZTouchRelativeMove *trm =
+        [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:self] name:@"touch-relative-move"];
+    trm.bound = _gameBound;
 
     MZSpriteCircleCollider *collider =
         [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1.0]
                      name:@"collider"];
     [collider addDebugDrawNodeWithParent:_debugLayer color:[UIColor redColor]];
+
+    player.position = mzpAdd([self center], mzp(0, -200));
+    player.rotation = 90;
 }
 
 - (void)_setEnemies {
     MZActor *enemy = [_enemiesUpdater addImmediate:[MZActor new]];
 
     MZNodes *nodes = [enemy addAction:[MZNodes new] name:@"nodes"];
-    [nodes addNode:[_enemiesLayer spriteWithForeverAnimationName:@"Bow"] name:@"body"];
+    [nodes addNode:[[self spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"Bow"] name:@"body"];
 
     MZAttack_NWayToDirection *a = [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
     a.bulletGenFunc = [self __test_enemy_bullet_func];
@@ -269,7 +208,7 @@
     a.numberOfWays = 5;
     a.targetDirection = 270;
     a.bulletVelocity = 100;
-    a.bulletScale = 0.5;
+    a.bulletScale = 0.25;
     a.beforeLauchAction = ^(MZAttack_NWayToDirection *_a) {
         _a.targetDirection += 10;
     };
@@ -301,7 +240,8 @@
         MZActor *b = [ebu addImmediate:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[_enemyBulletsLayer spriteWithTextureName:@"fireball.png"] name:@"body"];
+        [nodes addNode:[[self spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"fireball.png"]
+                  name:@"body"];
 
         SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
 
@@ -309,12 +249,18 @@
             [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
                      name:@"collider"];
 
-        __mz_gen_weak_block(weak, b);
+        __mz_gen_weak_block(weakB, b);
         collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weak setActive:false];
+            [weakB setActive:false];
         };
-
         [collider addDebugDrawNodeWithParent:dl color:[UIColor greenColor]];
+
+        MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:_gameBound] name:@"boundTest"];
+        __mz_gen_weak_block(wbSprite, bodySprite);
+        boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
+        boundTest.outOfBoundAction = ^(id bt) {
+            [weakB setActive:false];
+        };
 
         return b;
     };
@@ -327,8 +273,8 @@
     };
 
     void (^randPut)() = ^{
-        NSString *n = [MZCollections randomPickInArray:_enemiesLayer.animationNames];
-        SKSpriteNode *s = [_enemiesLayer spriteWithForeverAnimationName:n];
+        NSString *n = [MZCollections randomPickInArray:[self spritesLayerWithName:@"enemies"].animationNames];
+        SKSpriteNode *s = [[self spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:n];
         s.position = randPos();
     };
 
