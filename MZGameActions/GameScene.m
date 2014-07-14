@@ -3,6 +3,7 @@
 #import "AnotherScene.h"
 #import "SetLayers.h"
 #import "SetPlayer.h"
+#import "PlayerBulletCreateFuncs.h"
 #import "EnemyCreateFuncs.h"
 #import "EnemyBulletCreateFuncs.h"
 
@@ -22,9 +23,9 @@
 }
 
 @synthesize playerActionTime;
-@synthesize enemiesCreateFuncs, enemyBulletCreateFuncs;
+@synthesize playerBulletCreateFuncs, enemiesCreateFuncs, enemyBulletCreateFuncs;
 @synthesize gameBound;
-@synthesize playersUpdater, enemiesUpdater, enemyBulletsUpdater;
+@synthesize playersUpdater, playerBulletsUpdater, enemiesUpdater, enemyBulletsUpdater;
 @synthesize debugLayer;
 
 - (id)initWithSize:(CGSize)size {
@@ -33,19 +34,21 @@
     [self _init];
 
     [[SetLayers newWithScene:self] setLayersFromDatas];
-    [[SetPlayer newWithScene:self] setPlayer];
 
+    playerBulletCreateFuncs = [PlayerBulletCreateFuncs newWithScene:self];
     enemiesCreateFuncs = [EnemyCreateFuncs newWithScene:self];
     enemyBulletCreateFuncs = [EnemyBulletCreateFuncs newWithScene:self];
+
+    [[SetPlayer newWithScene:self] setPlayer];
 
     [self _setGUIs];
 
     [self addChild:debugLayer];
 
-    [self runAction:[SKAction sequence:@[
-                                          [SKAction waitForDuration:3],
-                                          [SKAction runBlock:^{ [enemiesCreateFuncs funcWithName:@"the-one"](); }]
-                                       ]]];
+    //    [self runAction:[SKAction sequence:@[
+    //                                          [SKAction waitForDuration:3],
+    //                                          [SKAction runBlock:^{ [enemiesCreateFuncs funcWithName:@"the-one"](); }]
+    //                                       ]]];
 
     return self;
 }
@@ -108,6 +111,7 @@
     [playerActionTime updateWithCurrentTime:currentTime];
 
     [playersUpdater update];
+    [playerBulletsUpdater update];
     [enemiesUpdater update];
     [enemyBulletsUpdater update];
 
@@ -122,6 +126,7 @@
     }
 
     [playersUpdater removeInactives];
+    [playerBulletsUpdater removeInactives];
     [enemiesUpdater removeInactives];
     [enemyBulletsUpdater removeInactives];
 
@@ -163,6 +168,9 @@
     playersUpdater = [MZActionsGroup new];
     playersUpdater.actionTime = playerActionTime;
 
+    playerBulletsUpdater = [MZActionsGroup new];
+    playerBulletsUpdater.actionTime = playerActionTime;
+
     enemiesUpdater = [MZActionsGroup new];
     enemiesUpdater.actionTime = playerActionTime;
 
@@ -187,6 +195,17 @@
                      [view presentScene:[AnotherScene sceneWithSize:weakSelf.size]
                              transition:[SKTransition crossFadeWithDuration:.5]];
                  }];
+
+
+    SKLabelNode *pauseButton = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
+    pauseButton.text = @"Pause";
+    [pauseButton setScale:0.5];
+    pauseButton.position = mzpAdd(mzp(0, self.size.height), mzp(60, -60));
+    [pauseButton addTouchType:kMZTouchType_Began
+                  touchAction:^(NSSet *touches, UIEvent *event) {
+                      weakSelf.playerActionTime.timeScale = (weakSelf.playerActionTime.timeScale == 0) ? 1 : 0;
+                  }];
+    [self addChild:pauseButton];
 }
 
 - (MZActor * (^)(void))__test_enemy_bullet_func {

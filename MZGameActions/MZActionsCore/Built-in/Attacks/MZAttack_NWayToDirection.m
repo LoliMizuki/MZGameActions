@@ -28,7 +28,6 @@
     [self _launchs];
 }
 
-
 @end
 
 @implementation MZAttack_NWayToDirection (_)

@@ -137,16 +137,25 @@
         },
     };
 
+    NSMutableDictionary *playerBulletsLayerData = [NSMutableDictionary new];
+    playerBulletsLayerData[@"type"] = @"sprites";
+    playerBulletsLayerData[@"atlas"] = @"player_bullets";
+    playerBulletsLayerData[@"number"] = @(100);
+
     NSMutableDictionary *enemyBulletsLayerData = [NSMutableDictionary new];
     enemyBulletsLayerData[@"type"] = @"sprites";
     enemyBulletsLayerData[@"atlas"] = @"enemy_bullets";
     enemyBulletsLayerData[@"number"] = @(500);
 
     NSMutableDictionary *layerDatas = [NSMutableDictionary new];
-    layerDatas[@"order-keys"] = @[ @"player", @"enemies", @"enemy-bullets" ];
+    layerDatas[@"order-keys"] = @[ @"player", @"enemies", @"player-bullets", @"enemy-bullets" ];
 
-    layerDatas[@"layers"] =
-        @{@"player" : playerLayerData, @"enemies" : enemiesLayerData, @"enemy-bullets" : enemyBulletsLayerData, };
+    layerDatas[@"layers"] = @{
+        @"player" : playerLayerData,
+        @"enemies" : enemiesLayerData,
+        @"player-bullets" : playerBulletsLayerData,
+        @"enemy-bullets" : enemyBulletsLayerData,
+    };
     return layerDatas;
 }
 

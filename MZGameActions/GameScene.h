@@ -4,6 +4,7 @@
 @class MZSpritesLayer;
 @class MZActionTime;
 @class MZActionsGroup;
+@class PlayerBulletCreateFuncs;
 @class EnemyCreateFuncs;
 @class EnemyBulletCreateFuncs;
 
@@ -16,10 +17,12 @@
 
 @property (nonatomic, readonly) MZActionTime *playerActionTime;
 
+@property (nonatomic, readonly) PlayerBulletCreateFuncs *playerBulletCreateFuncs;
 @property (nonatomic, readonly) EnemyCreateFuncs *enemiesCreateFuncs;
 @property (nonatomic, readonly) EnemyBulletCreateFuncs *enemyBulletCreateFuncs;
 
 @property (nonatomic, readonly) MZActionsGroup *playersUpdater;
+@property (nonatomic, readonly) MZActionsGroup *playerBulletsUpdater;
 @property (nonatomic, readonly) MZActionsGroup *enemiesUpdater;
 @property (nonatomic, readonly) MZActionsGroup *enemyBulletsUpdater;
 
