@@ -4,9 +4,9 @@
 @class MZSpritesLayer;
 @class MZActionTime;
 @class MZActionsGroup;
-@class PlayerBulletCreateFuncs;
-@class EnemyCreateFuncs;
-@class EnemyBulletCreateFuncs;
+@class PlayerBulletCreateFuncs, EnemyCreateFuncs, EnemyBulletCreateFuncs;
+@class ActorCreateFuncs;
+@class ActorUpdaters;
 
 
 
@@ -21,11 +21,8 @@
 @property (nonatomic, readonly) EnemyCreateFuncs *enemiesCreateFuncs;
 @property (nonatomic, readonly) EnemyBulletCreateFuncs *enemyBulletCreateFuncs;
 
-@property (nonatomic, readonly) MZActionsGroup *playersUpdater;
-@property (nonatomic, readonly) MZActionsGroup *playerBulletsUpdater;
-@property (nonatomic, readonly) MZActionsGroup *enemiesUpdater;
-@property (nonatomic, readonly) MZActionsGroup *enemyBulletsUpdater;
-
+@property (nonatomic, readonly) ActorCreateFuncs *actorCreateFuncs;
+@property (nonatomic, readonly) ActorUpdaters *actorUpdaters;
 @property (nonatomic, readonly) SKNode *debugLayer;
 
 

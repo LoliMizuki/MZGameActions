@@ -6,6 +6,5 @@
 @property (nonatomic, readwrite, weak) GameScene *gameScene;
 
 + (instancetype)newWithScene:(GameScene *)gameScene;
-
 - (void)setPlayer;
 @end

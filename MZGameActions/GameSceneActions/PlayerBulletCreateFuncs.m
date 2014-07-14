@@ -1,6 +1,7 @@
 #import "PlayerBulletCreateFuncs.h"
 #import "MZGameHeader.h"
 #import "GameScene.h"
+#import "ActorUpdaters.h"
 
 @interface PlayerBulletCreateFuncs (_)
 - (void)_setCreateFuncs;
@@ -36,13 +37,13 @@
 @implementation PlayerBulletCreateFuncs (_)
 
 - (void)_setCreateFuncs {
-    __mz_gen_weak_block(wbGameScene, gameScene);
+    __mz_gen_weak_block(wbScene, gameScene);
 
     _createFuncsDict[@"pb-1"] = ^{
-        MZActor *b = [wbGameScene.playerBulletsUpdater addImmediate:[MZActor new]];
+        MZActor *b = [wbScene.actorUpdaters.playerBulletsUpdater addImmediate:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[[wbGameScene spritesLayerWithName:@"player-bullets"] spriteWithTextureName:@"10-fireball.png"]
+        [nodes addNode:[[wbScene spritesLayerWithName:@"player-bullets"] spriteWithTextureName:@"10-fireball.png"]
                   name:@"body"];
 
         SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
@@ -55,10 +56,9 @@
         collider.collidedAction = ^(MZSpriteCircleCollider *c) {
             [weakB setActive:false];
         };
-        [collider addDebugDrawNodeWithParent:wbGameScene.debugLayer color:[UIColor brownColor]];
+        [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor brownColor]];
 
-        MZBoundTest *boundTest =
-            [b addAction:[MZBoundTest newWithTester:b bound:wbGameScene.gameBound] name:@"boundTest"];
+        MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:wbScene.gameBound] name:@"boundTest"];
         __mz_gen_weak_block(wbSprite, bodySprite);
         boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
         boundTest.outOfBoundAction = ^(id bt) {

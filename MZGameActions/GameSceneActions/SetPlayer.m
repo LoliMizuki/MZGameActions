@@ -1,7 +1,5 @@
 #import "SetPlayer.h"
-#import "GameScene.h"
-#import "PlayerBulletCreateFuncs.h"
-#import "MZGameHeader.h"
+#import "GameSceneActionsHeader.h"
 
 @implementation SetPlayer
 
@@ -10,12 +8,15 @@
 + (instancetype)newWithScene:(GameScene *)gameScene {
     SetPlayer *sp = [self new];
     sp.gameScene = gameScene;
-
     return sp;
 }
 
+- (void)dealloc {
+    gameScene = nil;
+}
+
 - (void)setPlayer {
-    MZActor *player = [gameScene.playersUpdater addImmediate:[MZActor new]];
+    MZActor *player = [gameScene.actorUpdaters.playersUpdater addImmediate:[MZActor new]];
 
     MZNodes *nodes = [player addActionWithClass:[MZNodes class] name:@"nodes"];
     SKSpriteNode *sprite =
