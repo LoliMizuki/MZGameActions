@@ -5,10 +5,12 @@
 
 #import "GameScene.h"
 
+#import "ActorUpdaters.h"
+
+#import "ActorCreateFuncs.h"
+
 #import "PlayerBulletCreateFuncs.h"
 #import "EnemyCreateFuncs.h"
 #import "EnemyBulletCreateFuncs.h"
-
-#import "ActorUpdaters.h"
 
 #endif

@@ -1,8 +1,5 @@
 #import "EnemyCreateFuncs.h"
-#import "MZGameHeader.h"
-#import "GameScene.h"
-#import "ActorUpdaters.h"
-#import "EnemyBulletCreateFuncs.h"
+#import "GameSceneActionsHeader.h"
 
 @interface EnemyCreateFuncs (_)
 - (void)_setEnemyFuncs;
@@ -47,7 +44,7 @@
         [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"Bow"] name:@"body"];
 
         MZAttack_NWayToDirection *a = [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
-        a.bulletGenFunc = [wbScene.enemyBulletCreateFuncs funcWithName:@"the-b"];
+        a.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
         a.colddown = 0.2;
         a.interval = 5;
         a.numberOfWays = 5;

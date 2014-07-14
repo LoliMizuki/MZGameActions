@@ -31,10 +31,7 @@
 
 - (void)dealloc {
     [self clear];
-
     gameScene = nil;
-
-    MZLog(@"Someone call for the doctor");
 }
 
 - (void)update {

@@ -34,7 +34,7 @@
     [collider addDebugDrawNodeWithParent:gameScene.debugLayer color:[UIColor redColor]];
 
     MZAttack_NWayToDirection *a = [player addAction:[MZAttack_NWayToDirection newWithAttacker:player] name:@"attack"];
-    a.bulletGenFunc = [gameScene.playerBulletCreateFuncs funcWithName:@"pb-1"];
+    a.bulletGenFunc = [gameScene.actorCreateFuncs.playerBullet funcWithName:@"pb-1"];
     a.numberOfWays = 3;
     a.interval = 5;
     a.bulletVelocity = 300;

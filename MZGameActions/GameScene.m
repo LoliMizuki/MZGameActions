@@ -7,6 +7,7 @@
 #import "EnemyCreateFuncs.h"
 #import "EnemyBulletCreateFuncs.h"
 #import "ActorUpdaters.h"
+#import "ActorCreateFuncs.h"
 
 @interface GameScene (_)
 - (void)_init;
@@ -20,7 +21,6 @@
 }
 
 @synthesize playerActionTime;
-@synthesize playerBulletCreateFuncs, enemiesCreateFuncs, enemyBulletCreateFuncs;
 @synthesize gameBound;
 @synthesize actorCreateFuncs;
 @synthesize actorUpdaters;
@@ -38,10 +38,7 @@
     actorUpdaters.enemyBulletsUpdater.actionTime = playerActionTime;
 
     [[SetLayers newWithScene:self] setLayersFromDatas];
-
-    playerBulletCreateFuncs = [PlayerBulletCreateFuncs newWithScene:self];
-    enemiesCreateFuncs = [EnemyCreateFuncs newWithScene:self];
-    enemyBulletCreateFuncs = [EnemyBulletCreateFuncs newWithScene:self];
+    actorCreateFuncs = [ActorCreateFuncs newWithScene:self];
 
     [[SetPlayer newWithScene:self] setPlayer];
 
@@ -51,7 +48,7 @@
 
     [self runAction:[SKAction sequence:@[
                                           [SKAction waitForDuration:3],
-                                          [SKAction runBlock:^{ [enemiesCreateFuncs funcWithName:@"the-one"](); }]
+                                          [SKAction runBlock:^{ [actorCreateFuncs.enemy funcWithName:@"the-one"](); }]
                                        ]]];
     return self;
 }

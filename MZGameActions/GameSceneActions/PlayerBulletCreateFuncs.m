@@ -28,6 +28,10 @@
     return self;
 }
 
+- (void)dealloc {
+    [_createFuncsDict removeAllObjects];
+}
+
 - (MZActor * (^)(void))funcWithName:(NSString *)name {
     return _createFuncsDict[name];
 }

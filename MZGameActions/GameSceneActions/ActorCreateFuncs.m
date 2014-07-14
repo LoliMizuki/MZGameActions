@@ -22,6 +22,10 @@
     return acf;
 }
 
+- (void)dealloc {
+    gameScene = nil;
+}
+
 @end
 
 @implementation ActorCreateFuncs (_)

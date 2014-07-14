@@ -16,11 +16,6 @@
 @property (nonatomic, readonly) CGRect gameBound;
 
 @property (nonatomic, readonly) MZActionTime *playerActionTime;
-
-@property (nonatomic, readonly) PlayerBulletCreateFuncs *playerBulletCreateFuncs;
-@property (nonatomic, readonly) EnemyCreateFuncs *enemiesCreateFuncs;
-@property (nonatomic, readonly) EnemyBulletCreateFuncs *enemyBulletCreateFuncs;
-
 @property (nonatomic, readonly) ActorCreateFuncs *actorCreateFuncs;
 @property (nonatomic, readonly) ActorUpdaters *actorUpdaters;
 @property (nonatomic, readonly) SKNode *debugLayer;
