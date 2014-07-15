@@ -22,6 +22,7 @@
 		8E3E4EBB196D444700D30963 /* MZSpriteCircleCollider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EBA196D444700D30963 /* MZSpriteCircleCollider.m */; };
 		8E3E4EBE196E7A6900D30963 /* MZBoundTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EBD196E7A6900D30963 /* MZBoundTest.m */; };
 		8E3E7D561973F1E300B253A8 /* MZHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7D551973F1E300B253A8 /* MZHealth.m */; };
+		8E3E7D59197519BD00B253A8 /* MZFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E7D58197519BD00B253A8 /* MZFormation.m */; };
 		8E3E9CFF1961BB6D0007D7D0 /* MZActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */; };
 		8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E9D011961C2DB0007D7D0 /* MZNodes.m */; };
 		8E5A88C61973ADC900220637 /* EnemyBulletCreateFuncs.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A88BD1973ADC900220637 /* EnemyBulletCreateFuncs.m */; };
@@ -102,6 +103,8 @@
 		8E3E4EBF196E7BCA00D30963 /* MZBoundTesterHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZBoundTesterHeader.h; sourceTree = "<group>"; };
 		8E3E7D541973F1E300B253A8 /* MZHealth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZHealth.h; sourceTree = "<group>"; };
 		8E3E7D551973F1E300B253A8 /* MZHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZHealth.m; sourceTree = "<group>"; };
+		8E3E7D57197519BD00B253A8 /* MZFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZFormation.h; sourceTree = "<group>"; };
+		8E3E7D58197519BD00B253A8 /* MZFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZFormation.m; sourceTree = "<group>"; };
 		8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActor.h; sourceTree = "<group>"; };
 		8E3E9CFE1961BB6D0007D7D0 /* MZActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActor.m; sourceTree = "<group>"; };
 		8E3E9D001961C2DB0007D7D0 /* MZNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZNodes.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				8E3E4EBD196E7A6900D30963 /* MZBoundTest.m */,
 				8E3E7D541973F1E300B253A8 /* MZHealth.h */,
 				8E3E7D551973F1E300B253A8 /* MZHealth.m */,
+				8E3E7D57197519BD00B253A8 /* MZFormation.h */,
+				8E3E7D58197519BD00B253A8 /* MZFormation.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				8E3E7D561973F1E300B253A8 /* MZHealth.m in Sources */,
 				8EB70A45196154CD008BC335 /* main.m in Sources */,
 				8E5A88C81973ADC900220637 /* PlayerBulletCreateFuncs.m in Sources */,
+				8E3E7D59197519BD00B253A8 /* MZFormation.m in Sources */,
 				8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */,
 				8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */,
 				8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */,

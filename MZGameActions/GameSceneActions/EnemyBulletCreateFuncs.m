@@ -53,9 +53,9 @@
                      name:@"collider"];
 
         __mz_gen_weak_block(weakB, b);
-        //        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-        //            [weakB setActive:false];
-        //        };
+        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
+            [weakB setActive:false];
+        };
         [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
 
         MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:wbScene.gameBound] name:@"boundTest"];

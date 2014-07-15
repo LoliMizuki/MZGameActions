@@ -92,12 +92,11 @@
         [wbNodes removeWithName:@"left-body"];
         wbCollider.isActive = false;
         h.isActive = false;
+        h.healthZeroActoin = nil;
     };
 
     collider.collidedAction = ^(id c) {
         wbHealth.healthPoint -= 1;
-        MZLog(@"%d", wbHealth.healthPoint);
-        MZLogBool(wbHealth.isActive);
     };
 }
 

@@ -12,6 +12,7 @@
 @interface GameScene (_)
 - (void)_init;
 - (void)_setGUIs;
+- (void)__test_formation;
 @end
 
 @implementation GameScene {
@@ -24,6 +25,7 @@
 @synthesize gameBound;
 @synthesize actorCreateFuncs;
 @synthesize actorUpdaters;
+@synthesize eventsExecutor;
 @synthesize debugLayer;
 
 - (id)initWithSize:(CGSize)size {
@@ -42,14 +44,17 @@
 
     [[SetPlayer newWithScene:self] setPlayer];
 
+    [self __test_formation];
+
     [self _setGUIs];
 
     if (debugLayer != nil) [self addChild:debugLayer];
 
-    [self runAction:[SKAction sequence:@[
-                                          [SKAction waitForDuration:3],
-                                          [SKAction runBlock:^{ [actorCreateFuncs.enemy funcWithName:@"the-one"](); }]
-                                       ]]];
+    //    [self runAction:[SKAction sequence:@[
+    //                                          [SKAction waitForDuration:3],
+    //                                          [SKAction runBlock:^{ [actorCreateFuncs.enemy
+    // funcWithName:@"the-one"](); }]
+    //                                       ]]];
     return self;
 }
 
@@ -109,11 +114,14 @@
 - (void)update:(CFTimeInterval)currentTime {
     [playerActionTime updateWithCurrentTime:currentTime];
 
+    [eventsExecutor update];
     [actorUpdaters update];
+
+    [eventsExecutor removeInactives];
 
     NSUInteger a = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfAvailable;
     NSUInteger b = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfElements;
-    _message.text = [NSString stringWithFormat:@"%lu/%lu", a, b];
+    _message.text = [NSString stringWithFormat:@"%lu/%lu\nformation: %lu", a, b, eventsExecutor.updatingAciotns.count];
 }
 
 @end
@@ -140,6 +148,9 @@
 
     playerActionTime = [MZActionTime new];
     playerActionTime.name = @"player";
+
+    eventsExecutor = [MZActionsGroup new];
+    eventsExecutor.actionTime = playerActionTime;
 
     _touchResponders = [NSMutableArray new];
 
@@ -172,6 +183,28 @@
                       weakSelf.playerActionTime.timeScale = (weakSelf.playerActionTime.timeScale == 0) ? 1 : 0;
                   }];
     [self addChild:pauseButton];
+}
+
+- (void)__test_formation {
+    MZFormation *f1 = [MZFormation new];
+    f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
+    [f1 addSpawnPositions:@[
+                             NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
+                             NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
+                          ]];
+    f1.maxSpawnCount = 10;
+    f1.interval = 0.5;
+
+    f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
+        MZHealth *health = [actor actionWithName:@"health"];
+        health.healthPoint = 3;
+
+        if (f.currentSpawnCount % 2 == 0) return;
+        MZMoveWithVelocityDirection *m = [actor actionWithName:@"move"];
+        m.direction = 0;
+    };
+
+    [eventsExecutor addLate:f1];
 }
 
 @end

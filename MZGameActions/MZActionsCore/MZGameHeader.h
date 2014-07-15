@@ -30,4 +30,6 @@
 
 #import "MZSpriteCircleCollider.h"
 
+#import "MZFormation.h"
+
 #import "MZHealth.h"

@@ -25,8 +25,7 @@
 }
 
 - (CGSize)testerSize {
-    MZAssertIfNilWithMessage(testerSizeFunc, @"no set test size");
-    return testerSizeFunc();
+    return (testerSizeFunc != nil) ? testerSizeFunc() : CGSizeZero;
 }
 
 - (void)update {
