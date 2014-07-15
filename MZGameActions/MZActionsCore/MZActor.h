@@ -12,6 +12,13 @@
 - (id)addActionWithClass:(Class)actionClass name:(NSString *)name;
 
 - (id)actionWithName:(NSString *)name;
+- (NSArray *)actionsWithClass:(Class)actionClass;
+
+- (id)removeAction:(MZAction *)action;
+- (id)removeActionWithName:(NSString *)name;
+- (NSArray *)removeActionsWithClass:(Class)actionClass;
+
+
 
 @end
 

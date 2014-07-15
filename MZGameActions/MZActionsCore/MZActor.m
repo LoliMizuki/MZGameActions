@@ -103,6 +103,35 @@
     return nil;
 }
 
+- (NSArray *)actionsWithClass:(Class)actionClass {
+    NSMutableArray *actions = [NSMutableArray new];
+    for (MZAction *a in _group.updatingAciotns) {
+        if ([a class] == actionClass) [actions addObject:a];
+    }
+
+    return actions;
+}
+
+- (id)removeAction:(MZAction *)action {
+    action.isActive = false;
+    return action;
+}
+
+- (id)removeActionWithName:(NSString *)name {
+    MZAction *a = [self actionWithName:name];
+    [self removeAction:a];
+    return a;
+}
+
+- (NSArray *)removeActionsWithClass:(Class)actionClass {
+    NSArray *actions = [self actionsWithClass:actionClass];
+    for (MZAction *a in actions) {
+        [self removeAction:a];
+    }
+
+    return actions;
+}
+
 - (void)update {
     [super update];
     [_group update];

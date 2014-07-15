@@ -29,3 +29,5 @@
 #import "MZAttacksHeader.h"
 
 #import "MZSpriteCircleCollider.h"
+
+#import "MZHealth.h"

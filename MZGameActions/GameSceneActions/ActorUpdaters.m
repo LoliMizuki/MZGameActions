@@ -4,6 +4,7 @@
 
 @interface ActorUpdaters (_)
 - (void)_collideWithUpdateA:(MZActionsGroup *)updaterA andUpdaterB:(MZActionsGroup *)updaterB;
+- (void)_actionWithCollidersA:(NSArray *)a andB:(NSArray *)b;
 @end
 
 
@@ -62,12 +63,19 @@
 
 - (void)_collideWithUpdateA:(MZActionsGroup *)updaterA andUpdaterB:(MZActionsGroup *)updaterB {
     for (MZActor *actorA in updaterA.updatingAciotns) {
-        MZSpriteCircleCollider *actorACollider = [actorA actionWithName:@"collider"];
+        NSArray *collidersA = [actorA actionsWithClass:[MZSpriteCircleCollider class]];
 
         for (MZActor *actorB in updaterB.updatingAciotns) {
-            MZSpriteCircleCollider *actorBCollider = [actorB actionWithName:@"collider"];
+            NSArray *collidersB = [actorB actionsWithClass:[MZSpriteCircleCollider class]];
+            [self _actionWithCollidersA:collidersA andB:collidersB];
+        }
+    }
+}
 
-            [actorACollider collidesAnother:actorBCollider];
+- (void)_actionWithCollidersA:(NSArray *)a andB:(NSArray *)b {
+    for (MZSpriteCircleCollider *ca in a) {
+        for (MZSpriteCircleCollider *cb in b) {
+            [ca collidesAnother:cb];
         }
     }
 }

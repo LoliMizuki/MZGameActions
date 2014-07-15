@@ -21,4 +21,5 @@
 - (MZNodeInfo *)addNode:(SKNode *)node name:(NSString *)name;
 - (MZNodeInfo *)nodeInfoWithName:(NSString *)name;
 - (SKNode *)nodeWithName:(NSString *)name;
+- (void)removeWithName:(NSString *)name;
 @end

@@ -20,7 +20,6 @@
 
 - (void)dealloc {
     [node returnPool];
-
     node = nil;
 }
 
@@ -145,6 +144,10 @@
 - (SKNode *)nodeWithName:(NSString *)name {
     MZNodeInfo *nodeIfo = [self nodeInfoWithName:name];
     return (nodeIfo != nil) ? nodeIfo.node : nil;
+}
+
+- (void)removeWithName:(NSString *)name {
+    [_nodeInfosDict removeObjectForKey:name];
 }
 
 @end
