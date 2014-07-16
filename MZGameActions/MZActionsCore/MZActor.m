@@ -132,6 +132,12 @@
     return actions;
 }
 
+- (void)refresh {
+    [self _updatePosition];
+    [self _updateScale];
+    [self _updateRotation];
+}
+
 - (void)update {
     [super update];
     [_group update];

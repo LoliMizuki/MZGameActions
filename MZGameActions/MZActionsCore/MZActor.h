@@ -18,6 +18,7 @@
 - (id)removeActionWithName:(NSString *)name;
 - (NSArray *)removeActionsWithClass:(Class)actionClass;
 
+- (void)refresh;
 
 
 @end

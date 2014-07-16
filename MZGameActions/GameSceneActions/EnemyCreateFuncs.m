@@ -60,7 +60,7 @@
     __mz_gen_weak_block(wbSelf, self);
 
     return ^{
-        __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemiesUpdater addLate:[MZActor new]];
+        __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemies addLate:[MZActor new]];
 
         [wbSelf _addCommonBoundTestToActor:enemy];
 
@@ -117,21 +117,22 @@
     __mz_gen_weak_block(wbSelf, self);
 
     return ^{
-        MZActor *e = [wbScene.actorUpdaters.enemiesUpdater addLate:[MZActor new]];
+        __mz_weak_block_type(MZActor *)e = [wbScene.actorUpdaters.enemies addLate:[MZActor new]];
 
         [wbSelf _addCommonBoundTestToActor:e];
 
-        __mz_weak_block MZHealth *health = [e addAction:[MZHealth new] name:@"health"];
+        __mz_weak_block_type(MZHealth *)health = [e addAction:[MZHealth new] name:@"health"];
         health.healthPoint = 4000;
 
-        MZNodes *nodes = [e addAction:[MZNodes new] name:@"nodes"];
+        __mz_weak_block_type(MZNodes *)nodes = [e addAction:[MZNodes new] name:@"nodes"];
+
         __mz_weak_block_type(MZNodeInfo *)bodyNodeIndo =
             [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"ship"]
                       name:@"body"];
         bodyNodeIndo.originScale = 0.3;
 
         __mz_weak_block_type(MZNodeInfo *)cannon1NodeIndo =
-            [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithAnimationName:@"monster_red"]
+            [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithAnimationName:@"monster_blue"]
                       name:@"cannon1"];
         cannon1NodeIndo.originScale = 0.5;
         cannon1NodeIndo.originPosition = mzp(50, 50);
@@ -156,18 +157,50 @@
             a.targetDirection = [MZMath degreesFromP1:a.attacker.position toP2:wbScene.player.position];
         };
 
-        __mz_weak_block_type(MZAttack_NWayToDirection *)attack2 =
-            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon2NodeIndo] name:@"attack2"];
-        attack2.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"rect"];
-        attack2.bulletScale = 0.4;
-        attack2.bulletVelocity = 100;
-        attack2.numberOfWays = 3;
-        attack2.interval = 10;
-        attack2.targetDirection = 270;
-        attack2.colddown = 0.5;
+        //        __mz_weak_block_type(MZAttack_NWayToDirection *)attack2 =
+        //            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon2NodeIndo] name:@"attack2"];
+        //        attack2.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"rect"];
+        //        attack2.bulletScale = 0.4;
+        //        attack2.bulletVelocity = 100;
+        //        attack2.numberOfWays = 3;
+        //        attack2.interval = 10;
+        //        attack2.targetDirection = 270;
+        //        attack2.colddown = 0.5;
 
+        // set cannon1 hp, collider
+        __mz_weak_block_type(MZHealth *)cannon1Health = [e addAction:[MZHealth new] name:@"cannon1-health"];
+        cannon1Health.healthPoint = 20;
+
+        __mz_weak_block_type(MZSpriteCircleCollider *)cannon1Collider =
+            [e addAction:[MZSpriteCircleCollider newWithSprite:(SKSpriteNode *)cannon1NodeIndo.node
+                                                        offset:MZPZero
+                                                collisionScale:1]
+                     name:@"cannon1Collider"];
+
+        cannon1Health.healthZeroActoin = ^(id h) {
+            [nodes removeWithName:@"cannon1"];
+//            [e removeAction:attack1];  // 測試不移除 ...
+            [e removeAction:cannon1Health];
+            [e removeAction:cannon1Collider];
+
+            [wbScene.player removeActionWithName:@"attack"];
+
+            //            attack2.numberOfWays = 36;
+            //            attack2.interval = 10;
+
+            [nodes nodeInfoWithName:@"body"].node =
+                [[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"monster_green"];
+            [nodes nodeInfoWithName:@"body"].originScale = 2;
+            [nodes nodeInfoWithName:@"body"].originRotation = 180;
+
+            [e refresh];
+        };
+        cannon1Collider.collidedAction = ^(id c) {
+            cannon1Health.healthPoint -= 1;
+        };
+
+        [e refresh];
         e.position = wbScene.center;
-        e.scale = 1;
         e.rotation = 270;
         return e;
     };

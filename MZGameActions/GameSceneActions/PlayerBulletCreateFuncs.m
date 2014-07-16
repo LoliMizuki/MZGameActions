@@ -44,7 +44,7 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     _createFuncsDict[@"pb-1"] = ^{
-        MZActor *b = [wbScene.actorUpdaters.playerBulletsUpdater addImmediate:[MZActor new]];
+        MZActor *b = [wbScene.actorUpdaters.playerBullets addImmediate:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
         [nodes addNode:[[wbScene spritesLayerWithName:@"player-bullets"] spriteWithTextureName:@"10-fireball.png"]

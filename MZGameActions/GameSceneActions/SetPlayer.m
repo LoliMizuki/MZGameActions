@@ -25,7 +25,7 @@
 }
 
 - (void)setPlayer {
-    MZActor *player = [gameScene.actorUpdaters.playersUpdater addImmediate:[MZActor new]];
+    MZActor *player = [gameScene.actorUpdaters.players addImmediate:[MZActor new]];
 
     MZTouchRelativeMove *trm = [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:gameScene]
                                             name:@"touch-relative-move"];
@@ -35,7 +35,7 @@
 
     [self _setMainBodyToPlayer:player];
     [self _setLeftToPlayer:player];
-    //    [self _setAttackToPlayer:player];
+    [self _setAttackToPlayer:player];
 
 
     player.position = mzpAdd([gameScene center], mzp(0, -200));

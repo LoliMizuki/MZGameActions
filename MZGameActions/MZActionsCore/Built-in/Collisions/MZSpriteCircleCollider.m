@@ -14,12 +14,16 @@
 @synthesize collidedAction;
 
 + (instancetype)newWithSprite:(SKSpriteNode *)sprite offset:(CGPoint)offset collisionScale:(float)collisionScale {
-    MZSpriteCircleCollider *collider = [MZSpriteCircleCollider new];
+    MZSpriteCircleCollider *collider = [self new];
     collider.sprite = sprite;
     collider.offset = offset;
     collider.collisionScale = collisionScale;
 
     return collider;
+}
+
++ (instancetype)newWithSprite:(SKSpriteNode *)sprite {
+    return [MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1];
 }
 
 + (bool)isColliderA:(MZSpriteCircleCollider *)colliderA collidedB:(MZSpriteCircleCollider *)colliderB {

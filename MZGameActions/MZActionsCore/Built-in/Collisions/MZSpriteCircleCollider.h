@@ -12,6 +12,7 @@
 @interface MZSpriteCircleCollider : MZAction
 
 + (instancetype)newWithSprite:(SKSpriteNode *)sprite offset:(CGPoint)offset collisionScale:(float)collisionScale;
++ (instancetype)newWithSprite:(SKSpriteNode *)sprite;
 + (bool)isColliderA:(MZSpriteCircleCollider *)colliderA collidedB:(MZSpriteCircleCollider *)colliderB;
 
 // setting

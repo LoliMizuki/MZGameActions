@@ -12,7 +12,7 @@
 @implementation ActorUpdaters
 
 @synthesize gameScene;
-@synthesize playersUpdater, playerBulletsUpdater, enemiesUpdater, enemyBulletsUpdater;
+@synthesize players, playerBullets, enemies, enemyBullets;
 
 + (instancetype)newWithGameScene:(GameScene *)gameScene {
     ActorUpdaters *u = [self new];
@@ -22,10 +22,10 @@
 - (instancetype)init {
     self = [super init];
 
-    playersUpdater = [MZActionsGroup new];
-    playerBulletsUpdater = [MZActionsGroup new];
-    enemiesUpdater = [MZActionsGroup new];
-    enemyBulletsUpdater = [MZActionsGroup new];
+    players = [MZActionsGroup new];
+    playerBullets = [MZActionsGroup new];
+    enemies = [MZActionsGroup new];
+    enemyBullets = [MZActionsGroup new];
 
     return self;
 }
@@ -36,25 +36,25 @@
 }
 
 - (void)update {
-    [playersUpdater update];
-    [playerBulletsUpdater update];
-    [enemiesUpdater update];
-    [enemyBulletsUpdater update];
+    [players update];
+    [playerBullets update];
+    [enemies update];
+    [enemyBullets update];
 
-    [self _collideWithUpdateA:playerBulletsUpdater andUpdaterB:enemiesUpdater];
-    [self _collideWithUpdateA:enemyBulletsUpdater andUpdaterB:playersUpdater];
+    [self _collideWithUpdateA:playerBullets andUpdaterB:enemies];
+    [self _collideWithUpdateA:enemyBullets andUpdaterB:players];
 
-    [playersUpdater removeInactives];
-    [playerBulletsUpdater removeInactives];
-    [enemiesUpdater removeInactives];
-    [enemyBulletsUpdater removeInactives];
+    [players removeInactives];
+    [playerBullets removeInactives];
+    [enemies removeInactives];
+    [enemyBullets removeInactives];
 }
 
 - (void)clear {
-    [playersUpdater clear];
-    [playerBulletsUpdater clear];
-    [enemiesUpdater clear];
-    [enemyBulletsUpdater clear];
+    [players clear];
+    [playerBullets clear];
+    [enemies clear];
+    [enemyBullets clear];
 }
 
 @end

@@ -4,9 +4,9 @@
 
 #pragma mark - MZNodeInfo
 
-@implementation MZNodeInfo
-
-@synthesize node;
+@implementation MZNodeInfo {
+    SKNode *_node;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -19,8 +19,19 @@
 }
 
 - (void)dealloc {
-    [node returnPool];
-    node = nil;
+    [self.node returnPool];
+    self.node = nil;
+}
+
+- (void)setNode:(SKNode *)newNode {
+    if (_node != nil) {
+        [_node returnPool];
+    }
+    _node = newNode;
+}
+
+- (SKNode *)node {
+    return _node;
 }
 
 - (void)setOriginScale:(double)originScale {
@@ -155,7 +166,7 @@
 }
 
 - (void)removeWithName:(NSString *)name {
-    MZAssert(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
+    MZWarning(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
     [_nodeInfosDict removeObjectForKey:name];
 }
 

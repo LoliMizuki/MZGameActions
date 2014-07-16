@@ -34,10 +34,10 @@
     [self _init];
 
     actorUpdaters = [ActorUpdaters newWithGameScene:self];
-    actorUpdaters.playersUpdater.actionTime = playerActionTime;
-    actorUpdaters.playerBulletsUpdater.actionTime = playerActionTime;
-    actorUpdaters.enemiesUpdater.actionTime = playerActionTime;
-    actorUpdaters.enemyBulletsUpdater.actionTime = playerActionTime;
+    actorUpdaters.players.actionTime = playerActionTime;
+    actorUpdaters.playerBullets.actionTime = playerActionTime;
+    actorUpdaters.enemies.actionTime = playerActionTime;
+    actorUpdaters.enemyBullets.actionTime = playerActionTime;
 
     [[SetLayers newWithScene:self] setLayersFromDatas];
     actorCreateFuncs = [ActorCreateFuncs newWithScene:self];
@@ -71,7 +71,7 @@
 }
 
 - (MZActor *)player {
-    return actorUpdaters.playersUpdater.updatingAciotns[0];
+    return actorUpdaters.players.updatingAciotns[0];
 }
 
 - (void)addTouchResponder:(id<MZTouchResponder>)touchResponder {
