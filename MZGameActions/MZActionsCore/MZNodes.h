@@ -10,6 +10,7 @@
 @property (nonatomic, readwrite, weak) SKNode *node;
 @property (nonatomic, readwrite) CGPoint originPosition;
 @property (nonatomic, readwrite) CGPoint originScaleXY;
+@property (nonatomic, readwrite) MZFloat originScale;
 @property (nonatomic, readwrite) float originRotation;
 @end
 

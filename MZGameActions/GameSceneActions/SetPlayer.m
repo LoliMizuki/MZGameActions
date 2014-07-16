@@ -5,6 +5,7 @@
 @interface SetPlayer (_)
 - (void)_setMainBodyToPlayer:(MZActor *)player;
 - (void)_setLeftToPlayer:(MZActor *)player;
+- (void)_setAttackToPlayer:(MZActor *)player;
 @end
 
 
@@ -34,15 +35,8 @@
 
     [self _setMainBodyToPlayer:player];
     [self _setLeftToPlayer:player];
+    //    [self _setAttackToPlayer:player];
 
-    MZAttack_NWayToDirection *a = [player addAction:[MZAttack_NWayToDirection newWithAttacker:player] name:@"attack"];
-    a.bulletGenFunc = [gameScene.actorCreateFuncs.playerBullet funcWithName:@"pb-1"];
-    a.numberOfWays = 3;
-    a.interval = 5;
-    a.bulletVelocity = 300;
-    a.targetDirection = 90;
-    a.colddown = 0.25;
-    a.bulletScale = 0.5;
 
     player.position = mzpAdd([gameScene center], mzp(0, -200));
     player.rotation = 90;
@@ -98,6 +92,17 @@
     collider.collidedAction = ^(id c) {
         wbHealth.healthPoint -= 1;
     };
+}
+
+- (void)_setAttackToPlayer:(MZActor *)player {
+    MZAttack_NWayToDirection *a = [player addAction:[MZAttack_NWayToDirection newWithAttacker:player] name:@"attack"];
+    a.bulletGenFunc = [gameScene.actorCreateFuncs.playerBullet funcWithName:@"pb-1"];
+    a.numberOfWays = 3;
+    a.interval = 5;
+    a.bulletVelocity = 300;
+    a.targetDirection = 90;
+    a.colddown = 0.25;
+    a.bulletScale = 0.5;
 }
 
 @end

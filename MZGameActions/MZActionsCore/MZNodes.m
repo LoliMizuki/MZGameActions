@@ -23,8 +23,16 @@
     node = nil;
 }
 
+- (void)setOriginScale:(double)originScale {
+    self.originScaleXY = mzp(originScale, originScale);
+}
+
+- (MZFloat)originScale {
+    return self.originScaleXY.x;
+}
+
 - (void)setPosition:(CGPoint)position {
-    MZAssertFalse(@"do't set me, use position");
+    MZAssertFalse(@"do't set me, use originPosition");
 }
 
 - (CGPoint)position {
@@ -40,7 +48,7 @@
 }
 
 - (void)setScale:(MZFloat)scale {
-    MZAssertFalse(@"do't set me");
+    MZAssertFalse(@"do't set me,  use originScale");
 }
 
 - (MZFloat)scale {

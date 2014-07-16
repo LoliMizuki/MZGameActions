@@ -8,25 +8,25 @@
 #import "EnemyBulletCreateFuncs.h"
 #import "ActorUpdaters.h"
 #import "ActorCreateFuncs.h"
+#import "GUILayer.h"
 
 @interface GameScene (_)
 - (void)_init;
-- (void)_setGUIs;
 - (void)__test_formation;
 @end
 
 @implementation GameScene {
     NSMutableDictionary *_spritesLayerDict;
     NSMutableArray *_touchResponders;
-    SKLabelNode *_message;
 }
 
 @synthesize playerActionTime;
 @synthesize gameBound;
 @synthesize actorCreateFuncs;
 @synthesize actorUpdaters;
+@synthesize player;
 @synthesize eventsExecutor;
-@synthesize debugLayer;
+@synthesize guiLayer, debugLayer;
 
 - (id)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
@@ -44,22 +44,20 @@
 
     [[SetPlayer newWithScene:self] setPlayer];
 
-    [self __test_formation];
+    guiLayer = [GUILayer newWithScene:self];
 
-    [self _setGUIs];
+    [self __test_formation];
 
     if (debugLayer != nil) [self addChild:debugLayer];
 
-    //    [self runAction:[SKAction sequence:@[
-    //                                          [SKAction waitForDuration:3],
-    //                                          [SKAction runBlock:^{ [actorCreateFuncs.enemy
-    // funcWithName:@"the-one"](); }]
-    //                                       ]]];
     return self;
 }
 
 - (void)dealloc {
     [self removeAllActions];
+
+    [guiLayer removeFromParent];
+
     [actorUpdaters clear];
 
     [_touchResponders removeAllObjects];
@@ -70,6 +68,10 @@
 
 - (CGPoint)center {
     return mzpFromSizeAndFactor(self.size, 0.5);
+}
+
+- (MZActor *)player {
+    return actorUpdaters.playersUpdater.updatingAciotns[0];
 }
 
 - (void)addTouchResponder:(id<MZTouchResponder>)touchResponder {
@@ -119,9 +121,7 @@
 
     [eventsExecutor removeInactives];
 
-    NSUInteger a = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfAvailable;
-    NSUInteger b = [self spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfElements;
-    _message.text = [NSString stringWithFormat:@"%lu/%lu\nformation: %lu", a, b, eventsExecutor.updatingAciotns.count];
+    [guiLayer update];
 }
 
 @end
@@ -153,58 +153,34 @@
     eventsExecutor.actionTime = playerActionTime;
 
     _touchResponders = [NSMutableArray new];
-
-    _message = [SKLabelNode labelNodeWithFontNamed:@"Arail"];
-    _message.position = mzp(self.size.width / 2, 20);
-    [self addChild:_message];
-}
-
-- (void)_setGUIs {
-    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"ElWoQnH"];
-    backButton.position = mzpAdd(mzp(self.size.width, self.size.height), mzp(-40, -60));
-    [backButton setScale:0.1];
-    [self addChild:backButton];
-
-    __mz_gen_weak_block(weakSelf, self);
-    [backButton addTouchType:kMZTouchType_Began
-                 touchAction:^(NSSet *touches, UIEvent *event) {
-                     SKView *view = weakSelf.view;
-                     [view presentScene:[AnotherScene sceneWithSize:weakSelf.size]
-                             transition:[SKTransition crossFadeWithDuration:.5]];
-                 }];
-
-
-    SKLabelNode *pauseButton = [SKLabelNode labelNodeWithFontNamed:@"Arial"];
-    pauseButton.text = @"Pause";
-    [pauseButton setScale:0.5];
-    pauseButton.position = mzpAdd(mzp(0, self.size.height), mzp(60, -60));
-    [pauseButton addTouchType:kMZTouchType_Began
-                  touchAction:^(NSSet *touches, UIEvent *event) {
-                      weakSelf.playerActionTime.timeScale = (weakSelf.playerActionTime.timeScale == 0) ? 1 : 0;
-                  }];
-    [self addChild:pauseButton];
 }
 
 - (void)__test_formation {
-    MZFormation *f1 = [MZFormation new];
-    f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
-    [f1 addSpawnPositions:@[
-                             NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
-                             NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
-                          ]];
-    f1.maxSpawnCount = 10;
-    f1.interval = 0.5;
+    //    MZFormation *f1 = [MZFormation new];
+    //    f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
+    //    [f1 addSpawnPositions:@[
+    //                             NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
+    //                             NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
+    //                          ]];
+    //    f1.maxSpawnCount = 10;
+    //    f1.interval = 0.5;
+    //
+    //    f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
+    //        MZHealth *health = [actor actionWithName:@"health"];
+    //        health.healthPoint = 3;
+    //
+    //        if (f.currentSpawnCount % 2 == 0) return;
+    //        MZMoveWithVelocityDirection *m = [actor actionWithName:@"move"];
+    //        m.direction = 0;
+    //    };
+    //
+    //    [eventsExecutor addLate:f1];
 
-    f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
-        MZHealth *health = [actor actionWithName:@"health"];
-        health.healthPoint = 3;
-
-        if (f.currentSpawnCount % 2 == 0) return;
-        MZMoveWithVelocityDirection *m = [actor actionWithName:@"move"];
-        m.direction = 0;
-    };
-
-    [eventsExecutor addLate:f1];
+    MZFormation *f2 = [MZFormation new];
+    f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
+    [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+    f2.maxSpawnCount = 1;
+    [eventsExecutor addLate:f2];
 }
 
 @end

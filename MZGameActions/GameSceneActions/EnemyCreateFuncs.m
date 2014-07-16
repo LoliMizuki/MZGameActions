@@ -4,6 +4,9 @@
 @interface EnemyCreateFuncs (_)
 - (MZBoundTest *)_addCommonBoundTestToActor:(MZActor *)actor;
 - (void)_setEnemyFuncs;
+
+- (MZActor * (^)(void))_theOne;
+- (MZActor * (^)(void))_cannons;
 @end
 
 
@@ -48,10 +51,15 @@
 }
 
 - (void)_setEnemyFuncs {
+    _createFuncsDict[@"the-one"] = [self _theOne];
+    _createFuncsDict[@"cannons"] = [self _cannons];
+}
+
+- (MZActor * (^)(void))_theOne {
     __mz_gen_weak_block(wbScene, gameScene);
     __mz_gen_weak_block(wbSelf, self);
 
-    _createFuncsDict[@"the-one"] = ^{
+    return ^{
         __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemiesUpdater addLate:[MZActor new]];
 
         [wbSelf _addCommonBoundTestToActor:enemy];
@@ -101,6 +109,67 @@
         //        enemy.rotation = 270;
 
         return enemy;
+    };
+}
+
+- (MZActor * (^)(void))_cannons {
+    __mz_gen_weak_block(wbScene, gameScene);
+    __mz_gen_weak_block(wbSelf, self);
+
+    return ^{
+        MZActor *e = [wbScene.actorUpdaters.enemiesUpdater addLate:[MZActor new]];
+
+        [wbSelf _addCommonBoundTestToActor:e];
+
+        __mz_weak_block MZHealth *health = [e addAction:[MZHealth new] name:@"health"];
+        health.healthPoint = 4000;
+
+        MZNodes *nodes = [e addAction:[MZNodes new] name:@"nodes"];
+        __mz_weak_block_type(MZNodeInfo *)bodyNodeIndo =
+            [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"ship"]
+                      name:@"body"];
+        bodyNodeIndo.originScale = 0.3;
+
+        __mz_weak_block_type(MZNodeInfo *)cannon1NodeIndo =
+            [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithAnimationName:@"monster_red"]
+                      name:@"cannon1"];
+        cannon1NodeIndo.originScale = 0.5;
+        cannon1NodeIndo.originPosition = mzp(50, 50);
+
+        __mz_weak_block_type(MZNodeInfo *)cannon2NodeIndo =
+            [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithAnimationName:@"monster_red"]
+                      name:@"cannon2"];
+        cannon2NodeIndo.originScale = 0.5;
+        cannon2NodeIndo.originPosition = mzp(50, -50);
+
+        // attack bind to cannon node
+        __mz_weak_block_type(MZAttack_NWayToDirection *)attack1 =
+            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon1NodeIndo] name:@"attack1"];
+        attack1.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
+        attack1.bulletScale = 0.4;
+        attack1.bulletVelocity = 100;
+        attack1.numberOfWays = 3;
+        attack1.interval = 10;
+        attack1.targetDirection = 270;
+        attack1.colddown = 0.5;
+        attack1.updateAction = ^(MZAttack_NWayToDirection *a) {
+            a.targetDirection = [MZMath degreesFromP1:a.attacker.position toP2:wbScene.player.position];
+        };
+
+        __mz_weak_block_type(MZAttack_NWayToDirection *)attack2 =
+            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon2NodeIndo] name:@"attack2"];
+        attack2.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"rect"];
+        attack2.bulletScale = 0.4;
+        attack2.bulletVelocity = 100;
+        attack2.numberOfWays = 3;
+        attack2.interval = 10;
+        attack2.targetDirection = 270;
+        attack2.colddown = 0.5;
+
+        e.position = wbScene.center;
+        e.scale = 1;
+        e.rotation = 270;
+        return e;
     };
 }
 

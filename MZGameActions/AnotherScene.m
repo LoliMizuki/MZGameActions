@@ -7,7 +7,7 @@
 - (instancetype)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
 
-    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"ElWoQnH"];
+    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"yuyurect"];
     backButton.position = mzpFromSizeAndFactor(self.size, .5);
     [self addChild:backButton];
 
