@@ -60,6 +60,8 @@
         //            attack.bulletOnLanuchedAction(attack, bullet);
         //        }
     }
+
+    self.launchCount++;
 }
 
 @end

@@ -11,6 +11,7 @@
 @property (nonatomic, readwrite) CGPoint bulletScaleXY;
 @property (nonatomic, readwrite) MZFloat bulletScale;
 @property (nonatomic, readwrite, strong) MZActor* (^bulletGenFunc)(void);
+@property (nonatomic, readwrite) NSUInteger launchCount;
 
 @property (nonatomic, readonly) NSUInteger currentLanchedCount;
 @property (nonatomic, readonly) NSUInteger currentBulletLanchedCount;

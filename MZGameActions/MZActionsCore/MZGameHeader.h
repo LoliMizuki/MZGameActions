@@ -13,7 +13,9 @@
 #import "MZNodes.h"
 
 // Group and seqence
+#import "MZIdle.h"
 #import "MZActionsGroup.h"
+#import "MZActionsSequence.h"
 
 // Supports
 #import "MZPool.h"
