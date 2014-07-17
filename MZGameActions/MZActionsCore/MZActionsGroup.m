@@ -22,7 +22,7 @@
 }
 
 - (void)dealloc {
-    [self clear];
+    [self removeAllActions];
     _newActionsBuffer = nil;
     _updatingAciotns = nil;
 }
@@ -45,7 +45,7 @@
     return _updatingAciotns;
 }
 
-- (id)addImmediate:(MZAction *)newAction {
+- (id)addAction:(MZAction *)newAction {
     MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
 
     [_updatingAciotns addObject:newAction];
@@ -54,13 +54,20 @@
     return newAction;
 }
 
-- (id)addLate:(MZAction *)newAction {
+- (id)addActionLate:(MZAction *)newAction {
     MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
 
     [_newActionsBuffer addObject:newAction];
     newAction.actionTime = self.actionTime;
 
     return newAction;
+}
+
+- (id)removeAction:(MZAction *)action {
+    if ([_newActionsBuffer containsObject:action]) [_newActionsBuffer removeObject:action];
+    if ([_updatingAciotns containsObject:action]) [_updatingAciotns removeObject:action];
+
+    return action;
 }
 
 - (void)update {
@@ -70,7 +77,7 @@
     [self _updateActions];
 }
 
-- (void)removeInactives {
+- (void)removeInactiveActions {
     for (int i = 0; i < _updatingAciotns.count; i++) {
         MZAction *a = _updatingAciotns[i];
         if (a.isActive) continue;
@@ -81,7 +88,7 @@
     }
 }
 
-- (void)clear {
+- (void)removeAllActions {
     [_newActionsBuffer removeAllObjects];
     [_updatingAciotns removeAllObjects];
 }

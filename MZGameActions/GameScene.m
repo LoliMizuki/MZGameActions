@@ -58,7 +58,7 @@
 
     [guiLayer removeFromParent];
 
-    [actorUpdaters clear];
+    [actorUpdaters removeAllActors];
 
     [_touchResponders removeAllObjects];
 
@@ -119,7 +119,8 @@
     [eventsExecutor update];
     [actorUpdaters update];
 
-    [eventsExecutor removeInactives];
+    [eventsExecutor removeInactiveActions];
+    [actorUpdaters removeInactiveActors];
 
     [guiLayer update];
 }
@@ -180,7 +181,7 @@
     f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
     [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
     f2.maxSpawnCount = 1;
-    [eventsExecutor addLate:f2];
+    [eventsExecutor addActionLate:f2];
 }
 
 @end

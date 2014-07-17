@@ -15,6 +15,7 @@
 
 + (instancetype)newWithGameScene:(GameScene *)gameScene;
 - (void)update;
-- (void)clear;
+- (void)removeInactiveActors;
+- (void)removeAllActors;
 
 @end

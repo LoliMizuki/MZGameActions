@@ -31,7 +31,7 @@
 }
 
 - (void)dealloc {
-    [self clear];
+    [self removeAllActors];
     gameScene = nil;
 }
 
@@ -43,18 +43,20 @@
 
     [self _collideWithUpdateA:playerBullets andUpdaterB:enemies];
     [self _collideWithUpdateA:enemyBullets andUpdaterB:players];
-
-    [players removeInactives];
-    [playerBullets removeInactives];
-    [enemies removeInactives];
-    [enemyBullets removeInactives];
 }
 
-- (void)clear {
-    [players clear];
-    [playerBullets clear];
-    [enemies clear];
-    [enemyBullets clear];
+- (void)removeInactiveActors {
+    [players removeInactiveActions];
+    [playerBullets removeInactiveActions];
+    [enemies removeInactiveActions];
+    [enemyBullets removeInactiveActions];
+}
+
+- (void)removeAllActors {
+    [players removeAllActions];
+    [playerBullets removeAllActions];
+    [enemies removeAllActions];
+    [enemyBullets removeAllActions];
 }
 
 @end

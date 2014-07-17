@@ -50,7 +50,7 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addImmediate:[MZActor new]];
+        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
         [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"fireball.png"]
@@ -83,7 +83,7 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addImmediate:[MZActor new]];
+        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
         [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"10-fireball"]
@@ -116,7 +116,7 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addImmediate:[MZActor new]];
+        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
         [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"rect"] name:@"body"];

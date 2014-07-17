@@ -60,7 +60,7 @@
     __mz_gen_weak_block(wbSelf, self);
 
     return ^{
-        __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemies addLate:[MZActor new]];
+        __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemies addActionLate:[MZActor new]];
 
         [wbSelf _addCommonBoundTestToActor:enemy];
 
@@ -117,7 +117,7 @@
     __mz_gen_weak_block(wbSelf, self);
 
     return ^{
-        __mz_weak_block_type(MZActor *)e = [wbScene.actorUpdaters.enemies addLate:[MZActor new]];
+        __mz_weak_block_type(MZActor *)e = [wbScene.actorUpdaters.enemies addActionLate:[MZActor new]];
 
         [wbSelf _addCommonBoundTestToActor:e];
 
@@ -208,11 +208,9 @@
         a0.interval = 10;
         a0.colddown = 0.1;
         a0.targetDirection = 270;
+        // test acc
         a0.updateAction = ^(MZAttack_NWayToDirection *_a) {
-            MZLog(@"%lu", (unsigned long)_a.launchCount);
             _a.bulletVelocity = 100 + (_a.launchCount - 1) * 50;
-
-            MZLog(@"%0.2f", _a.bulletVelocity);
         };
 
         MZIdle *idle = [MZIdle newWithDuration:3];

@@ -9,10 +9,13 @@
 
 @implementation MZActor {
     MZActionsGroup *_group;
+    NSMutableArray *_willBeRemovedActions;
 
     CGPoint _position;
     CGPoint _scaleXY;
     MZFloat _rotation;
+
+    NSUInteger _anonymousNameCount;
 }
 
 @synthesize position, scaleXY, scale, rotation;
@@ -21,15 +24,19 @@
     self = [super init];
 
     _group = [MZActionsGroup new];
+    _willBeRemovedActions = [NSMutableArray new];
     _position = MZPZero;
     _scaleXY = MZPOne;
     _rotation = 0;
+    _anonymousNameCount = 0;
 
     return self;
 }
 
 - (void)dealloc {
-    [_group clear];
+    [_willBeRemovedActions removeAllObjects];
+
+    [_group removeAllActions];
     _group = nil;
 }
 
@@ -78,11 +85,12 @@
     return _rotation;
 }
 
+
 - (id)addAction:(MZAction *)action name:(NSString *)name {
     MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");
 
     action.name = name;
-    [_group addImmediate:action];
+    [_group addAction:action];
 
     return action;
 }
@@ -90,6 +98,14 @@
 - (id)addActionWithClass:(Class)actionClass name:(NSString *)name {
     MZAction *action = [actionClass new];
     [self addAction:action name:name];
+
+    return action;
+}
+
+- (id)addAction:(MZAction *)action {
+    NSString *anonymousName = [NSString stringWithFormat:@"%lu", _anonymousNameCount];
+    [self addAction:action name:anonymousName];
+    _anonymousNameCount++;
 
     return action;
 }
@@ -113,7 +129,7 @@
 }
 
 - (id)removeAction:(MZAction *)action {
-    action.isActive = false;
+    [_willBeRemovedActions addObject:action];
     return action;
 }
 
@@ -123,7 +139,7 @@
     return a;
 }
 
-- (NSArray *)removeActionsWithClass:(Class)actionClass {
+- (NSArray *)removeAllActionsWithClass:(Class)actionClass {
     NSArray *actions = [self actionsWithClass:actionClass];
     for (MZAction *a in actions) {
         [self removeAction:a];
@@ -141,7 +157,22 @@
 - (void)update {
     [super update];
     [_group update];
-    [_group removeInactives];
+}
+
+- (void)removeInactiveActions {
+    [_group removeInactiveActions];
+
+    if (_willBeRemovedActions.count > 0) {
+        for (MZAction *rm in _willBeRemovedActions) {
+            [_group removeAction:rm];
+        }
+    }
+
+    [_willBeRemovedActions removeAllObjects];
+}
+
+- (void)removeAllActions {
+    [_group removeAllActions];
 }
 
 @end

@@ -1,12 +1,11 @@
 #import "MZAction.h"
 
-@interface MZActionsGroup : MZAction
+@interface MZActionsGroup : MZAction <MZActionsContainer>
 
 @property (nonatomic, readonly) NSMutableArray *updatingAciotns;
 
-// add action and immediate call start
-- (id)addImmediate:(MZAction *)newAction;
-- (id)addLate:(MZAction *)newAction;
-- (void)removeInactives;
-- (void)clear;
+- (id)addAction:(MZAction *)newAction;
+- (id)addActionLate:(MZAction *)newAction;
+- (void)removeInactiveActions;
+- (void)removeAllActions;
 @end

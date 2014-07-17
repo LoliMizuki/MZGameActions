@@ -32,6 +32,18 @@ typedef NS_ENUM(NSInteger, MZTouchType) { kMZTouchType_Began, kMZTouchType_Moved
 
 
 
+#pragma mark - MZActionsContainer
+
+@protocol MZActionsContainer <NSObject>
+- (id)addAction:(id)action;
+- (id)removeAction:(id)action;
+- (void)update;
+- (void)removeInactiveActions;
+- (void)removeAllActions;
+@end
+
+
+
 #pragma mark - MZTransform
 
 @protocol MZTransform <NSObject>

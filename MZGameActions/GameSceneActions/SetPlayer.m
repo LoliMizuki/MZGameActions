@@ -25,7 +25,7 @@
 }
 
 - (void)setPlayer {
-    MZActor *player = [gameScene.actorUpdaters.players addImmediate:[MZActor new]];
+    MZActor *player = [gameScene.actorUpdaters.players addAction:[MZActor new]];
 
     MZTouchRelativeMove *trm = [player addAction:[MZTouchRelativeMove newWithMover:player touchNotifier:gameScene]
                                             name:@"touch-relative-move"];

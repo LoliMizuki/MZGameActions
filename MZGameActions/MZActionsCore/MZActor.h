@@ -1,7 +1,7 @@
 #import "MZAction.h"
 #import "MZGameDefines.h"
 
-@interface MZActor : MZAction <MZTransform>
+@interface MZActor : MZAction <MZTransform, MZActionsContainer>
 
 @property (nonatomic, readwrite) CGPoint position;
 @property (nonatomic, readwrite) CGPoint scaleXY;
@@ -9,6 +9,7 @@
 @property (nonatomic, readwrite) MZFloat rotation;
 
 - (id)addAction:(MZAction *)action name:(NSString *)name;
+- (id)addAction:(MZAction *)action;
 - (id)addActionWithClass:(Class)actionClass name:(NSString *)name;
 
 - (id)actionWithName:(NSString *)name;
@@ -16,13 +17,14 @@
 
 - (id)removeAction:(MZAction *)action;
 - (id)removeActionWithName:(NSString *)name;
-- (NSArray *)removeActionsWithClass:(Class)actionClass;
+- (NSArray *)removeAllActionsWithClass:(Class)actionClass;
 
 - (void)refresh;
 
+- (void)removeInactiveActions;
+- (void)removeAllActions;
 
 @end
 
-// action 用備份 dict 備份一下
-// remove with name
-// actionsWithClass
+// TODO:
+// action 用備份 dict cache 一下
