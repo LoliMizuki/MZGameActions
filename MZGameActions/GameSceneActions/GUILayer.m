@@ -26,15 +26,15 @@
 
 - (void)dealloc {
     if ([self hasActions]) [self removeAllActions];
-    [self removeAllChildren];
+    //    [self removeAllChildren];
     gameScene = nil;
 }
 
 - (void)update {
-    NSUInteger a = [gameScene spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfAvailable;
-    NSUInteger b = [gameScene spritesLayerWithName:@"enemy-bullets"].nodesPool.numberOfElements;
-    _message.text =
-        [NSString stringWithFormat:@"%lu/%lu\nformation: %lu", a, b, gameScene.eventsExecutor.updatingAciotns.count];
+    NSUInteger a = [gameScene spritesLayerWithName:@"player-bullets"].nodesPool.numberOfAvailable;
+    NSUInteger b = [gameScene spritesLayerWithName:@"player-bullets"].nodesPool.numberOfElements;
+    _message.text = [NSString
+        stringWithFormat:@"%lu/%lu\nformation: %lu", b - a, b, gameScene.eventsExecutor.updatingAciotns.count];
 }
 
 @end

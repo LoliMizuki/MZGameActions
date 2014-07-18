@@ -8,6 +8,8 @@
 @end
 
 @implementation MZActor {
+    NSMutableArray *_activeConditions;
+
     MZActionsGroup *_group;
     NSMutableArray *_willBeRemovedActions;
 
@@ -23,6 +25,8 @@
 - (instancetype)init {
     self = [super init];
 
+    _activeConditions = [NSMutableArray new];
+
     _group = [MZActionsGroup new];
     _willBeRemovedActions = [NSMutableArray new];
     _position = MZPZero;
@@ -34,10 +38,33 @@
 }
 
 - (void)dealloc {
+    [_activeConditions removeAllObjects];
+
     [_willBeRemovedActions removeAllObjects];
 
     [_group removeAllActions];
     _group = nil;
+}
+
+- (bool)isActive {
+    for (bool (^cond)(void)in _activeConditions) {
+        if (!cond()) return false;
+    }
+
+    return true;
+}
+
+- (void)setIsActiveFunc:(bool (^)(void))isActiveFunc {
+    MZAssertFalse(@"use addActiveCondition: to do this");
+}
+
+- (bool (^)(void))isActiveFunc {
+    MZAssertFalse(@"use addActiveCondition: to do this");
+    return nil;
+}
+
+- (void)addActiveCondition:(bool (^)(void))activeCondition {
+    [_activeConditions addObject:activeCondition];
 }
 
 - (void)setActionTime:(MZActionTime *)anActionTime {

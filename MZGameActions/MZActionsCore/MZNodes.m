@@ -166,7 +166,8 @@
 }
 
 - (void)removeWithName:(NSString *)name {
-    MZWarning(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
+    //    MZWarning(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
+    MZAssert(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
     [_nodeInfosDict removeObjectForKey:name];
 }
 

@@ -34,6 +34,12 @@
 }
 
 - (void)dealloc {
+    CGFloat r, g, b;
+    [_debugNode.strokeColor getRed:&r green:&g blue:&b alpha:nil];
+    if (r == 0 && g == 1 && b == 1) {
+        MZLog(@"hahah");
+    }
+
     [_debugNode removeFromParent];
 }
 

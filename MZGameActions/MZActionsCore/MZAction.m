@@ -79,10 +79,6 @@
     mz_block_exec(self.endAction, self);
 }
 
-- (void)setActive:(bool)active {
-    isActiveFunc = ^{ return active; };
-}
-
 @end
 
 @implementation MZAction (_)

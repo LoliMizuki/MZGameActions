@@ -8,6 +8,8 @@
 @property (nonatomic, readwrite) MZFloat scale;
 @property (nonatomic, readwrite) MZFloat rotation;
 
+- (void)addActiveCondition:(bool (^)(void))activeCondition;
+
 - (id)addAction:(MZAction *)action name:(NSString *)name;
 - (id)addAction:(MZAction *)action;
 - (id)addActionWithClass:(Class)actionClass name:(NSString *)name;

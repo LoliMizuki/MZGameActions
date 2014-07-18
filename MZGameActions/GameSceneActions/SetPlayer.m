@@ -61,6 +61,8 @@
 }
 
 - (void)_setLeftToPlayer:(MZActor *)player {
+    __mz_gen_weak_block(wbPlayer, player);
+
     MZNodes *nodes = [player actionWithName:@"nodes"];
 
     MZNodeInfo *nodeInfo =
@@ -84,8 +86,8 @@
 
     health.healthZeroActoin = ^(MZHealth *h) {
         [wbNodes removeWithName:@"left-body"];
-        wbCollider.isActive = false;
-        h.isActive = false;
+        [wbPlayer removeAction:wbCollider];
+        [wbPlayer removeAction:h];
         h.healthZeroActoin = nil;
     };
 

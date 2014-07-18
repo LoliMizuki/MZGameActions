@@ -131,7 +131,10 @@
 
 - (void)_init {
     _spritesLayerDict = [NSMutableDictionary new];
+
+#if LAYER_DEBUG
     debugLayer = [SKNode node];
+#endif
 
     CGPoint inner = mzp(50, 50);
     gameBound = CGRectMake(inner.x, inner.y, self.size.width - 2 * inner.x, self.size.height - 2 * inner.y);
@@ -176,12 +179,20 @@
     //    };
     //
     //    [eventsExecutor addLate:f1];
+    
+        MZFormation *f2 = [MZFormation new];
+        f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
+        [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+        f2.maxSpawnCount = 1;
+        [eventsExecutor addActionLate:f2];
 
-    MZFormation *f2 = [MZFormation new];
-    f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
-    [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-    f2.maxSpawnCount = 1;
-    [eventsExecutor addActionLate:f2];
+/*
+    MZFormation *fs = [MZFormation new];
+    fs.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-simple"];
+    [fs addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+    fs.maxSpawnCount = 1;
+    [eventsExecutor addActionLate:fs];
+    */
 }
 
 @end

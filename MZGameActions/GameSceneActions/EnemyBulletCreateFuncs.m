@@ -64,7 +64,7 @@
 
         __mz_gen_weak_block(weakB, b);
         collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
         [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
 
@@ -72,7 +72,7 @@
         __mz_gen_weak_block(wbSprite, bodySprite);
         boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
         boundTest.outOfBoundAction = ^(id bt) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
 
         return b;
@@ -97,7 +97,7 @@
 
         __mz_gen_weak_block(weakB, b);
         collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
         [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
 
@@ -105,7 +105,7 @@
         __mz_gen_weak_block(wbSprite, bodySprite);
         boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
         boundTest.outOfBoundAction = ^(id bt) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
 
         return b;
@@ -129,7 +129,7 @@
 
         __mz_gen_weak_block(weakB, b);
         collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
         [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
 
@@ -137,7 +137,7 @@
         __mz_gen_weak_block(wbSprite, bodySprite);
         boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
         boundTest.outOfBoundAction = ^(id bt) {
-            [weakB setActive:false];
+            [weakB addActiveCondition:^{ return (bool)false; }];
         };
 
         return b;

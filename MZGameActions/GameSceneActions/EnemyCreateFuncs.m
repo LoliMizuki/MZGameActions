@@ -5,6 +5,7 @@
 - (MZBoundTest *)_addCommonBoundTestToActor:(MZActor *)actor;
 - (void)_setEnemyFuncs;
 
+- (MZActor * (^)(void))_theSimple;
 - (MZActor * (^)(void))_theOne;
 - (MZActor * (^)(void))_cannons;
 @end
@@ -44,15 +45,72 @@
     __mz_weak_block_type(MZActor *)wbActor = actor;
     MZBoundTest *bt = [actor addAction:[MZBoundTest newWithTester:actor bound:wbScene.gameBound] name:@"bound"];
     bt.outOfBoundAction = ^(id b) {
-        wbActor.isActive = false;
+        [wbActor addActiveCondition:^{ return (bool)false; }];
     };
 
     return bt;
 }
 
 - (void)_setEnemyFuncs {
+    _createFuncsDict[@"the-simple"] = [self _theSimple];
     _createFuncsDict[@"the-one"] = [self _theOne];
     _createFuncsDict[@"cannons"] = [self _cannons];
+}
+
+- (MZActor * (^)(void))_theSimple {
+    __mz_gen_weak_block(wbScene, gameScene);
+    __mz_gen_weak_block(wbSelf, self);
+    return ^{
+        __mz_weak_block MZActor *enemy = [wbScene.actorUpdaters.enemies addActionLate:[MZActor new]];
+
+        [wbSelf _addCommonBoundTestToActor:enemy];
+
+        __mz_weak_block MZHealth *health = [enemy addAction:[MZHealth new] name:@"health"];
+        health.healthPoint = 100;
+
+        MZNodes *nodes = [enemy addAction:[MZNodes new] name:@"nodes"];
+        [nodes addNode:[[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"Bow"] name:@"body"];
+
+        MZAttack_NWayToDirection *attack =
+            [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
+        attack.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
+        attack.colddown = 10000;
+        attack.interval = 5;
+        attack.numberOfWays = 1;
+        attack.targetDirection = 0;
+        attack.bulletVelocity = 10;
+        attack.bulletScale = 0.25;
+
+        MZSpriteCircleCollider *collider =
+            [enemy addAction:[MZSpriteCircleCollider newWithSprite:(SKSpriteNode *)[nodes nodeWithName:@"body"]
+                                                            offset:MZPZero
+                                                    collisionScale:1]
+                        name:@"collider"];
+        [collider addDebugDrawNodeWithParent:wbScene.debugLayer
+                                       color:[UIColor colorWithRed:0.000 green:1.000 blue:0.957 alpha:1.000]];
+        collider.collidedAction = ^(id c) {
+            health.healthPoint -= 1;
+            if (health.healthPoint <= 0) {
+                [enemy addActiveCondition:^{ return (bool)false; }];
+            }
+        };
+
+        //        MZMoveTurnToDirection *move = [enemy addAction:[MZMoveTurnToDirection newWithMover:enemy]
+        // name:@"move"];
+        //        move.direction = 180;
+        //        move.turnDegreesPerSecond = 50;
+        //        move.turnToDirection = 270;
+        //        move.velocity = 100;
+
+        //        __mz_gen_weak_block(wbMove, move);
+        //        attack.beforeLauchAction = ^(MZAttack_NWayToDirection *_a) {
+        //            _a.targetDirection = wbMove.direction;
+        //        };
+
+        enemy.scale = 0.3;
+
+        return enemy;
+    };
 }
 
 - (MZActor * (^)(void))_theOne {
@@ -90,7 +148,7 @@
         collider.collidedAction = ^(id c) {
             health.healthPoint -= 1;
             if (health.healthPoint <= 0) {
-                enemy.isActive = false;
+                [enemy addActiveCondition:^{ return (bool)false; }];
             }
         };
 
@@ -157,16 +215,6 @@
             a.targetDirection = [MZMath degreesFromP1:a.attacker.position toP2:wbScene.player.position];
         };
 
-        //        __mz_weak_block_type(MZAttack_NWayToDirection *)attack2 =
-        //            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon2NodeIndo] name:@"attack2"];
-        //        attack2.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"rect"];
-        //        attack2.bulletScale = 0.4;
-        //        attack2.bulletVelocity = 100;
-        //        attack2.numberOfWays = 3;
-        //        attack2.interval = 10;
-        //        attack2.targetDirection = 270;
-        //        attack2.colddown = 0.5;
-
         // set cannon1 hp, collider
         __mz_weak_block_type(MZHealth *)cannon1Health = [e addAction:[MZHealth new] name:@"cannon1-health"];
         cannon1Health.healthPoint = 20;
@@ -176,25 +224,20 @@
                                                         offset:MZPZero
                                                 collisionScale:1]
                      name:@"cannon1Collider"];
+        MZLogRetainCount(@"aaa", cannon1Collider);
 
-        cannon1Health.healthZeroActoin = ^(id h) {
+        [cannon1Collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[SKColor yellowColor]];
+
+
+        cannon1Health.healthZeroActoin = ^(MZHealth *h) {
             [nodes removeWithName:@"cannon1"];
-            //            [e removeAction:attack1];  // 測試不移除 ...
-            [e removeAction:cannon1Health];
+            [e removeAction:attack1];
+            [e removeAction:h];
             [e removeAction:cannon1Collider];
 
-            [wbScene.player removeActionWithName:@"attack"];
-
-            //            attack2.numberOfWays = 36;
-            //            attack2.interval = 10;
-
-            [nodes nodeInfoWithName:@"body"].node =
-                [[wbScene spritesLayerWithName:@"enemies"] spriteWithForeverAnimationName:@"monster_green"];
-            [nodes nodeInfoWithName:@"body"].originScale = 2;
-            [nodes nodeInfoWithName:@"body"].originRotation = 180;
-
-            [e refresh];
+            h.healthZeroActoin = nil;
         };
+
         cannon1Collider.collidedAction = ^(id c) {
             cannon1Health.healthPoint -= 1;
         };

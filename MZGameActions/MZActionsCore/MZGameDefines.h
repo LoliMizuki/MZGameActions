@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, MZTouchType) { kMZTouchType_Began, kMZTouchType_Moved
 @property (nonatomic, readwrite) MZFloat timeScale;
 @property (nonatomic, readwrite, strong) MZActionTime *actionTime;
 
-@property (nonatomic, readwrite) bool isActive;
+@property (nonatomic, readonly) bool isActive;
 @property (nonatomic, readonly) MZFloat deltaTime;
 @property (nonatomic, readonly) MZFloat passedTime;
 
