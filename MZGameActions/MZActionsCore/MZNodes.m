@@ -165,6 +165,13 @@
     return (nodeIfo != nil) ? nodeIfo.node : nil;
 }
 
+- (void)removeWithNodeInfo:(MZNodeInfo *)nodeInfo {
+    NSArray *keys = [_nodeInfosDict allKeysForObject:nodeInfo];
+    for (NSString *name in keys) {
+        [_nodeInfosDict removeObjectForKey:name];
+    }
+}
+
 - (void)removeWithName:(NSString *)name {
     //    MZWarning(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);
     MZAssert(_nodeInfosDict[name] != nil, @"not contain this action (%@)", name);

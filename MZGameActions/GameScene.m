@@ -179,20 +179,20 @@
     //    };
     //
     //    [eventsExecutor addLate:f1];
-    
-        MZFormation *f2 = [MZFormation new];
-        f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
-        [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-        f2.maxSpawnCount = 1;
-        [eventsExecutor addActionLate:f2];
 
-/*
-    MZFormation *fs = [MZFormation new];
-    fs.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-simple"];
-    [fs addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-    fs.maxSpawnCount = 1;
-    [eventsExecutor addActionLate:fs];
-    */
+    MZFormation *f2 = [MZFormation new];
+    f2.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
+    [f2 addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+    f2.maxSpawnCount = 1;
+    [eventsExecutor addActionLate:f2];
+
+    /*
+        MZFormation *fs = [MZFormation new];
+        fs.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-simple"];
+        [fs addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+        fs.maxSpawnCount = 1;
+        [eventsExecutor addActionLate:fs];
+        */
 }
 
 @end

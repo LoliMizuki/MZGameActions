@@ -112,6 +112,9 @@
     return _rotation;
 }
 
+- (NSArray *)actions {
+    return _group.updatingAciotns;
+}
 
 - (id)addAction:(MZAction *)action name:(NSString *)name {
     MZAssertIfNilWithMessage(self.actionTime, @"must set actionTime first");

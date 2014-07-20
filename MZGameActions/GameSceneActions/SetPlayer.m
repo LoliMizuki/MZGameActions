@@ -35,7 +35,7 @@
 
     [self _setMainBodyToPlayer:player];
     [self _setLeftToPlayer:player];
-    [self _setAttackToPlayer:player];
+    //    [self _setAttackToPlayer:player];
 
 
     player.position = mzpAdd([gameScene center], mzp(0, -200));
@@ -63,36 +63,32 @@
 - (void)_setLeftToPlayer:(MZActor *)player {
     __mz_gen_weak_block(wbPlayer, player);
 
-    MZNodes *nodes = [player actionWithName:@"nodes"];
+    __mz_weak_block_type(MZNodes *)nodes = [player actionWithName:@"nodes"];
 
-    MZNodeInfo *nodeInfo =
+    __mz_weak_block_type(MZNodeInfo *)nodeInfo =
         [nodes addNode:[[gameScene spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-left"]
                   name:@"left-body"];
     nodeInfo.originPosition = mzp(80, 0);
 
     SKSpriteNode *sprite = (SKSpriteNode *)nodeInfo.node;
 
-    MZSpriteCircleCollider *collider =
+    __mz_weak_block_type(MZSpriteCircleCollider *)collider =
         [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1.0]
-                     name:@"left-bidy-collider"];
+                     name:@"left-body-collider"];
     [collider addDebugDrawNodeWithParent:gameScene.debugLayer color:[UIColor redColor]];
 
-    MZHealth *health = [player addAction:[MZHealth new] name:@"sub-health"];
+    __mz_weak_block_type(MZHealth *)health = [player addAction:[MZHealth new] name:@"sub-health"];
     health.healthPoint = 10;
 
-    __mz_gen_weak_block(wbNodes, nodes);
-    __mz_gen_weak_block(wbHealth, health);
-    __mz_gen_weak_block(wbCollider, collider);
-
     health.healthZeroActoin = ^(MZHealth *h) {
-        [wbNodes removeWithName:@"left-body"];
-        [wbPlayer removeAction:wbCollider];
-        [wbPlayer removeAction:h];
+        [nodes removeWithNodeInfo:nodeInfo];
+        [wbPlayer removeAction:collider];
+        [wbPlayer removeAction:health];
         h.healthZeroActoin = nil;
     };
 
     collider.collidedAction = ^(id c) {
-        wbHealth.healthPoint -= 1;
+        health.healthPoint -= 1;
     };
 }
 

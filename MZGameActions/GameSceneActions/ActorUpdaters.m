@@ -50,6 +50,15 @@
     [playerBullets removeInactiveActions];
     [enemies removeInactiveActions];
     [enemyBullets removeInactiveActions];
+
+    [MZMapReduces mapWithArray:players.updatingAciotns
+                        action:^(MZActor *actor) { [actor removeInactiveActions]; }];
+    [MZMapReduces mapWithArray:playerBullets.updatingAciotns
+                        action:^(MZActor *actor) { [actor removeInactiveActions]; }];
+    [MZMapReduces mapWithArray:enemies.updatingAciotns
+                        action:^(MZActor *actor) { [actor removeInactiveActions]; }];
+    [MZMapReduces mapWithArray:enemyBullets.updatingAciotns
+                        action:^(MZActor *actor) { [actor removeInactiveActions]; }];
 }
 
 - (void)removeAllActors {

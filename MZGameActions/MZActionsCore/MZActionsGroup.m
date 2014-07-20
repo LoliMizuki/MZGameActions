@@ -2,7 +2,7 @@
 #import "MZGameHeader.h"
 
 @interface MZActionsGroup (_)
-- (void)_addUpdatingActionsFromBuffer;
+- (void)_moveActionsFromBufferToUpdating;
 - (void)_updateActions;
 @end
 
@@ -41,7 +41,7 @@
     return _actionTime;
 }
 
-- (NSMutableArray *)updatingAciotns {
+- (NSArray *)updatingAciotns {
     return _updatingAciotns;
 }
 
@@ -73,7 +73,7 @@
 - (void)update {
     [super update];
 
-    [self _addUpdatingActionsFromBuffer];
+    [self _moveActionsFromBufferToUpdating];
     [self _updateActions];
 }
 
@@ -97,7 +97,7 @@
 
 @implementation MZActionsGroup (_)
 
-- (void)_addUpdatingActionsFromBuffer {
+- (void)_moveActionsFromBufferToUpdating {
     if (_newActionsBuffer.count == 0) return;
 
     for (MZAction *a in _newActionsBuffer) {
