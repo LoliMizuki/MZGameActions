@@ -10,7 +10,7 @@
     MZFloat _duration;
 }
 
-@synthesize name, isActive, isActiveFunc, duration, actionTime;
+@synthesize name, isActive, isActiveFunc, duration, actionTime, deallocAction;
 
 - (instancetype)init {
     self = [super init];
@@ -22,6 +22,10 @@
 }
 
 - (void)dealloc {
+    if (self.deallocAction != nil) {
+        self.deallocAction(self);
+    }
+
     self.actionTime = nil;
 }
 

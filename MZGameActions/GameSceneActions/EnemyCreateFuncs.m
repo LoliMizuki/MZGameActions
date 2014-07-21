@@ -156,26 +156,22 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
-        MZActor *e = [self newEnemyWithHP:40 bodySprite:[self _enemyAnimationSpriteWithName:@"ship"]];
+        MZActor *enemy = [self newEnemyWithHP:40 bodySprite:[self _enemyAnimationSpriteWithName:@"ship"]];
+        __mz_gen_weak_block(wbEnemy, enemy);
 
-        MZNodes *nodes = [e actionWithName:@"nodes"];
+        __mz_weak_block_type(MZNodes *)nodes = [enemy actionWithName:@"nodes"];
 
         MZNodeInfo *bodyNodeInfo = [nodes nodeInfoWithName:@"body"];
         bodyNodeInfo.originScale = 0.3;
 
-        __mz_weak_block_type(MZNodeInfo *)cannon1NodeIndo =
+        __mz_weak_block_type(MZNodeInfo *)cannon1NodeInfo =
             [nodes addNode:[self _enemyAnimationSpriteWithName:@"monster_blue"] name:@"cannon1"];
-        cannon1NodeIndo.originScale = 0.5;
-        cannon1NodeIndo.originPosition = mzp(50, 50);
-
-        __mz_weak_block_type(MZNodeInfo *)cannon2NodeInfo =
-            [nodes addNode:[self _enemyAnimationSpriteWithName:@"monster_red"] name:@"cannon2"];
-        cannon2NodeInfo.originScale = 0.5;
-        cannon2NodeInfo.originPosition = mzp(50, -50);
+        cannon1NodeInfo.originScale = 0.5;
+        cannon1NodeInfo.originPosition = mzp(50, 50);
 
         // attack bind to cannon node
         __mz_weak_block_type(MZAttack_NWayToDirection *)attack1 =
-            [e addAction:[MZAttack_NWayToDirection newWithAttacker:cannon1NodeIndo] name:@"attack1"];
+            [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:cannon1NodeInfo] name:@"attack1"];
         attack1.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
         attack1.bulletScale = 0.4;
         attack1.bulletVelocity = 100;
@@ -188,24 +184,22 @@
         };
 
         // set cannon1 hp, collider
-        __mz_weak_block_type(MZHealth *)cannon1Health = [e addAction:[MZHealth new] name:@"cannon1-health"];
+        __mz_weak_block_type(MZHealth *)cannon1Health = [enemy addAction:[MZHealth new] name:@"cannon1-health"];
         cannon1Health.healthPoint = 20;
 
         __mz_weak_block_type(MZSpriteCircleCollider *)cannon1Collider =
-            [e addAction:[MZSpriteCircleCollider newWithSprite:(SKSpriteNode *)cannon1NodeIndo.node
-                                                        offset:MZPZero
-                                                collisionScale:1]
-                     name:@"cannon1Collider"];
-        MZLogRetainCount(@"aaa", cannon1Collider);
+            [enemy addAction:[MZSpriteCircleCollider newWithSprite:(SKSpriteNode *)cannon1NodeInfo.node
+                                                            offset:MZPZero
+                                                    collisionScale:1]
+                        name:@"cannon1Collider"];
 
         [cannon1Collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[SKColor yellowColor]];
 
-
         cannon1Health.healthZeroActoin = ^(MZHealth *h) {
             [nodes removeWithName:@"cannon1"];
-            [e removeAction:attack1];
-            [e removeAction:h];
-            [e removeAction:cannon1Collider];
+            [wbEnemy removeAction:attack1];
+            [wbEnemy removeAction:h];
+            [wbEnemy removeAction:cannon1Collider];
 
             h.healthZeroActoin = nil;
         };
@@ -214,7 +208,7 @@
             cannon1Health.healthPoint -= 1;
         };
 
-        MZAttack_NWayToDirection *a0 = [MZAttack_NWayToDirection newWithAttacker:cannon2NodeInfo];
+        MZAttack_NWayToDirection *a0 = [MZAttack_NWayToDirection newWithAttacker:cannon1NodeInfo];
         a0.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
         a0.numberOfWays = 5;
         a0.bulletVelocity = 200;
@@ -228,9 +222,9 @@
             _a.bulletVelocity = 100 + (_a.launchCount - 1) * 50;
         };
 
-        MZWait *idle = [MZWait newWithDuration:3];
+        MZWait *wait = [MZWait newWithDuration:3];
 
-        MZAttack_NWayToDirection *a1 = [MZAttack_NWayToDirection newWithAttacker:cannon2NodeInfo];
+        MZAttack_NWayToDirection *a1 = [MZAttack_NWayToDirection newWithAttacker:cannon1NodeInfo];
         a1.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
         a1.numberOfWays = 36;
         a1.bulletVelocity = 200;
@@ -240,14 +234,13 @@
         a1.colddown = 0.1;
         a1.targetDirection = 90;
 
-        //__mz_weak_block_type(MZActionsSequence *)seqAtk = [e addAction:[] name:@"seq-atk"]
-        MZActionsSequence *seqAtk = [MZActionsSequence newWithActions:@[ a0, idle, a1 ]];
-        [e addAction:seqAtk name:@"seq-atk"];
+        MZActionsSequence *seqAtk = [MZActionsSequence newWithActions:@[ a0, wait, a1 ]];
+        [enemy addAction:seqAtk name:@"seq-atk"];
 
-        [e refresh];
-        e.position = wbScene.center;
-        e.rotation = 270;
-        return e;
+        [enemy refresh];
+        enemy.position = wbScene.center;
+        enemy.rotation = 270;
+        return enemy;
     };
 }
 

@@ -16,7 +16,7 @@
 + (instancetype)newWithActions:(NSArray *)actions {
     MZActionsSequence *actionsSequence = [self new];
 
-    for (MZAction *a in actions) [actionsSequence addAciotn:a];
+    for (MZAction *a in actions) [actionsSequence addAction:a];
 
     return actionsSequence;
 }
@@ -28,15 +28,36 @@
 }
 
 - (void)dealloc {
-    [aciotnsSequence removeAllObjects];
-}
-
-- (void)addAciotn:(MZAction *)action {
-    [aciotnsSequence addObject:action];
+    [self removeAllActions];
 }
 
 - (bool)isActive {
     return _currentIndex < aciotnsSequence.count;
+}
+
+- (id)addAction:(MZAction *)action {
+    [aciotnsSequence addObject:action];
+    return action;
+}
+
+- (id)removeAction:(MZAction *)action {
+    if ([aciotnsSequence containsObject:action]) [aciotnsSequence removeObject:action];
+    return action;
+}
+
+- (void)removeInactiveActions {
+    for (int i = 0; i < aciotnsSequence.count; i++) {
+        MZAction *a = aciotnsSequence[i];
+        if (a.isActive) continue;
+
+        [a end];
+        [aciotnsSequence removeObjectAtIndex:i];
+        i--;
+    }
+}
+
+- (void)removeAllActions {
+    [aciotnsSequence removeAllObjects];
 }
 
 - (void)start {

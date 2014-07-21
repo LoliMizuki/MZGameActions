@@ -8,6 +8,7 @@
 @property (nonatomic, readwrite, strong) void (^startAction)(id action);
 @property (nonatomic, readwrite, strong) void (^updateAction)(id action);
 @property (nonatomic, readwrite, strong) void (^endAction)(id action);
+@property (nonatomic, readwrite, strong) void (^deallocAction)(id action);
 
 - (void)start;
 - (void)update;

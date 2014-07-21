@@ -6,6 +6,9 @@
 @interface EnemyBulletCreateFuncs (_)
 - (void)_setCreateFuncs;
 
+- (SKSpriteNode *)_bulletSpriteWithName:(NSString *)name;
+- (MZActor *)_newBulletWithSprite:(SKSpriteNode *)sprite;
+
 - (MZActor * (^)(void))_the_b;
 - (MZActor * (^)(void))_fireball;
 - (MZActor * (^)(void))_rect;
@@ -46,102 +49,46 @@
     _createFuncsDict[@"rect"] = [self _rect];
 }
 
-- (MZActor * (^)(void))_the_b {
-    __mz_gen_weak_block(wbScene, gameScene);
+- (SKSpriteNode *)_bulletSpriteWithName:(NSString *)name {
+    return [[self.gameScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:name];
+}
 
-    return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
+- (MZActor *)_newBulletWithSprite:(SKSpriteNode *)sprite {
+    MZActor *bullet = [self.gameScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
 
-        MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"fireball.png"]
-                  name:@"body"];
+    MZNodes *nodes = [bullet addAction:[MZNodes new] name:@"nodes"];
+    [nodes addNode:sprite name:@"body"];
 
-        SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
-
-        MZSpriteCircleCollider *collider =
-            [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
+    MZSpriteCircleCollider *collider =
+        [bullet addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:0.5]
                      name:@"collider"];
-
-        __mz_gen_weak_block(weakB, b);
-        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-        [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
-
-        MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:wbScene.gameBound] name:@"boundTest"];
-        __mz_gen_weak_block(wbSprite, bodySprite);
-        boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
-        boundTest.outOfBoundAction = ^(id bt) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-
-        return b;
+    [collider addDebugDrawNodeWithParent:self.gameScene.debugLayer color:[UIColor greenColor]];
+    __mz_gen_weak_block(wbBullet, bullet);
+    collider.collidedAction = ^(MZSpriteCircleCollider *c) {
+        [wbBullet addActiveCondition:^{ return (bool)false; }];
     };
+
+    MZBoundTest *boundTest =
+        [bullet addAction:[MZBoundTest newWithTester:bullet bound:self.gameScene.gameBound] name:@"boundTest"];
+    __mz_gen_weak_block(wbSprite, sprite);
+    boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
+    boundTest.outOfBoundAction = ^(id bt) {
+        [wbBullet addActiveCondition:^{ return (bool)false; }];
+    };
+
+    return bullet;
+}
+
+- (MZActor * (^)(void))_the_b {
+    return ^{ return [self _newBulletWithSprite:[self _bulletSpriteWithName:@"fireball"]]; };
 }
 
 - (MZActor * (^)(void))_fireball {
-    __mz_gen_weak_block(wbScene, gameScene);
-
-    return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
-
-        MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"10-fireball"]
-                  name:@"body"];
-
-        SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
-
-        MZSpriteCircleCollider *collider =
-            [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
-                     name:@"collider"];
-
-        __mz_gen_weak_block(weakB, b);
-        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-        [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
-
-        MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:wbScene.gameBound] name:@"boundTest"];
-        __mz_gen_weak_block(wbSprite, bodySprite);
-        boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
-        boundTest.outOfBoundAction = ^(id bt) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-
-        return b;
-    };
+    return ^{ return [self _newBulletWithSprite:[self _bulletSpriteWithName:@"10-fireball"]]; };
 }
 
 - (MZActor * (^)(void))_rect {
-    __mz_gen_weak_block(wbScene, gameScene);
-
-    return ^{
-        MZActor *b = [wbScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
-
-        MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[[wbScene spritesLayerWithName:@"enemy-bullets"] spriteWithTextureName:@"rect"] name:@"body"];
-
-        SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];
-
-        MZSpriteCircleCollider *collider =
-            [b addAction:[MZSpriteCircleCollider newWithSprite:bodySprite offset:MZPZero collisionScale:0.5]
-                     name:@"collider"];
-
-        __mz_gen_weak_block(weakB, b);
-        collider.collidedAction = ^(MZSpriteCircleCollider *c) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-        [collider addDebugDrawNodeWithParent:wbScene.debugLayer color:[UIColor greenColor]];
-
-        MZBoundTest *boundTest = [b addAction:[MZBoundTest newWithTester:b bound:wbScene.gameBound] name:@"boundTest"];
-        __mz_gen_weak_block(wbSprite, bodySprite);
-        boundTest.testerSizeFunc = ^{ return (wbSprite != nil) ? wbSprite.size : CGSizeZero; };
-        boundTest.outOfBoundAction = ^(id bt) {
-            [weakB addActiveCondition:^{ return (bool)false; }];
-        };
-
-        return b;
-    };
+    return ^{ return [self _newBulletWithSprite:[self _bulletSpriteWithName:@"rect"]]; };
 }
 
 @end

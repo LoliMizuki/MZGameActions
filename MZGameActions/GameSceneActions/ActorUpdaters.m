@@ -74,10 +74,15 @@
 
 - (void)_collideWithUpdateA:(MZActionsGroup *)updaterA andUpdaterB:(MZActionsGroup *)updaterB {
     for (MZActor *actorA in updaterA.updatingAciotns) {
+        if (actorA.isActive == false) continue;
+
         NSArray *collidersA = [actorA actionsWithClass:[MZSpriteCircleCollider class]];
 
         for (MZActor *actorB in updaterB.updatingAciotns) {
+            if (actorB.isActive == false) continue;
+
             NSArray *collidersB = [actorB actionsWithClass:[MZSpriteCircleCollider class]];
+
             [self _actionWithCollidersA:collidersA andB:collidersB];
         }
     }
