@@ -13,7 +13,7 @@
 #import "MZNodes.h"
 
 // Group and seqence
-#import "MZIdle.h"
+#import "MZWait.h"
 #import "MZActionsGroup.h"
 #import "MZActionsSequence.h"
 

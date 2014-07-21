@@ -1,6 +1,7 @@
 #import "MZAction.h"
+#import "MZGameDefines.h"
 
-@interface MZActionsSequence : MZAction
+@interface MZActionsSequence : MZAction /*<MZActionsContainer>*/
 
 @property (nonatomic, readonly) NSMutableArray *aciotnsSequence;
 

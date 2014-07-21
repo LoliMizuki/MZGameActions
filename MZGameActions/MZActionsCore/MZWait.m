@@ -1,10 +1,10 @@
-#import "MZIdle.h"
+#import "MZWait.h"
 #import "MZGameHeader.h"
 
-@implementation MZIdle
+@implementation MZWait
 
 + (instancetype)newWithDuration:(MZFloat)duration {
-    MZIdle *idle = [self new];
+    MZWait *idle = [self new];
     idle.duration = duration;
     return idle;
 }

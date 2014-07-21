@@ -27,6 +27,15 @@
     _updatingAciotns = nil;
 }
 
+- (bool)isActive {
+    if (_newActionsBuffer.count > 0) return true;
+    for (MZActor *a in _updatingAciotns) {
+        if (a.isActive) return true;
+    }
+
+    return false;
+}
+
 - (void)setActionTime:(MZActionTime *)anActionTime {
     _actionTime = anActionTime;
 

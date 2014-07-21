@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 
+@class SKSpriteNode;
 @class GameScene;
 @class MZActor;
 
@@ -12,9 +13,6 @@
 + (instancetype)newWithScene:(GameScene *)gameScene;
 
 - (MZActor * (^)(void))funcWithName:(NSString *)name;
+- (MZActor *)newEnemyWithHP:(int)hp bodySprite:(SKSpriteNode *)bodySprite;
 
 @end
-
-// enemy 的基本
-// MZHealth
-// MZBoundTest

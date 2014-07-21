@@ -1,5 +1,5 @@
 #import "MZAction.h"
 
-@interface MZIdle : MZAction
+@interface MZWait : MZAction
 + (instancetype)newWithDuration:(MZFloat)duration;
 @end

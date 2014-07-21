@@ -29,11 +29,6 @@
     return (isActiveFunc != nil) ? isActiveFunc() : true;
 }
 
-- (void)setIsActive:(bool)anActive {
-    isActiveFunc = nil;
-    isActiveFunc = ^{ return anActive; };
-}
-
 - (void)setTimeScale:(MZFloat)aTimeScale {
     self.actionTime.timeScale = aTimeScale;
 }
