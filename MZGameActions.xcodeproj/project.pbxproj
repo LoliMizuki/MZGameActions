@@ -64,7 +64,7 @@
 		8EB70A5F196154CD008BC335 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB70A3A196154CD008BC335 /* UIKit.framework */; };
 		8EB70A67196154CD008BC335 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EB70A65196154CD008BC335 /* InfoPlist.strings */; };
 		8EB70A69196154CD008BC335 /* MZGameActionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB70A68196154CD008BC335 /* MZGameActionsTests.m */; };
-		8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */; };
+		8EF5EA71196A8979009B8CD6 /* MZMoveTurnFromTo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5EA70196A8979009B8CD6 /* MZMoveTurnFromTo.m */; };
 		8EFB2B1E1961596300A23555 /* MZActionTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B1B1961596300A23555 /* MZActionTime.m */; };
 		8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B2019615EEC00A23555 /* MZSpriteKit.m */; };
 		8EFB2B241961638600A23555 /* MZAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB2B231961638600A23555 /* MZAction.m */; };
@@ -188,8 +188,8 @@
 		8EB70A64196154CD008BC335 /* MZGameActionsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MZGameActionsTests-Info.plist"; sourceTree = "<group>"; };
 		8EB70A66196154CD008BC335 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8EB70A68196154CD008BC335 /* MZGameActionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZGameActionsTests.m; sourceTree = "<group>"; };
-		8EF5EA6F196A8979009B8CD6 /* MZMoveTurnToDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveTurnToDirection.h; sourceTree = "<group>"; };
-		8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveTurnToDirection.m; sourceTree = "<group>"; };
+		8EF5EA6F196A8979009B8CD6 /* MZMoveTurnFromTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveTurnFromTo.h; sourceTree = "<group>"; };
+		8EF5EA70196A8979009B8CD6 /* MZMoveTurnFromTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveTurnFromTo.m; sourceTree = "<group>"; };
 		8EFB2B1A1961596300A23555 /* MZActionTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActionTime.h; sourceTree = "<group>"; };
 		8EFB2B1B1961596300A23555 /* MZActionTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActionTime.m; sourceTree = "<group>"; };
 		8EFB2B1C1961596300A23555 /* MZGameDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGameDefines.h; sourceTree = "<group>"; };
@@ -310,8 +310,8 @@
 				8E0DC93C196A731000EB49A3 /* MZMove.m */,
 				8E0DC93E196A76DE00EB49A3 /* MZMoveWithVelocityDirection.h */,
 				8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */,
-				8EF5EA6F196A8979009B8CD6 /* MZMoveTurnToDirection.h */,
-				8EF5EA70196A8979009B8CD6 /* MZMoveTurnToDirection.m */,
+				8EF5EA6F196A8979009B8CD6 /* MZMoveTurnFromTo.h */,
+				8EF5EA70196A8979009B8CD6 /* MZMoveTurnFromTo.m */,
 				8E85D9F5196AA83000C40013 /* MZMoveReachAtTime.h */,
 				8E85D9F6196AA83000C40013 /* MZMoveReachAtTime.m */,
 			);
@@ -614,7 +614,7 @@
 				8E5A88C81973ADC900220637 /* PlayerBulletCreateFuncs.m in Sources */,
 				8E3E7D59197519BD00B253A8 /* MZFormation.m in Sources */,
 				8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */,
-				8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */,
+				8EF5EA71196A8979009B8CD6 /* MZMoveTurnFromTo.m in Sources */,
 				8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */,
 				8E6D85E01976CE44004F1080 /* MZActionRepeat.m in Sources */,
 				8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */,

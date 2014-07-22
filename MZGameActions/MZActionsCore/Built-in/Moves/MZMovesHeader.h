@@ -5,7 +5,7 @@
 
 #import "MZMove.h"
 #import "MZMoveWithVelocityDirection.h"
-#import "MZMoveTurnToDirection.h"
+#import "MZMoveTurnFromTo.h"
 #import "MZMoveReachAtTime.h"
 
 #endif

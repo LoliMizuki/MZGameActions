@@ -1,17 +1,17 @@
-#import "MZMoveTurnToDirection.h"
+#import "MZMoveTurnFromTo.h"
 #import "MZGameHeader.h"
 
-@interface MZMoveTurnToDirection (_)
+@interface MZMoveTurnFromTo (_)
 - (void)_updateBefore;
 @end
 
 
 
-@implementation MZMoveTurnToDirection {
+@implementation MZMoveTurnFromTo {
     MZMoveWithVelocityDirection *_moveWithVelocityDirection;
 }
 
-@synthesize turnToDirection, turnDegreesPerSecond, permissibleDegreesRange, velocity, direction, acceleration,
+@synthesize fromDirection, toDirection, turnDegreesPerSecond, permissibleDegreesRange, velocity, acceleration,
     velocityLimited;
 
 - (instancetype)init {
@@ -50,11 +50,11 @@
     return _moveWithVelocityDirection.velocity;
 }
 
-- (void)setDirection:(MZFloat)aDirection {
+- (void)setFromDirection:(MZFloat)aDirection {
     _moveWithVelocityDirection.direction = aDirection;
 }
 
-- (MZFloat)direction {
+- (MZFloat)fromDirection {
     return _moveWithVelocityDirection.direction;
 }
 
@@ -111,33 +111,32 @@
 
 @end
 
-@implementation MZMoveTurnToDirection (_)
+@implementation MZMoveTurnFromTo (_)
 
 - (void)_updateBefore {
     MZAssert(self.turnDegreesPerSecond >= 0, @"turnDegreesPerSecond must more than zero, but is %0.2f",
              self.turnDegreesPerSecond);
 
     MZFloat currDeg = [MZMath formatDegrees:self.currentDirection];
-    MZFloat turnDeg = [MZMath formatDegrees:self.turnToDirection];
+    MZFloat toDeg = [MZMath formatDegrees:self.toDirection];
 
-    if (fabsf(currDeg - turnDeg) <= self.permissibleDegreesRange) {
-        _moveWithVelocityDirection.direction = [MZMath formatDegrees:turnDeg];
+    if (fabsf(currDeg - toDeg) <= self.permissibleDegreesRange) {
+        _moveWithVelocityDirection.direction = [MZMath formatDegrees:toDeg];
 
         // TODO: face to dir test ... dn't forget remove me
         id<MZTransform> asTransform = (id<MZTransform>)self.mover;
-        [asTransform setRotation:turnDeg];
+        [asTransform setRotation:toDeg];
 
         return;
     }
 
-    MZFloat shortestDistance = [MZMath shortestDistanceFromDegrees:currDeg toDegrees:turnDeg];
+    MZFloat shortestDistance = [MZMath shortestDistanceFromDegrees:currDeg toDegrees:toDeg];
 
     int increaseSign = (shortestDistance >= 0) ? 1 : -1;
     MZFloat deltaDeg = increaseSign * (self.turnDegreesPerSecond * self.deltaTime);
     MZFloat nextDeg = [MZMath formatDegrees:currDeg + deltaDeg];
 
-    nextDeg =
-        [MZMoveTurnToDirection degreesOutOfBoundFixWithDegree:nextDeg limitedDegrees:turnDeg increaseSign:increaseSign];
+    nextDeg = [MZMoveTurnFromTo degreesOutOfBoundFixWithDegree:nextDeg limitedDegrees:toDeg increaseSign:increaseSign];
 
     _moveWithVelocityDirection.direction = [MZMath formatDegrees:nextDeg];
 

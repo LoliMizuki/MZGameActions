@@ -138,9 +138,9 @@
         attack.bulletVelocity = 300;
         attack.bulletScale = 0.25;
 
-        MZMoveTurnToDirection *move = [enemy addAction:[MZMoveTurnToDirection newWithMover:enemy] name:@"move"];
-        move.direction = 180;
-        move.turnToDirection = 270;
+        MZMoveTurnFromTo *move = [enemy addAction:[MZMoveTurnFromTo newWithMover:enemy] name:@"move"];
+        move.fromDirection = 180;
+        move.toDirection = 270;
         move.turnDegreesPerSecond = 100;
         move.velocity = 100;
 
@@ -296,7 +296,7 @@
     return ^{
         MZActor *enemy = [self newEnemyWithHP:5 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
 
-        MZMoveTurnToDirection *move = [enemy addAction:[MZMoveTurnToDirection newWithMover:enemy] name:@"move"];
+        MZMoveTurnFromTo *move = [enemy addAction:[MZMoveTurnFromTo newWithMover:enemy] name:@"move"];
         move.velocity = 200;
         move.turnDegreesPerSecond = 100;
         //        move.updateAction = ^(MZMoveTurnToDirection *m) {m.direction};

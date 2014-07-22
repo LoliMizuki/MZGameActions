@@ -173,8 +173,8 @@
 
     f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
         if (f.currentSpawnCount % 2 == 0) return;
-        MZMoveTurnToDirection *m = [actor actionWithName:@"move"];
-        m.direction = 0;
+        MZMoveTurnFromTo *m = [actor actionWithName:@"move"];
+        m.fromDirection = 0;
     };
 
     [eventsExecutor addActionLate:f1];
