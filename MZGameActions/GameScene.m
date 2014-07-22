@@ -162,40 +162,42 @@
 }
 
 - (void)__test_formation {
+    MZFormation *f1 = [MZFormation new];
+    f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
+    [f1 addSpawnPositions:@[
+                             NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
+                             NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
+                          ]];
+    f1.maxSpawnCount = 1;
+    f1.interval = 0.5;
+
+    f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
+        if (f.currentSpawnCount % 2 == 0) return;
+        MZMoveTurnToDirection *m = [actor actionWithName:@"move"];
+        m.direction = 0;
+    };
+
+    [eventsExecutor addActionLate:f1];
     /*
-        MZFormation *f1 = [MZFormation new];
-        f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
-        [f1 addSpawnPositions:@[
-                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
-                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
-                              ]];
-        f1.maxSpawnCount = 10;
-        f1.interval = 0.5;
-
-        f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
-            MZHealth *health = [actor actionWithName:@"health"];
-            health.healthPoint = 3;
-
-            if (f.currentSpawnCount % 2 == 0) return;
-            MZMoveWithVelocityDirection *m = [actor actionWithName:@"move"];
-            m.direction = 0;
-        };
-
-        [eventsExecutor addActionLate:f1];
+        MZFormation *cannonFormation = [MZFormation new];
+        cannonFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-cannons"];
+        [cannonFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+        cannonFormation.maxSpawnCount = 1;
+        [eventsExecutor addActionLate:cannonFormation];
     */
-
-    MZFormation *cannonFormation = [MZFormation new];
-    cannonFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"cannons"];
-    [cannonFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-    cannonFormation.maxSpawnCount = 1;
-    [eventsExecutor addActionLate:cannonFormation];
-
     /*
         MZFormation *fs = [MZFormation new];
         fs.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-simple"];
         [fs addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
         fs.maxSpawnCount = 1;
         [eventsExecutor addActionLate:fs];
+    */
+    /*
+        MZFormation *repeatFormation = [MZFormation new];
+        repeatFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-repeater"];
+        [repeatFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+        repeatFormation.maxSpawnCount = 1;
+        [eventsExecutor addActionLate:repeatFormation];
     */
 }
 

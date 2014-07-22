@@ -21,8 +21,8 @@
     self = [super init];
 
     colddown = 0.0;
-
     bulletVelocity = 0.0;
+
     _bulletScaleXY = MZPOne;
 
     return self;
@@ -31,6 +31,10 @@
 - (void)dealloc {
     attacker = nil;
     bulletGenFunc = nil;
+}
+
+- (void)start {
+    [super start];
 }
 
 - (void)setBulletScaleXY:(CGPoint)aBulletScaleXY {

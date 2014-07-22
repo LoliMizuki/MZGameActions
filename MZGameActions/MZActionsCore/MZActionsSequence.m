@@ -75,13 +75,10 @@
         [curr end];
         _currentIndex++;
         curr = [self _actionAtIndex:_currentIndex];
+        if (curr != nil) [curr start];
     }
 
     if (curr != nil) [curr update];
-}
-
-- (void)end {
-    [super end];
 }
 
 @end

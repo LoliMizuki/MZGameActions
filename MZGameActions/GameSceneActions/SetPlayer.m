@@ -35,7 +35,7 @@
 
     [self _setMainBodyToPlayer:player];
     [self _setLeftToPlayer:player];
-    [self _setAttackToPlayer:player];
+    //    [self _setAttackToPlayer:player];
 
     player.position = mzpAdd([gameScene center], mzp(0, -200));
     player.rotation = 90;

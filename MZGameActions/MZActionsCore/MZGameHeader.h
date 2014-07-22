@@ -16,6 +16,7 @@
 #import "MZWait.h"
 #import "MZActionsGroup.h"
 #import "MZActionsSequence.h"
+#import "MZActionRepeat.h"
 
 // Supports
 #import "MZPool.h"

@@ -17,8 +17,12 @@
 
 - (instancetype)init {
     self = [super init];
-    _colddownCount = 0.0;
     return self;
+}
+
+-(void)start {
+    [super start];
+    _colddownCount = 0.0;
 }
 
 - (void)update {

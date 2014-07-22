@@ -6,11 +6,13 @@
 - (SKSpriteNode *)_enemySpriteWithFrameName:(NSString *)name;
 - (SKSpriteNode *)_enemyAnimationSpriteWithName:(NSString *)name;
 - (MZBoundTest *)_addCommonBoundTestToActor:(MZActor *)actor;
+
 - (void)_setEnemyFuncs;
 
 - (MZActor * (^)(void))_theSimple;
 - (MZActor * (^)(void))_theOne;
-- (MZActor * (^)(void))_cannons;
+- (MZActor * (^)(void))_theCannons;
+- (MZActor * (^)(void))_theRepeater;
 @end
 
 
@@ -95,7 +97,8 @@
 - (void)_setEnemyFuncs {
     _createFuncsDict[@"the-simple"] = [self _theSimple];
     _createFuncsDict[@"the-one"] = [self _theOne];
-    _createFuncsDict[@"cannons"] = [self _cannons];
+    _createFuncsDict[@"the-cannons"] = [self _theCannons];
+    _createFuncsDict[@"the-repeater"] = [self _theRepeater];
 }
 
 - (MZActor * (^)(void))_theSimple {
@@ -123,7 +126,7 @@
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
-        MZActor *enemy = [self newEnemyWithHP:10 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
+        MZActor *enemy = [self newEnemyWithHP:3 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
 
         MZAttack_NWayToDirection *attack =
             [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy] name:@"attack"];
@@ -137,13 +140,13 @@
 
         MZMoveTurnToDirection *move = [enemy addAction:[MZMoveTurnToDirection newWithMover:enemy] name:@"move"];
         move.direction = 180;
-        move.turnDegreesPerSecond = 100;
         move.turnToDirection = 270;
-        move.velocity = 200;
+        move.turnDegreesPerSecond = 100;
+        move.velocity = 100;
 
         __mz_gen_weak_block(wbMove, move);
         attack.beforeLauchAction = ^(MZAttack_NWayToDirection *_a) {
-            _a.targetDirection = wbMove.direction;
+            _a.targetDirection = wbMove.currentDirection;
         };
 
         enemy.scale = 0.3;
@@ -152,7 +155,7 @@
     };
 }
 
-- (MZActor * (^)(void))_cannons {
+- (MZActor * (^)(void))_theCannons {
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
@@ -240,6 +243,66 @@
         [enemy refresh];
         enemy.position = wbScene.center;
         enemy.rotation = 270;
+        return enemy;
+    };
+}
+
+- (MZActor * (^)(void))_theRepeater {
+    return ^{
+        MZActor *enemy = [self newEnemyWithHP:100 bodySprite:[self _enemyAnimationSpriteWithName:@"monster_red"]];
+
+        // test, 用 active func 測試發射次數來結束
+
+        MZAttack_NWayToDirection *a1 = [MZAttack_NWayToDirection newWithAttacker:enemy];
+        a1.bulletGenFunc = [self.gameScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
+        a1.bulletScale = 0.4;
+        a1.bulletVelocity = 50;
+        a1.numberOfWays = 1;
+        a1.targetDirection = 270;
+        a1.colddown = 9999;
+        a1.duration = 0.5;
+
+        MZAttack_NWayToDirection *a2 = [MZAttack_NWayToDirection newWithAttacker:enemy];
+        a2.bulletGenFunc = [self.gameScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
+        a2.bulletScale = 0.4;
+        a2.bulletVelocity = 50;
+        a2.colddown = 9999;
+        a2.numberOfWays = 3;
+        a2.interval = 20;
+        a2.targetDirection = 270;
+        a2.duration = 1.5;
+
+        MZActionsSequence *seq = [MZActionsSequence
+            newWithActions:
+                @[ [MZWait newWithDuration:2], a1, [MZWait newWithDuration:0.5], a2, [MZWait newWithDuration:0.5] ]];
+
+        //        [enemy addAction:[MZActionRepeat newWithAction:seq times:3]];
+        [enemy addAction:[MZActionRepeat newWithForeverAction:seq]];
+
+        enemy.rotation = 270;
+
+        return enemy;
+    };
+}
+
+- (MZActor * (^)(void))_theMother {
+    return ^{
+        MZActor *enemy = [self newEnemyWithHP:300 bodySprite:[self _enemyAnimationSpriteWithName:@"ship"]];
+        return enemy;
+    };
+}
+
+- (MZActor * (^)(void))_theChild {
+    return ^{
+        MZActor *enemy = [self newEnemyWithHP:5 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
+
+        MZMoveTurnToDirection *move = [enemy addAction:[MZMoveTurnToDirection newWithMover:enemy] name:@"move"];
+        move.velocity = 200;
+        move.turnDegreesPerSecond = 100;
+        //        move.updateAction = ^(MZMoveTurnToDirection *m) {m.direction};
+
+        //        self.gameScene.player
+
         return enemy;
     };
 }

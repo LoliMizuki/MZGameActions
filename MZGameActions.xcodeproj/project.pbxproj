@@ -35,7 +35,7 @@
 		8E5A88CA1973ADC900220637 /* SetPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A88C51973ADC900220637 /* SetPlayer.m */; };
 		8E5A88CD1973B1F400220637 /* ActorUpdaters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A88CC1973B1F400220637 /* ActorUpdaters.m */; };
 		8E5A88D01973C8FF00220637 /* ActorCreateFuncs.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A88CF1973C8FF00220637 /* ActorCreateFuncs.m */; };
-		8E6D85E01976CE44004F1080 /* MZRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D85DF1976CE44004F1080 /* MZRepeat.m */; };
+		8E6D85E01976CE44004F1080 /* MZActionRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E6D85DF1976CE44004F1080 /* MZActionRepeat.m */; };
 		8E700DE2196A6FF600885D02 /* MZTouchRelativeMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */; };
 		8E7CA2811964122100917EEB /* MZPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CA2801964122100917EEB /* MZPool.m */; };
 		8E85D9F7196AA83000C40013 /* MZMoveReachAtTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E85D9F6196AA83000C40013 /* MZMoveReachAtTime.m */; };
@@ -134,8 +134,8 @@
 		8E5A88CE1973C8FF00220637 /* ActorCreateFuncs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActorCreateFuncs.h; sourceTree = "<group>"; };
 		8E5A88CF1973C8FF00220637 /* ActorCreateFuncs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActorCreateFuncs.m; sourceTree = "<group>"; };
 		8E5A88D11973CE4A00220637 /* GameSceneActionsHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSceneActionsHeader.h; sourceTree = "<group>"; };
-		8E6D85DE1976CE44004F1080 /* MZRepeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRepeat.h; sourceTree = "<group>"; };
-		8E6D85DF1976CE44004F1080 /* MZRepeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRepeat.m; sourceTree = "<group>"; };
+		8E6D85DE1976CE44004F1080 /* MZActionRepeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZActionRepeat.h; sourceTree = "<group>"; };
+		8E6D85DF1976CE44004F1080 /* MZActionRepeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZActionRepeat.m; sourceTree = "<group>"; };
 		8E700DDF196A6FF600885D02 /* MZTouchRelativeMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZTouchRelativeMove.h; sourceTree = "<group>"; };
 		8E700DE0196A6FF600885D02 /* MZTouchRelativeMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZTouchRelativeMove.m; sourceTree = "<group>"; };
 		8E7CA27F1964122100917EEB /* MZPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPool.h; sourceTree = "<group>"; };
@@ -444,8 +444,8 @@
 				8EFB2B26196171D200A23555 /* MZActionsGroup.m */,
 				8E3E7D5D1976686800B253A8 /* MZActionsSequence.h */,
 				8E3E7D5E1976686800B253A8 /* MZActionsSequence.m */,
-				8E6D85DE1976CE44004F1080 /* MZRepeat.h */,
-				8E6D85DF1976CE44004F1080 /* MZRepeat.m */,
+				8E6D85DE1976CE44004F1080 /* MZActionRepeat.h */,
+				8E6D85DF1976CE44004F1080 /* MZActionRepeat.m */,
 				8E3E7D6019767B0700B253A8 /* MZWait.h */,
 				8E3E7D6119767B0700B253A8 /* MZWait.m */,
 				8E3E9CFD1961BB6D0007D7D0 /* MZActor.h */,
@@ -616,7 +616,7 @@
 				8EFB2B2119615EEC00A23555 /* MZSpriteKit.m in Sources */,
 				8EF5EA71196A8979009B8CD6 /* MZMoveTurnToDirection.m in Sources */,
 				8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */,
-				8E6D85E01976CE44004F1080 /* MZRepeat.m in Sources */,
+				8E6D85E01976CE44004F1080 /* MZActionRepeat.m in Sources */,
 				8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */,
 				8E5A88C91973ADC900220637 /* SetLayers.m in Sources */,
 			);
