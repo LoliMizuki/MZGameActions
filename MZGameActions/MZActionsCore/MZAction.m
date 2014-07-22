@@ -10,7 +10,8 @@
     MZFloat _duration;
 }
 
-@synthesize name, isActive, isActiveFunc, duration, actionTime, deallocAction;
+@synthesize name;
+@synthesize isActive, isActiveFunc, duration, actionTime, deallocAction;
 
 - (instancetype)init {
     self = [super init];

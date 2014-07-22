@@ -9,10 +9,12 @@
 
 - (void)_setEnemyFuncs;
 
-- (MZActor * (^)(void))_theSimple;
-- (MZActor * (^)(void))_theOne;
-- (MZActor * (^)(void))_theCannons;
-- (MZActor * (^)(void))_theRepeater;
+- (ActorGenFunc)_theSimple;
+- (ActorGenFunc)_theOne;
+- (ActorGenFunc)_theCannons;
+- (ActorGenFunc)_theRepeater;
+- (ActorGenFunc)_theMother;
+- (ActorGenFunc)_theStalker;
 @end
 
 
@@ -36,7 +38,7 @@
     return self;
 }
 
-- (MZActor * (^)(void))funcWithName:(NSString *)name {
+- (ActorGenFunc)funcWithName:(NSString *)name {
     MZAssertIfNilWithMessage(_createFuncsDict[name], @"can not found func with name: %@", name);
     return _createFuncsDict[name];
 }
@@ -99,9 +101,11 @@
     _createFuncsDict[@"the-one"] = [self _theOne];
     _createFuncsDict[@"the-cannons"] = [self _theCannons];
     _createFuncsDict[@"the-repeater"] = [self _theRepeater];
+    _createFuncsDict[@"the-mother"] = [self _theMother];
+    _createFuncsDict[@"the-stalker"] = [self _theStalker];
 }
 
-- (MZActor * (^)(void))_theSimple {
+- (ActorGenFunc)_theSimple {
     __mz_gen_weak_block(wbScene, gameScene);
     return ^{
         MZActor *enemy = [self newEnemyWithHP:30 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
@@ -122,7 +126,7 @@
     };
 }
 
-- (MZActor * (^)(void))_theOne {
+- (ActorGenFunc)_theOne {
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
@@ -155,7 +159,7 @@
     };
 }
 
-- (MZActor * (^)(void))_theCannons {
+- (ActorGenFunc)_theCannons {
     __mz_gen_weak_block(wbScene, gameScene);
 
     return ^{
@@ -247,12 +251,11 @@
     };
 }
 
-- (MZActor * (^)(void))_theRepeater {
+- (ActorGenFunc)_theRepeater {
     return ^{
         MZActor *enemy = [self newEnemyWithHP:100 bodySprite:[self _enemyAnimationSpriteWithName:@"monster_red"]];
 
-        // test, 用 active func 測試發射次數來結束
-
+        // TODO: test, 用 active func 測試發射次數來結束
         MZAttack_NWayToDirection *a1 = [MZAttack_NWayToDirection newWithAttacker:enemy];
         a1.bulletGenFunc = [self.gameScene.actorCreateFuncs.enemyBullet funcWithName:@"the-b"];
         a1.bulletScale = 0.4;
@@ -285,23 +288,58 @@
     };
 }
 
-- (MZActor * (^)(void))_theMother {
+- (ActorGenFunc)_theMother {
     return ^{
         MZActor *enemy = [self newEnemyWithHP:300 bodySprite:[self _enemyAnimationSpriteWithName:@"ship"]];
+        __mz_gen_weak_block(wbEnemy, enemy);
+
+        MZAction *spawn = [MZAction new];
+        spawn.duration = 0.1;
+        spawn.startAction = ^(MZAction *ss) {
+            MZActor *child = [self funcWithName:@"the-stalker"]();
+            child.position = wbEnemy.position;
+            MZLog(@"spawn start");
+        };
+        spawn.endAction = ^(id d) {
+            MZLog(@"spawn end");
+        };
+
+        MZWait *delay = [MZWait newWithDuration:1];
+        delay.startAction = ^(id d) {
+            MZLog(@"delay start");
+        };
+        delay.endAction = ^(id d) {
+            MZLog(@"delay end");
+        };
+
+        MZActionsSequence *spawnSeq = [MZActionsSequence newWithActions:@[ delay, spawn ]];
+
+        [enemy addAction:[MZActionRepeat newWithForeverAction:spawnSeq] name:@"seq"];  // issue???
+        //        [enemy addAction:[MZActionRepeat newWithAction:spawnSeq times:3] name:@"seq"];
+        //        [enemy addAction:spawnSeq name:@"seq"];
+        //        [enemy addAction:spawn name:@"spawn"];
+        //        [enemy addAction:[MZActionRepeat newWithAction:spawn times:3] name:@"spawn"];
+
+        enemy.scale = 0.5;
+        enemy.rotation = 270;
+
         return enemy;
     };
 }
 
-- (MZActor * (^)(void))_theChild {
+- (ActorGenFunc)_theStalker {
     return ^{
         MZActor *enemy = [self newEnemyWithHP:5 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
+        __mz_gen_weak_block(wbEnemy, enemy);
 
         MZMoveTurnFromTo *move = [enemy addAction:[MZMoveTurnFromTo newWithMover:enemy] name:@"move"];
         move.velocity = 200;
         move.turnDegreesPerSecond = 100;
-        //        move.updateAction = ^(MZMoveTurnToDirection *m) {m.direction};
+        move.updateAction = ^(MZMoveTurnFromTo *m) {
+            m.fromDirection = [MZMath degreesFromP1:wbEnemy.position toP2:self.gameScene.player.position];
+        };
 
-        //        self.gameScene.player
+        enemy.scale = .2;
 
         return enemy;
     };

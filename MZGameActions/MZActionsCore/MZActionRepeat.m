@@ -19,6 +19,7 @@
 + (instancetype)newWithForeverAction:(MZAction *)action {
     MZActionRepeat *repeat = [self new];
     repeat->_action = action;
+    repeat->_times = 999;
     repeat->_isForever = true;
     return repeat;
 }
@@ -36,7 +37,7 @@
 - (void)update {
     [super update];
 
-    if (!_action.isActive && _timesCount > 0) {
+    if (_action.isActive == false && _timesCount > 0) {
         _timesCount--;
         if (_isForever) _timesCount = 999;
         if (_timesCount > 0) [_action start];

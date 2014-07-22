@@ -162,22 +162,25 @@
 }
 
 - (void)__test_formation {
-    MZFormation *f1 = [MZFormation new];
-    f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
-    [f1 addSpawnPositions:@[
-                             NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
-                             NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
-                          ]];
-    f1.maxSpawnCount = 1;
-    f1.interval = 0.5;
+    /*
+        MZFormation *f1 = [MZFormation new];
+        f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
+        [f1 addSpawnPositions:@[
+                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
+                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
+                              ]];
+        f1.maxSpawnCount = 1;
+        f1.interval = 0.5;
 
-    f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
-        if (f.currentSpawnCount % 2 == 0) return;
-        MZMoveTurnFromTo *m = [actor actionWithName:@"move"];
-        m.fromDirection = 0;
-    };
+        f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
+            if (f.currentSpawnCount % 2 == 0) return;
+            MZMoveTurnFromTo *m = [actor actionWithName:@"move"];
+            m.fromDirection = 0;
+        };
 
-    [eventsExecutor addActionLate:f1];
+        [eventsExecutor addActionLate:f1];
+    */
+
     /*
         MZFormation *cannonFormation = [MZFormation new];
         cannonFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-cannons"];
@@ -199,6 +202,20 @@
         repeatFormation.maxSpawnCount = 1;
         [eventsExecutor addActionLate:repeatFormation];
     */
+
+    /*
+        MZFormation *childFormation = [MZFormation new];
+        childFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-stalker"];
+        [childFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+        childFormation.maxSpawnCount = 1;
+        [eventsExecutor addActionLate:childFormation];
+    */
+
+    MZFormation *motherShipFormation = [MZFormation new];
+    motherShipFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-mother"];
+    [motherShipFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
+    motherShipFormation.maxSpawnCount = 1;
+    [eventsExecutor addActionLate:motherShipFormation];
 }
 
 @end

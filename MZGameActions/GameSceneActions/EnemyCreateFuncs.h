@@ -4,6 +4,8 @@
 @class GameScene;
 @class MZActor;
 
+typedef MZActor * (^ActorGenFunc)(void);
+
 
 
 @interface EnemyCreateFuncs : NSObject
@@ -12,7 +14,7 @@
 
 + (instancetype)newWithScene:(GameScene *)gameScene;
 
-- (MZActor * (^)(void))funcWithName:(NSString *)name;
+- (ActorGenFunc)funcWithName:(NSString *)name;
 - (MZActor *)newEnemyWithHP:(int)hp bodySprite:(SKSpriteNode *)bodySprite;
 
 @end
