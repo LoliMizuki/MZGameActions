@@ -15,7 +15,6 @@
 
 
 @interface GameScene : SKScene <MZTouchNotifier>
-
 @property (nonatomic, readonly) CGPoint center;
 @property (nonatomic, readonly) CGRect gameBound;
 

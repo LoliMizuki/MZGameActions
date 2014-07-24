@@ -10,9 +10,10 @@
 #import "ActorCreateFuncs.h"
 #import "GUILayer.h"
 
+#import "TestScenario.h"
+
 @interface GameScene (_)
 - (void)_init;
-- (void)__test_formation;
 @end
 
 @implementation GameScene {
@@ -46,7 +47,7 @@
 
     guiLayer = [GUILayer newWithScene:self];
 
-    [self __test_formation];
+    [[TestScenario newWithGameScene:self] setScenario];
 
     if (debugLayer != nil) [self addChild:debugLayer];
 
@@ -159,63 +160,6 @@
     eventsExecutor.actionTime = playerActionTime;
 
     _touchResponders = [NSMutableArray new];
-}
-
-- (void)__test_formation {
-    /*
-        MZFormation *f1 = [MZFormation new];
-        f1.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-one"];
-        [f1 addSpawnPositions:@[
-                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(100, 200))),
-                                 NSValueFromCGPoint(mzpAdd(self.center, mzp(-100, 200))),
-                              ]];
-        f1.maxSpawnCount = 1;
-        f1.interval = 0.5;
-
-        f1.setActionToActorWhenSpawn = ^(MZFormation *f, MZActor *actor) {
-            if (f.currentSpawnCount % 2 == 0) return;
-            MZMoveTurnFromTo *m = [actor actionWithName:@"move"];
-            m.fromDirection = 0;
-        };
-
-        [eventsExecutor addActionLate:f1];
-    */
-
-    /*
-        MZFormation *cannonFormation = [MZFormation new];
-        cannonFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-cannons"];
-        [cannonFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-        cannonFormation.maxSpawnCount = 1;
-        [eventsExecutor addActionLate:cannonFormation];
-    */
-    /*
-        MZFormation *fs = [MZFormation new];
-        fs.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-simple"];
-        [fs addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-        fs.maxSpawnCount = 1;
-        [eventsExecutor addActionLate:fs];
-    */
-    /*
-        MZFormation *repeatFormation = [MZFormation new];
-        repeatFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-repeater"];
-        [repeatFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-        repeatFormation.maxSpawnCount = 1;
-        [eventsExecutor addActionLate:repeatFormation];
-    */
-
-    /*
-        MZFormation *childFormation = [MZFormation new];
-        childFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-stalker"];
-        [childFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-        childFormation.maxSpawnCount = 1;
-        [eventsExecutor addActionLate:childFormation];
-    */
-
-    MZFormation *motherShipFormation = [MZFormation new];
-    motherShipFormation.createFunc = [self.actorCreateFuncs.enemy funcWithName:@"the-mother"];
-    [motherShipFormation addSpawnPositions:@[ NSValueFromCGPoint(self.center) ]];
-    motherShipFormation.maxSpawnCount = 1;
-    [eventsExecutor addActionLate:motherShipFormation];
 }
 
 @end

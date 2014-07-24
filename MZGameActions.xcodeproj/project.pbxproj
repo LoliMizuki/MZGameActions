@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E04298C1980C1AF00A649F3 /* TestScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E04298B1980C1AF00A649F3 /* TestScenario.m */; };
 		8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93C196A731000EB49A3 /* MZMove.m */; };
 		8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */; };
 		8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E24D88C1966A504000388AC /* MZSpritesLayer.m */; };
@@ -82,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E04298A1980C1AF00A649F3 /* TestScenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScenario.h; sourceTree = "<group>"; };
+		8E04298B1980C1AF00A649F3 /* TestScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScenario.m; sourceTree = "<group>"; };
 		8E0DC93A196A728F00EB49A3 /* MZMovesHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZMovesHeader.h; sourceTree = "<group>"; };
 		8E0DC93B196A731000EB49A3 /* MZMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMove.h; sourceTree = "<group>"; };
 		8E0DC93C196A731000EB49A3 /* MZMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMove.m; sourceTree = "<group>"; };
@@ -227,6 +230,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E0429891980C18C00A649F3 /* Scenarios */ = {
+			isa = PBXGroup;
+			children = (
+				8E04298A1980C1AF00A649F3 /* TestScenario.h */,
+				8E04298B1980C1AF00A649F3 /* TestScenario.m */,
+			);
+			path = Scenarios;
+			sourceTree = "<group>";
+		};
 		8E3E4EA6196D22F500D30963 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +402,7 @@
 				8E3E4EA4196D21DB00D30963 /* AnotherScene.m */,
 				8EB70A50196154CD008BC335 /* GameScene.h */,
 				8EB70A51196154CD008BC335 /* GameScene.m */,
+				8E0429891980C18C00A649F3 /* Scenarios */,
 				8E5A88BB1973ADC900220637 /* GameSceneActions */,
 				8EFB2B181961596300A23555 /* MZActionsCore */,
 				8EB70A55196154CD008BC335 /* Images.xcassets */,
@@ -580,6 +593,7 @@
 				8E9C9B11196A867800A3BCF2 /* MZMath.m in Sources */,
 				8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */,
 				8E9C9B12196A867800A3BCF2 /* MZMemoryUsage.m in Sources */,
+				8E04298C1980C1AF00A649F3 /* TestScenario.m in Sources */,
 				8E85D9FA196AAB7200C40013 /* MZAttack.m in Sources */,
 				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
 				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,

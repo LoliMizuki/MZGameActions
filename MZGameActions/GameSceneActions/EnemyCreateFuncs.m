@@ -279,7 +279,6 @@
             newWithActions:
                 @[ [MZWait newWithDuration:2], a1, [MZWait newWithDuration:0.5], a2, [MZWait newWithDuration:0.5] ]];
 
-        //        [enemy addAction:[MZActionRepeat newWithAction:seq times:3]];
         [enemy addAction:[MZActionRepeat newWithForeverAction:seq]];
 
         enemy.rotation = 270;
@@ -298,27 +297,13 @@
         spawn.startAction = ^(MZAction *ss) {
             MZActor *child = [self funcWithName:@"the-stalker"]();
             child.position = wbEnemy.position;
-            MZLog(@"spawn start");
-        };
-        spawn.endAction = ^(id d) {
-            MZLog(@"spawn end");
         };
 
         MZWait *delay = [MZWait newWithDuration:1];
-        delay.startAction = ^(id d) {
-            MZLog(@"delay start");
-        };
-        delay.endAction = ^(id d) {
-            MZLog(@"delay end");
-        };
 
         MZActionsSequence *spawnSeq = [MZActionsSequence newWithActions:@[ delay, spawn ]];
 
-        [enemy addAction:[MZActionRepeat newWithForeverAction:spawnSeq] name:@"seq"];  // issue???
-        //        [enemy addAction:[MZActionRepeat newWithAction:spawnSeq times:3] name:@"seq"];
-        //        [enemy addAction:spawnSeq name:@"seq"];
-        //        [enemy addAction:spawn name:@"spawn"];
-        //        [enemy addAction:[MZActionRepeat newWithAction:spawn times:3] name:@"spawn"];
+        [enemy addAction:[MZActionRepeat newWithForeverAction:spawnSeq] name:@"seq"];
 
         enemy.scale = 0.5;
         enemy.rotation = 270;
