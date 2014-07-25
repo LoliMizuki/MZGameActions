@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E04298C1980C1AF00A649F3 /* TestScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E04298B1980C1AF00A649F3 /* TestScenario.m */; };
 		8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93C196A731000EB49A3 /* MZMove.m */; };
 		8E0DC940196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */; };
+		8E15F3EE1982C6970053153F /* TestScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E15F3ED1982C6970053153F /* TestScenario.m */; };
+		8E15F3F21982C6E80053153F /* TimeBaseLevelTestScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E15F3F11982C6E80053153F /* TimeBaseLevelTestScenario.m */; };
 		8E24D88D1966A504000388AC /* MZSpritesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E24D88C1966A504000388AC /* MZSpritesLayer.m */; };
 		8E3E4EA5196D21DB00D30963 /* AnotherScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA4196D21DB00D30963 /* AnotherScene.m */; };
 		8E3E4EAE196D22F500D30963 /* enemies.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8E3E4EA7196D22F500D30963 /* enemies.atlas */; };
@@ -83,13 +84,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E04298A1980C1AF00A649F3 /* TestScenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScenario.h; sourceTree = "<group>"; };
-		8E04298B1980C1AF00A649F3 /* TestScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScenario.m; sourceTree = "<group>"; };
 		8E0DC93A196A728F00EB49A3 /* MZMovesHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZMovesHeader.h; sourceTree = "<group>"; };
 		8E0DC93B196A731000EB49A3 /* MZMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMove.h; sourceTree = "<group>"; };
 		8E0DC93C196A731000EB49A3 /* MZMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMove.m; sourceTree = "<group>"; };
 		8E0DC93E196A76DE00EB49A3 /* MZMoveWithVelocityDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMoveWithVelocityDirection.h; sourceTree = "<group>"; };
 		8E0DC93F196A76DE00EB49A3 /* MZMoveWithVelocityDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMoveWithVelocityDirection.m; sourceTree = "<group>"; };
+		8E15F3EC1982C6970053153F /* TestScenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScenario.h; sourceTree = "<group>"; };
+		8E15F3ED1982C6970053153F /* TestScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScenario.m; sourceTree = "<group>"; };
+		8E15F3F01982C6E80053153F /* TimeBaseLevelTestScenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeBaseLevelTestScenario.h; sourceTree = "<group>"; };
+		8E15F3F11982C6E80053153F /* TimeBaseLevelTestScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeBaseLevelTestScenario.m; sourceTree = "<group>"; };
 		8E24D88B1966A504000388AC /* MZSpritesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZSpritesLayer.h; sourceTree = "<group>"; };
 		8E24D88C1966A504000388AC /* MZSpritesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZSpritesLayer.m; sourceTree = "<group>"; };
 		8E3E4EA3196D21DB00D30963 /* AnotherScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherScene.h; sourceTree = "<group>"; };
@@ -233,10 +236,28 @@
 		8E0429891980C18C00A649F3 /* Scenarios */ = {
 			isa = PBXGroup;
 			children = (
-				8E04298A1980C1AF00A649F3 /* TestScenario.h */,
-				8E04298B1980C1AF00A649F3 /* TestScenario.m */,
+				8E15F3EB1982C6970053153F /* Test */,
+				8E15F3EF1982C6CE0053153F /* TimeBaseLevelTest */,
 			);
 			path = Scenarios;
+			sourceTree = "<group>";
+		};
+		8E15F3EB1982C6970053153F /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				8E15F3EC1982C6970053153F /* TestScenario.h */,
+				8E15F3ED1982C6970053153F /* TestScenario.m */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		8E15F3EF1982C6CE0053153F /* TimeBaseLevelTest */ = {
+			isa = PBXGroup;
+			children = (
+				8E15F3F01982C6E80053153F /* TimeBaseLevelTestScenario.h */,
+				8E15F3F11982C6E80053153F /* TimeBaseLevelTestScenario.m */,
+			);
+			path = TimeBaseLevelTest;
 			sourceTree = "<group>";
 		};
 		8E3E4EA6196D22F500D30963 /* Resources */ = {
@@ -593,7 +614,6 @@
 				8E9C9B11196A867800A3BCF2 /* MZMath.m in Sources */,
 				8E9C9B0B196A867800A3BCF2 /* MZCollections.m in Sources */,
 				8E9C9B12196A867800A3BCF2 /* MZMemoryUsage.m in Sources */,
-				8E04298C1980C1AF00A649F3 /* TestScenario.m in Sources */,
 				8E85D9FA196AAB7200C40013 /* MZAttack.m in Sources */,
 				8E0DC93D196A731000EB49A3 /* MZMove.m in Sources */,
 				8E9C9B0E196A867800A3BCF2 /* MZGLHelper.m in Sources */,
@@ -607,6 +627,7 @@
 				8E3E4EBE196E7A6900D30963 /* MZBoundTest.m in Sources */,
 				8E3E9D021961C2DB0007D7D0 /* MZNodes.m in Sources */,
 				8E3E7D5C1975401D00B253A8 /* GUILayer.m in Sources */,
+				8E15F3F21982C6E80053153F /* TimeBaseLevelTestScenario.m in Sources */,
 				8E5A88D01973C8FF00220637 /* ActorCreateFuncs.m in Sources */,
 				8E9C9B0F196A867800A3BCF2 /* MZiOSFiles.m in Sources */,
 				8E5A88C71973ADC900220637 /* EnemyCreateFuncs.m in Sources */,
@@ -623,6 +644,7 @@
 				8E9C9B10196A867800A3BCF2 /* MZMapReduces.m in Sources */,
 				8E5A88C61973ADC900220637 /* EnemyBulletCreateFuncs.m in Sources */,
 				8EFB2B281961777F00A23555 /* MZActionsGroup.m in Sources */,
+				8E15F3EE1982C6970053153F /* TestScenario.m in Sources */,
 				8E3E7D561973F1E300B253A8 /* MZHealth.m in Sources */,
 				8EB70A45196154CD008BC335 /* main.m in Sources */,
 				8E5A88C81973ADC900220637 /* PlayerBulletCreateFuncs.m in Sources */,

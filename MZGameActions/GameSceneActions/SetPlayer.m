@@ -54,7 +54,7 @@
                   name:@"body"].node;
 
     MZSpriteCircleCollider *collider =
-        [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:1.0]
+        [player addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:.25]
                      name:@"collider"];
     [collider addDebugDrawNodeWithParent:gameScene.debugLayer color:[UIColor redColor]];
 }

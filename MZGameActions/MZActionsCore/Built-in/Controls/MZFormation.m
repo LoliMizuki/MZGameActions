@@ -15,7 +15,7 @@
     MZFloat _spawnTimeCount;
 }
 
-@synthesize createFunc, maxSpawnCount, interval, setActionToActorWhenSpawn;
+@synthesize newActorFunc, maxSpawnCount, interval, setActionToActorWhenSpawn;
 @synthesize delay;
 @synthesize currentSpawnCount;
 
@@ -83,12 +83,12 @@
 }
 
 - (void)_createActor {
-    MZAssertIfNilWithMessage(createFunc, @"createFunc is nil");
+    MZAssertIfNilWithMessage(newActorFunc, @"createFunc is nil");
     MZAssert(_spawnPositions.count > 0, @"spawnPositions is not set");
 
     CGPoint spawnPos = [_spawnPositions[currentSpawnCount % _spawnPositions.count] CGPointValue];
 
-    MZActor *a = createFunc();
+    MZActor *a = newActorFunc();
     a.position = spawnPos;
 
     if (setActionToActorWhenSpawn != nil) {

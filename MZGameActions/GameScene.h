@@ -1,7 +1,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "MZGameDefines.h"
 
-#define LAYER_DEBUG true
+#define LAYER_DEBUG false
 
 @class MZSpritesLayer;
 @class MZActionTime;

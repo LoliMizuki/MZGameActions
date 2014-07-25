@@ -48,7 +48,7 @@
 
 - (void)_addF1AtTime:(MZFloat)time {
     MZFormation *f1 = [MZFormation new];
-    f1.createFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-one"];
+    f1.newActorFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-one"];
     [f1 addSpawnPositions:@[
                              NSValueFromCGPoint(mzpAdd(gameScene.center, mzp(100, 200))),
                              NSValueFromCGPoint(mzpAdd(gameScene.center, mzp(-100, 200))),
@@ -67,7 +67,7 @@
 
 - (void)_addCannonAtTime:(MZFloat)time {
     MZFormation *cannonFormation = [MZFormation new];
-    cannonFormation.createFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-cannons"];
+    cannonFormation.newActorFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-cannons"];
     [cannonFormation addSpawnPositions:@[ NSValueFromCGPoint(gameScene.center) ]];
     cannonFormation.maxSpawnCount = 1;
 
@@ -76,7 +76,7 @@
 
 - (void)_addSimpleAt:(double)time {
     MZFormation *fs = [MZFormation new];
-    fs.createFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-simple"];
+    fs.newActorFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-simple"];
     [fs addSpawnPositions:@[ NSValueFromCGPoint(mzpAdd(gameScene.center, mzp(0, 200))) ]];
     fs.maxSpawnCount = 1;
     [self _addAtTime:6 formation:fs];
@@ -84,7 +84,7 @@
 
 - (void)_addMotherShipAtTime:(MZFloat)time {
     MZFormation *motherShipFormation = [MZFormation new];
-    motherShipFormation.createFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-mother"];
+    motherShipFormation.newActorFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-mother"];
     [motherShipFormation addSpawnPositions:@[ NSValueFromCGPoint(gameScene.center) ]];
     motherShipFormation.maxSpawnCount = 1;
 
@@ -93,7 +93,7 @@
 
 - (void)_addRepeaterAtTime:(MZFloat)time {
     MZFormation *repeatFormation = [MZFormation new];
-    repeatFormation.createFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-repeater"];
+    repeatFormation.newActorFunc = [gameScene.actorCreateFuncs.enemy funcWithName:@"the-repeater"];
     [repeatFormation addSpawnPositions:@[ NSValueFromCGPoint(gameScene.center) ]];
     repeatFormation.maxSpawnCount = 1;
 

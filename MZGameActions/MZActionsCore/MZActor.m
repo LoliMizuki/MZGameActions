@@ -133,7 +133,7 @@
 }
 
 - (id)addAction:(MZAction *)action {
-    NSString *anonymousName = [NSString stringWithFormat:@"%lu", _anonymousNameCount];
+    NSString *anonymousName = [NSString stringWithFormat:@"%lu", (unsigned long)_anonymousNameCount];
     [self addAction:action name:anonymousName];
     _anonymousNameCount++;
 

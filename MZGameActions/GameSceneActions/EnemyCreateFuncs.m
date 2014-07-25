@@ -313,15 +313,27 @@
 }
 
 - (ActorGenFunc)_theStalker {
+    __mz_gen_weak_block(wbScene, gameScene);
     return ^{
-        MZActor *enemy = [self newEnemyWithHP:5 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
+        MZActor *enemy = [self newEnemyWithHP:2 bodySprite:[self _enemyAnimationSpriteWithName:@"Bow"]];
         __mz_gen_weak_block(wbEnemy, enemy);
 
         MZMoveTurnFromTo *move = [enemy addAction:[MZMoveTurnFromTo newWithMover:enemy] name:@"move"];
-        move.velocity = 200;
+        __mz_gen_weak_block(wbMove, move);
+        move.velocity = 160;
         move.turnDegreesPerSecond = 100;
         move.updateAction = ^(MZMoveTurnFromTo *m) {
             m.fromDirection = [MZMath degreesFromP1:wbEnemy.position toP2:self.gameScene.player.position];
+        };
+
+        MZAttack_NWayToDirection *attack = [enemy addAction:[MZAttack_NWayToDirection newWithAttacker:enemy]];
+        attack.numberOfWays = 3;
+        attack.interval = 30;
+        attack.colddown = 9999;
+        attack.bulletGenFunc = [wbScene.actorCreateFuncs.enemyBullet funcWithName:@"fireball"];
+        attack.bulletVelocity = 200;
+        attack.updateAction = ^(MZAttack_NWayToDirection *_attack) {
+            _attack.targetDirection = wbMove.currentDirection;
         };
 
         enemy.scale = .2;

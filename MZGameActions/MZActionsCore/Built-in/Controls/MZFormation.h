@@ -4,7 +4,7 @@
 
 @interface MZFormation : MZAction
 
-@property (nonatomic, readwrite, weak) MZActor * (^createFunc)(void);
+@property (nonatomic, readwrite, weak) MZActor * (^newActorFunc)(void);
 @property (nonatomic, readwrite) NSUInteger maxSpawnCount;
 @property (nonatomic, readwrite) MZFloat interval;
 @property (nonatomic, readwrite) MZFloat delay;

@@ -11,6 +11,7 @@
 #import "GUILayer.h"
 
 #import "TestScenario.h"
+#import "TimeBaseLevelTestScenario.h"
 
 @interface GameScene (_)
 - (void)_init;
@@ -47,7 +48,8 @@
 
     guiLayer = [GUILayer newWithScene:self];
 
-    [[TestScenario newWithGameScene:self] setScenario];
+    //    [[TestScenario newWithGameScene:self] setScenario];
+    [[TimeBaseLevelTestScenario newWithScene:self] set];
 
     if (debugLayer != nil) [self addChild:debugLayer];
 
