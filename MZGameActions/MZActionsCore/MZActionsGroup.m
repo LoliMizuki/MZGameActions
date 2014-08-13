@@ -29,7 +29,7 @@
 
 - (bool)isActive {
     if (_newActionsBuffer.count > 0) return true;
-    for (MZActor *a in _updatingAciotns) {
+    for (MZAction *a in _updatingAciotns) {
         if (a.isActive) return true;
     }
 

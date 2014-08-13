@@ -50,7 +50,7 @@
 
     SKSpriteNode *sprite =
         (SKSpriteNode *)
-        [nodes addNode:[[gameScene spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-up"]
+        [nodes addNodeInfoWithNode:[[gameScene spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-up"]
                   name:@"body"].node;
 
     MZSpriteCircleCollider *collider =
@@ -65,7 +65,7 @@
     __mz_weak_block_type(MZNodes *)nodes = [player actionWithName:@"nodes"];
 
     __mz_weak_block_type(MZNodeInfo *)nodeInfo =
-        [nodes addNode:[[gameScene spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-left"]
+        [nodes addNodeInfoWithNode:[[gameScene spritesLayerWithName:@"player"] spriteWithForeverAnimationName:@"fairy-walk-left"]
                   name:@"left-body"];
     nodeInfo.originPosition = mzp(80, 0);
 

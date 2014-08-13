@@ -17,6 +17,7 @@
 
 
 #pragma mark - SKNode (MZTouch_Private)
+
 typedef void (^MZTouchAction)(NSSet *touches, UIEvent *event);
 
 @interface SKNode (MZTouch)

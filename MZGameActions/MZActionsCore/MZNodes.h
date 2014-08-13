@@ -19,7 +19,7 @@
 #pragma mark - MZNodes
 
 @interface MZNodes : MZAction <MZTransform>
-- (MZNodeInfo *)addNode:(SKNode *)node name:(NSString *)name;
+- (MZNodeInfo *)addNodeInfoWithNode:(SKNode *)node name:(NSString *)name;
 - (MZNodeInfo *)nodeInfoWithName:(NSString *)name;
 - (SKNode *)nodeWithName:(NSString *)name;
 - (void)removeWithNodeInfo:(MZNodeInfo *)nodeInfo;

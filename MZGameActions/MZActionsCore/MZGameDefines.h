@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, MZTouchType) { kMZTouchType_Began, kMZTouchType_Moved
 
 
 
-#pragma mark - TouchNotifier & Touc hResponder
+#pragma mark - TouchNotifier & TouchResponder
 
 @protocol MZTouchResponder;
 

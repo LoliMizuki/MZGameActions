@@ -49,7 +49,7 @@
     [self _addCommonBoundTestToActor:enemy];
 
     __mz_weak_block_type(MZNodes *)nodes = [enemy addAction:[MZNodes new] name:@"nodes"];
-    [nodes addNode:bodySprite name:@"body"];
+    [nodes addNodeInfoWithNode:bodySprite name:@"body"];
 
     __mz_weak_block_type(MZHealth *)health = [enemy addAction:[MZHealth new] name:@"health"];
     health.healthPoint = hp;
@@ -172,7 +172,7 @@
         bodyNodeInfo.originScale = 0.3;
 
         __mz_weak_block_type(MZNodeInfo *)cannon1NodeInfo =
-            [nodes addNode:[self _enemyAnimationSpriteWithName:@"monster_blue"] name:@"cannon1"];
+            [nodes addNodeInfoWithNode:[self _enemyAnimationSpriteWithName:@"monster_blue"] name:@"cannon1"];
         cannon1NodeInfo.originScale = 0.5;
         cannon1NodeInfo.originPosition = mzp(50, 50);
 

@@ -47,7 +47,7 @@
         MZActor *b = [wbScene.actorUpdaters.playerBullets addAction:[MZActor new]];
 
         MZNodes *nodes = [b addAction:[MZNodes new] name:@"nodes"];
-        [nodes addNode:[[wbScene spritesLayerWithName:@"player-bullets"] spriteWithTextureName:@"10-fireball.png"]
+        [nodes addNodeInfoWithNode:[[wbScene spritesLayerWithName:@"player-bullets"] spriteWithTextureName:@"10-fireball.png"]
                   name:@"body"];
 
         SKSpriteNode *bodySprite = (SKSpriteNode *)[nodes nodeWithName:@"body"];

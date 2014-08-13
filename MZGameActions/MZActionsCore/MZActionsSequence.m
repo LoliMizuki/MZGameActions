@@ -11,7 +11,7 @@
     int _currentIndex;
 }
 
-@synthesize aciotnsSequence;
+@synthesize actionsSequence;
 
 + (instancetype)newWithActions:(NSArray *)actions {
     MZActionsSequence *actionsSequence = [self new];
@@ -23,7 +23,7 @@
 
 - (instancetype)init {
     self = [super init];
-    aciotnsSequence = [NSMutableArray new];
+    actionsSequence = [NSMutableArray new];
     return self;
 }
 
@@ -32,32 +32,32 @@
 }
 
 - (bool)isActive {
-    return _currentIndex < aciotnsSequence.count;
+    return _currentIndex < actionsSequence.count;
 }
 
 - (id)addAction:(MZAction *)action {
-    [aciotnsSequence addObject:action];
+    [actionsSequence addObject:action];
     return action;
 }
 
 - (id)removeAction:(MZAction *)action {
-    if ([aciotnsSequence containsObject:action]) [aciotnsSequence removeObject:action];
+    if ([actionsSequence containsObject:action]) [actionsSequence removeObject:action];
     return action;
 }
 
 - (void)removeInactiveActions {
-    for (int i = 0; i < aciotnsSequence.count; i++) {
-        MZAction *a = aciotnsSequence[i];
+    for (int i = 0; i < actionsSequence.count; i++) {
+        MZAction *a = actionsSequence[i];
         if (a.isActive) continue;
 
         [a end];
-        [aciotnsSequence removeObjectAtIndex:i];
+        [actionsSequence removeObjectAtIndex:i];
         i--;
     }
 }
 
 - (void)removeAllActions {
-    [aciotnsSequence removeAllObjects];
+    [actionsSequence removeAllObjects];
 }
 
 - (void)start {
@@ -86,7 +86,7 @@
 @implementation MZActionsSequence (_)
 
 - (MZAction *)_actionAtIndex:(int)index {
-    return (0 <= index && index < aciotnsSequence.count) ? aciotnsSequence[index] : nil;
+    return (0 <= index && index < actionsSequence.count) ? actionsSequence[index] : nil;
 }
 
 @end

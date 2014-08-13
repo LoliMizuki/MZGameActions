@@ -3,7 +3,7 @@
 
 @interface MZActionsSequence : MZAction <MZActionsContainer>
 
-@property (nonatomic, readonly) NSMutableArray *aciotnsSequence;
+@property (nonatomic, readonly) NSMutableArray *actionsSequence;
 
 + (instancetype)newWithActions:(NSArray *)actions;
 - (id)addAction:(MZAction *)action;

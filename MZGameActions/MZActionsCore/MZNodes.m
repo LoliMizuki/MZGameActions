@@ -147,7 +147,7 @@
     return _rotation;
 }
 
-- (MZNodeInfo *)addNode:(SKNode *)node name:(NSString *)name {
+- (MZNodeInfo *)addNodeInfoWithNode:(SKNode *)node name:(NSString *)name {
     MZNodeInfo *nodeInfo = [MZNodeInfo new];
     nodeInfo.node = node;
 

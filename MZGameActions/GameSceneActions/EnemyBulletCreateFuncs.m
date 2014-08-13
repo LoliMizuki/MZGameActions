@@ -57,7 +57,7 @@
     MZActor *bullet = [self.gameScene.actorUpdaters.enemyBullets addAction:[MZActor new]];
 
     MZNodes *nodes = [bullet addAction:[MZNodes new] name:@"nodes"];
-    [nodes addNode:sprite name:@"body"];
+    [nodes addNodeInfoWithNode:sprite name:@"body"];
 
     MZSpriteCircleCollider *collider =
         [bullet addAction:[MZSpriteCircleCollider newWithSprite:sprite offset:MZPZero collisionScale:0.5]
